@@ -2,24 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Meet Harry</title>
+    <title>About - Harry's Page</title>
 </head>
 
 <body>
 <header>
-    <h2>Harry H. Wang</h2>
+    <h2>About Harry H. Wang</h2>
 </header>
 <nav>
     <!-- TODO(harry) create more pages -->
-    <a href="">Who is Harry?</a>
-    <a href="">Some of my photography works</a>
-    <a href="">Technical Articles</a>
+    <a href="">My collections</a>
+    <a href="#equip">Equipments that I Use</a>
+    <a href="#softwares">Software that I use</a>
 </nav>
-<section id="intro-of-myself">
+
+<figure>
     <img alt="A picture of Harry Wang" src="harry.jpg" width=250 draggable="false">
-    <p>hello everyone! I am Harry Wang. I am the host of this website. It is a great pleasure to meet you!
-        <br>Let me show a little bit of myself.
-    </p>
+    <figcaption>photoshoped me</figcaption>
+</figure>
+
+<p>hello everyone! I am Harry Wang. I am the host of this website. It is a great pleasure to meet you!
+    <br>Let me show a little bit of myself.
+</p>
+
+<section id="hobbies" class="about-me">
     <h2>My hobbies are:</h2>
     <ol title="List of hobbies">
         <li>Cycling</li>
@@ -27,6 +33,9 @@
         <li>Programming</li>
         <li>Cooking</li>
     </ol>
+</section>
+
+<section id="fun-facts" class="about-me">
     <h2>Some fun facts about me:</h2>
     <ul title="List of fun facts about me">
         <li>My first line of code is <pre>@for %i in (*.mp3) do (echo %i >> sounds.txt)</pre>
@@ -38,6 +47,9 @@
             <p>I used to prank very hard on peers XD</p>
         </li>
     </ul>
+</section>
+
+<section id="quote" class="about-me">
     <h2>My favourite quote is</h2>
     <blockquote>
         Empty your mind, be formless, shapeless — like water. Now you put water in a cup, it becomes the cup; 
@@ -45,35 +57,52 @@
         water can flow or it can crash. Be water, my friend. &nbsp;&nbsp;&nbsp;
         <i lang="zh-Hans"><strong>上善若水， 水利万物而不争。</strong></i>
     </blockquote>
-    <details>
-        <summary>
-        Steps to put an elephant in a fridge
-        </summary>
-    <ol>
-        <li>Open the door of the fridge</li>
-        <li>Put the elephant into the fridge</li>
-        <li>Close the door of the fridge</li>
-    </ol>
-</detail>
 </section>
-<aside>
-    <h3>Productive softwares that I use</h3>
+
+<section id="equip" class="about-me">
+    <h2>Equipments that I use are:</h2>
+    <ul title="List of equipments that Harry use">
+        <li>Sony &alpha;&trade;6000</li>
+        <li>Sony-Zeiss&trade; 16-70mm f/4</li>
+        <li>Samyang 12mm f/2</li>
+    </ul>
+</section>
+
+<section id="softwares" class="about-me">
+    <h2>Productive softwares that I use</h2>
     <ul title="List of softwares">
         <li>Adobe Photoshop CC 2018</li>
         <li>Adobe Camera Raw</li>
         <li>Google Nik Collections</li>
     </ul>
+</section>
+
+<aside>
+    <!-- TODO(harry) add a counter or some fun gadgets-->
+    <details>
+        <summary>Steps to put an elephant in a fridge</summary>
+        <ol>
+            <li>Open the door of the fridge</li>
+            <li>Put the elephant into the fridge</li>
+            <li>Close the door of the fridge</li>
+        </ol>
+    </details>
 </aside>
+
 <footer>
-    <p class="contact-info">message me at 
-        <a href="mailto:haoyan.wang@mail.utoronto.ca">haoyan.wang@mail.utoronto.ca</a>
-    </p>
-    <p class="contact-info">Come to say hello on Facebook at
-        <a href="https://www.facebook.com/haoyan.wang.739">@Harry Wang</a>
-    </p>
+    <details>
+        <summary>Contact me</summary>
+        <p class="contact-info">message me at 
+            <a href="mailto:haoyan.wang@mail.utoronto.ca">haoyan.wang@mail.utoronto.ca</a>
+        </p>
+        <p class="contact-info">Come to say hello on Facebook at
+            <a href="https://www.facebook.com/haoyan.wang.739">@Harry Wang</a>
+        </p>
+    </details>
     <hr>
     <blockquote>Copyright &copy; 2020 Harry H. Wang</blockquote>
     <hr>
 </footer>
 </body>
+
 </html>
