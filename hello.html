@@ -3,23 +3,51 @@
 <head>
     <meta charset="utf-8">
     <title>About - Harry's Page</title>
+    <style>
+        /* CSS */
+        body, html {
+            font-size: 24px;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        nav {
+            font-size: 26px;
+            color: rgb(255, 96, 4);
+        }
+
+        blockquote {
+            font-family:'Times New Roman', Times, serif;
+        }
+
+        ol, ul {
+            line-height: 2em;
+        }
+    </style>
 </head>
 
 <body>
 <header>
-    <h2>About Harry H. Wang</h2>
-</header>
-<nav>
-    <details>
-        <summary>Nav Bar</summary>
-        <!-- TODO(harry) create more pages -->
+    <!-- Main header across the site -->
+    <nav>
+        <a href="hello.html">About</a>
         <a href="gallery.html">My collections</a>
-        <a href="#equip">Equipments that I Use</a>
-        <a href="#softwares">Software that I use</a>
-        <a href="assets/resume.pdf" download="harry-wang-UofT-CS&Stats-2022">
-         My <span lang="fr">Résumé</span></a>
-    </details>
-</nav>
+    </nav>
+    <hr>
+</header>
+
+<header>
+    <h2>About Harry H. Wang</h2>
+    <hr>
+    <nav>
+        <!-- Secondary header for this page -->
+        <div class="navbar">
+            <a href="#equip">Equipments that I Use</a>
+            <a href="#softwares">Software that I use</a>
+            <a href="assets/resume.pdf" download="harry-wang-UofT-CS&Stats-2022">
+            My <span lang="fr">Résumé</span></a>
+        </div>
+    </nav>
+</header>
 
 <div id="greeting">
     <figure>
@@ -32,20 +60,21 @@
     </p>
 </div>
 
-<section id="hobbies" class="about-me">
-    <h2>My hobbies are:</h2>
+<article id="hobbies" class="about-me">
+    <h3>My hobbies are:</h3>
     <ol title="List of hobbies">
         <li>Cycling</li>
         <li>Photography and Design</li>
         <li>Programming</li>
-        <li>Cooking</li>
+        <li>Workout</li>
     </ol>
-</section>
+</article>
 
-<section id="fun-facts" class="about-me">
-    <h2>Some fun facts about me:</h2>
+<article id="fun-facts" class="about-me">
+    <h3>Some fun facts about me:</h3>
     <ul title="List of fun facts about me">
-        <li>My first line of code is <pre>@for %i in (*.mp3) do (echo %i >> sounds.txt)</pre>
+        <li>My first line of code is 
+            <pre>@for %i in (*.mp3) do (echo %i >> sounds.txt)</pre>
         </li>
         <li>
             I started to use Photoshop in 2008 on an Intel Pentium D
@@ -64,35 +93,35 @@
             </details>
         </li>
     </ul>
-</section>
+</article>
 
-<section id="quote" class="about-me">
-    <h2>My favourite quote is</h2>
+<article id="quote" class="about-me">
+    <h3>My favourite quote is</h3>
     <blockquote>
         Empty your mind, be formless, shapeless — like water. Now you put water in a cup, it becomes the cup; 
         You put water into a bottle it becomes the bottle; You put it in a teapot it becomes the teapot. Now
         water can flow or it can crash. Be water, my friend. &nbsp;&nbsp;&nbsp;
         <i lang="zh-Hans"><strong>上善若水， 水利万物而不争。</strong></i>
     </blockquote>
-</section>
+</article>
 
-<section id="equip" class="about-me">
-    <h2>Equipments that I use are:</h2>
+<article id="equip" class="about-me">
+    <h3>Equipments that I use are:</h3>
     <ul title="List of equipments that Harry use">
         <li>Sony &alpha;6000&trade;</li>
         <li>Sony-Zeiss 16-70mm f/4</li>
         <li>Samyang 12mm f/2</li>
     </ul>
-</section>
+</article>
 
-<section id="softwares" class="about-me">
-    <h2>Productive softwares that I use</h2>
+<article id="softwares" class="about-me">
+    <h3>Productive softwares that I use</h3>
     <ul title="List of softwares">
         <li>Adobe Photoshop CC 2018</li>
         <li>Adobe Camera Raw</li>
         <li>Google Nik Collections</li>
     </ul>
-</section>
+</article>
 
 <aside>
     <!-- TODO(harry) add a counter or some fun gadgets-->

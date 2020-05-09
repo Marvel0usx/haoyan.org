@@ -2,25 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Gallery</title>
+    <title>Gallery - Harry's Page</title>
+    <style>
+        /* CSS */
+        body, html {
+            font-size: 24px;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+        
+        nav {
+            font-size: 26px;
+            color: rgb(255, 96, 4);
+        }
+
+        figcaption {
+            color: dimgray;
+        }
+    </style>
 </head>
 
 <body>
 <header>
-    <h3>Harry's Photo Collections</h3>
+    <!-- Main header across the site -->
+    <nav>
+        <a href="hello.html">About</a>
+        <a href="gallery.html">My collections</a>
+    </nav>
+    <hr>
 </header>
-<nav>
-    <a href="hello.html">About</a>
-    <details>
-        <summary>Collections</summary>
-        <a href="#wild">The Nature</a>
-        <a href="#city">Cities</a>
-        <a href="#street">Streets</a>
-        <a href="#obj">Objects</a>
-    </details>
-</nav>
 
-<section class="gallery">
+<header>
+    <!-- Secondary header for this page -->
+    <h2>Harry's Photo Collections</h2>
+    <hr>
+    <nav>
+        <details>
+            <summary>Collections</summary>
+            <a href="#wild">The Nature</a>
+            <a href="#city">Cities</a>
+            <a href="#street">Streets</a>
+            <a href="#obj">Objects</a>
+        </details>
+    </nav>
+</header>
+
+<article class="gallery">
     <h3>Recent Works</h3>
     <ul title="List of front-page photos">
         <li>
@@ -84,7 +110,7 @@
             </figure>
         </li>
     </ul>
-</section>
+</article>
 <footer>
     <hr>
     <p>Copyright &copy; 2020 Harry H. Wang</p>
