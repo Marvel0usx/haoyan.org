@@ -5,22 +5,44 @@
     <title>About - Harry's Page</title>
     <style>
         /* CSS */
+        @import url('https://fonts.googleapis.com/css2?&family=Marcellus+SC&display=swap');
+        
         body, html {
-            font-size: 24px;
-            font-family:Verdana, Geneva, Tahoma, sans-serif;
-        }
-
-        nav {
-            font-size: 26px;
-            color: rgb(255, 96, 4);
-        }
-
-        blockquote {
+            font-size: 20px;
             font-family:'Times New Roman', Times, serif;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+        }
+        
+        nav {
+            font-size: 1.2rem;
+            color: rgb(255, 96, 4);
         }
 
         ol, ul {
             line-height: 2em;
+        }
+
+        figure {
+            margin-left: 0;
+        }
+
+        figcaption {
+            color: dimgrey;
+        }
+
+        blockquote {
+            text-align: justify;
         }
     </style>
 </head>
@@ -50,14 +72,14 @@
 </header>
 
 <div id="greeting">
-    <figure>
-        <img alt="A picture of Harry Wang" src="images/harry.jpg" title="picture of Harry"
-         width=250 draggable="false">
-        <figcaption>photoshoped me</figcaption>
-    </figure>    
     <p>hello everyone! I am Harry Wang. I am the host of this website. It is a great pleasure to meet you!
         <br>Let me show a little bit of myself.
     </p>
+    <figure>
+        <img alt="A picture of Harry Wang" src="images/harry.jpg" title="picture of Harry"
+            width=250 draggable="false">
+        <figcaption>photoshoped me</figcaption>
+    </figure>    
 </div>
 
 <article id="hobbies" class="about-me">
@@ -108,18 +130,18 @@
 <article id="equip" class="about-me">
     <h3>Equipments that I use are:</h3>
     <ul title="List of equipments that Harry use">
-        <li>Sony &alpha;6000&trade;</li>
-        <li>Sony-Zeiss 16-70mm f/4</li>
-        <li>Samyang 12mm f/2</li>
+        <li id="alpha">Sony &alpha;6000&trade;</li>
+        <li id="lens">Sony-Zeiss 16-70mm f/4</li>
+        <li id="lens">Samyang 12mm f/2</li>
     </ul>
 </article>
 
 <article id="softwares" class="about-me">
     <h3>Productive softwares that I use</h3>
     <ul title="List of softwares">
-        <li>Adobe Photoshop CC 2018</li>
-        <li>Adobe Camera Raw</li>
-        <li>Google Nik Collections</li>
+        <li id="ps">Adobe Photoshop CC 2018</li>
+        <li id="raw">Adobe Camera Raw</li>
+        <li id="nik">Google Nik Collections</li>
     </ul>
 </article>
 
