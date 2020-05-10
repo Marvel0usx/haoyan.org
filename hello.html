@@ -44,6 +44,25 @@
         blockquote {
             text-align: justify;
         }
+
+        strong {
+            color: red;
+        }
+
+        .ul-icons {
+            width: 24px;
+            margin-right: 1vw;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        .equip {
+            list-style-type: none;
+        }
+
+        .softwares {
+            list-style-type: none;
+        }
     </style>
 </head>
 
@@ -84,12 +103,12 @@
 
 <article id="hobbies" class="about-me">
     <h3>My hobbies are:</h3>
-    <ol title="List of hobbies">
+    <ul title="List of hobbies">
         <li>Cycling</li>
         <li>Photography and Design</li>
         <li>Programming</li>
         <li>Workout</li>
-    </ol>
+    </ul>
 </article>
 
 <article id="fun-facts" class="about-me">
@@ -103,16 +122,6 @@
         </li>
         <li>
             <p>I used to prank very hard on peers XD</p>
-        </li>
-        <li>
-            <details>
-                <summary>*CONFIDENTIAL*</summary>
-                <figure>
-                    <img src="images/acquarium.jpg" alt="A piture of Harry and Jan" 
-                     title="Harry and Jan" width=300>
-                    <figcaption>Me and Jan in acquarium!</figcaption>
-                </figure>
-            </details>
         </li>
     </ul>
 </article>
@@ -129,31 +138,42 @@
 
 <article id="equip" class="about-me">
     <h3>Equipments that I use are:</h3>
-    <ul title="List of equipments that Harry use">
-        <li id="alpha">Sony &alpha;6000&trade;</li>
-        <li id="lens">Sony-Zeiss 16-70mm f/4</li>
-        <li id="lens">Samyang 12mm f/2</li>
+    <ul class="equip" title="List of equipments that Harry use">
+        <li>
+            <img src="icons/camera.png" class="ul-icons" alt="">Sony &alpha;6000&trade;
+        </li>
+        <li>
+            <img src="icons/lens.png" class="ul-icons" alt="">Sony-Zeiss 16-70mm f/4
+        </li>
+        <li>
+            <img src="icons/lens.png" class="ul-icons" alt="">Samyang 12mm f/2
+        </li>
     </ul>
 </article>
 
 <article id="softwares" class="about-me">
     <h3>Productive softwares that I use</h3>
-    <ul title="List of softwares">
-        <li id="ps">Adobe Photoshop CC 2018</li>
-        <li id="raw">Adobe Camera Raw</li>
-        <li id="nik">Google Nik Collections</li>
+    <ul class="softwares" title="List of softwares">
+        <li>
+            <img src="icons/ps.ico" class="ul-icons" alt="">Adobe Photoshop CC 2018
+        </li>
+        <li>
+            <img src="icons/raw.webp" class="ul-icons" alt="">Adobe Camera Raw
+        </li>
+        <li><img src="icons/nik.png" class="ul-icons" alt="">Google Nik Collections
+        </li>
     </ul>
 </article>
 
 <aside>
     <!-- TODO(harry) add a counter or some fun gadgets-->
     <details>
-        <summary>Steps to put an elephant in a fridge</summary>
-        <ol>
-            <li>Open the door of the fridge</li>
-            <li>Put the elephant into the fridge</li>
-            <li>Close the door of the fridge</li>
-        </ol>
+        <summary><strong>CONFIDENTIAL</strong></summary>
+        <figure>
+            <img src="images/acquarium.jpg" alt="A piture of Harry and Jan" 
+                title="Harry and Jan" width=300>
+            <figcaption>Me and Jan in acquarium!</figcaption>
+        </figure>
     </details>
 </aside>
 
