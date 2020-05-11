@@ -1,0 +1,41 @@
+/* layout for webpage layout */
+h2, h3 {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+ol, ul {
+    line-height: 2em;
+}
+
+.gallery ul {
+    line-height: 80%;       /* making the list compact*/
+    padding: 0;
+    margin: 0;
+}
+
+.gallery figure {
+    margin: 0;
+    padding: 0;
+}
+
+.gallery img {
+    width: 640px;
+}
+
+figure {
+    margin-left: 0;
+}
+
+.about-me .ul-icons,
+.about-me .ul-icons {
+    width: 24px;
+    margin-right: 10px;
+    margin-left: 0;
+    padding: 0;
+}
+
+nav a {
+    padding: 5px;
+    border-radius: 5px;
+}

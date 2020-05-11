@@ -3,45 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Gallery - Harry's Page</title>
-    <style>
-        /* CSS */        
-        body, html {
-            font-size: 20px;
-            font-family:'Times New Roman', Times, serif;
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-top: 1vh;
-            margin-bottom: 1vh;
-        }
-
-        h3 {
-            font-size: 1.6rem;
-            margin-top: 1vh;
-            margin-bottom: 1vh;
-        }
-        
-        nav {
-            font-size: 1.2rem;
-            color: rgb(255, 96, 4);
-        }
-
-        ul {
-            line-height: 80%;   /* making the list compact*/
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        ul li::before {     /* for accessibility announcing null list mark */
-            content: "\200B";
-        }
-
-        figcaption {
-            color: dimgrey;
-        }
-    </style>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -59,14 +22,11 @@
     <h2>Harry's Photo Collections</h2>
     <hr>
     <nav>
-        <details>
-            <summary>Collections</summary>
-            <a href="#recent">Recent Works</a>
-            <a href="#wild">The Nature</a>
-            <a href="#city">Cities</a>
-            <a href="#street">Streets</a>
-            <a href="#obj">Objects</a>
-        </details>
+        <a href="#recent">Recent Works</a>
+        <a href="#wild">Nature</a>
+        <a href="#city">Cities</a>
+        <a href="#street">Streets</a>
+        <a href="#obj">Objects</a>
     </nav>
 </header>
 
