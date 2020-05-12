@@ -21,6 +21,8 @@ ol, ul {
 
 .gallery img {
     width: 640px;
+    padding: 10px;
+    border: 4px solid rgba(0, 0, 0, 0.8);
 }
 
 figure {
