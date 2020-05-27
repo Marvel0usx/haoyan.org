@@ -1,0 +1,14 @@
+table {
+    border: 2px solid orange;
+}
+
+td:hover {
+    color: aliceblue;
+    background-color: indianred;
+}
+
+input.tb-cell {
+    color: inherit;
+    border: none;
+    background-color: transparent;
+}
