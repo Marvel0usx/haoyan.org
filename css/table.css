@@ -1,14 +1,59 @@
+html, body {
+    font-size: 14px;
+    font-family: "Arial", sans-serif;
+}
+
+.table {
+    padding: 0;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+table, th, td {
+    border: 1px solid orange;
+    text-align: center;
+    vertical-align: center;
+    border-spacing: 2px;
+}
+
 table {
-    border: 2px solid orange;
+    border-collapse: separate;
 }
 
-td:hover {
-    color: aliceblue;
-    background-color: indianred;
+thead {
+    background-color: antiquewhite;
 }
 
-input.tb-cell {
-    color: inherit;
-    border: none;
+th, td {
+    padding: 4px 10px 4px 2px;
+}
+
+input {
     background-color: transparent;
+    text-align: center;
+    border: none;
+    font-size: 1.6em;
+    height: 40px;
+}
+
+tr:nth-child(2n-1) {
+    background-color: rgba(165, 42, 42, 0.09);
+}
+
+tfoot {
+    background-color: aquamarine;
+}
+
+.t-interval {
+    background-color: beige;
+    text-align: right;
+    position: sticky;
+    left: 0;
+}
+
+tbody > tr:hover {
+    color: rgb(196, 47, 47);
+    background-color: #f1ffc4;
 }
