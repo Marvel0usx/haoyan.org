@@ -27,6 +27,7 @@ thead {
 }
 
 th, td {
+    position: relative;
     padding: 4px 10px 4px 2px;
 }
 
@@ -56,4 +57,17 @@ tfoot {
 tbody > tr:hover {
     color: rgb(196, 47, 47);
     background-color: #f1ffc4;
+}
+
+input:hover:after, td:hover::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: azure;
+    box-sizing: border-box;
+    border: 1px solid black;
+    right: 0;
+    bottom: 0;
 }
