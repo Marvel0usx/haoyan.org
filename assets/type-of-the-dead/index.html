@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Game - Type of the Dead</title>
+        <script src="js/game.js"></script>
+        <link rel="stylesheet" href="css/game.css">
+    </head>
+    <body>
+        <section id="home">
+            <header>
+                <h2>Try To Type as Fast as You Can</h2>
+                <h3>You have 5 seconds to type each word!</h3>
+            </header>
+            <div>
+                <label for="difficulty">Choose a difficulty</label>
+                <select name="difficulty" id="diff-select">
+                    <option value="easy">Easy</option>
+                    <option value="mid">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <br>
+            <button id="start-game">Start!</button>
+        </section>
+
+        <div id="countdown">
+            <p id="seconds">3</p>
+        </div>
+
+        <div id="game">
+            <p id="level"></p>
+            <p id="time"></p>
+            <p id="prompt"></p>
+            <p id="typed"></p>
+        </div>
+
+        <section id="win">
+            <header>
+                <h2>Woohoo! You Won!</h2>
+            </header>
+            <button class="again">Play Again</button>
+        </section>
+
+        <section id="lose">
+            <header>
+                <h2>It never comes easy!</h2>
+            </header>
+            <button class="again">Try Again!</button>
+        </section>
+
+        <aside id="stats" class="flex-container">
+            <div id="rate">Correct Rate: 100%</div>
+            <div id="speed">Speed: 0wpm</div>
+        </aside>
+
+    </body>
+</html>

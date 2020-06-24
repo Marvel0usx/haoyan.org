@@ -1,0 +1,88 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20pt;
+    color: rgba(59, 119, 231, 0.8);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+
+#home,
+#countdown,
+#win,
+#lose {
+    text-align: center;
+    /* box-sizing: border-box; */
+    width: fit-content;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#countdown {
+    display: block;
+    font-size: 30vmin;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 2.8rem;
+    outline: 2px dashed navy;
+}
+
+button {
+    color: rgb(228, 39, 102);
+    font-size: x-large;
+    font-weight: bolder;
+    padding: 10px 20px;
+    border: 0;
+    background-color: azure;
+    border-radius: 30px;
+    width: 200px;
+}
+
+button:hover {
+    transform: scale(1.1);
+    color: white;
+    background-color: blueviolet;
+    transition: 0.2s;
+}
+
+.flex-container {
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    min-height: 10vmin;
+    min-width: 100%;
+}
+
+#rate, #speed {
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bolder;
+    min-width: 50%;
+    align-self: center;
+}
+
+#diff-select {
+    height: 1.7em;
+    min-width: 6em;
+    font-size: x-large;
+    color: rgba(59, 119, 231, 0.8);
+    background-color: transparent;
+    border: 1px dashed navy;
+}
+
+#countdown,
+#win,
+#lose,
+#stats {
+    display: none;
+}
