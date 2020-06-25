@@ -10,7 +10,8 @@ var player = {
     y: undefined,
     xPrev: 0,
     yPrev: 0,
-    color: "yellow"
+    color: "yellow",
+    degree: 0
 }
 
 var snacks = [{
@@ -20,7 +21,7 @@ var snacks = [{
     ySpeed: 2,
     color: undefined,
     r: SNACK_INIT_RADIUS,
-    fury: false
+    poison: false
 }]
 
 function init() {
@@ -60,8 +61,10 @@ function drawPecman() {
     ctx.translate(player.x, player.y);
 
     // align the pec-man with the trace of mouse
-    var degree = Math.atan2(player.y - player.yPrev, player.x - player.xPrev);
-    ctx.rotate(degree);
+    if (player.x !== player.xPrev || player.y !== player.yPrev) {
+        player.degree = Math.atan2(player.y - player.yPrev, player.x - player.xPrev);
+    }
+    ctx.rotate(player.degree);
 
     // draw pec-man
     ctx.fillStyle = player.color;
@@ -82,6 +85,8 @@ function generateSnacks() {
     snacks[0].color = "yellow";
     snacks[0].x = w/2;
     snacks[0].y = h/2;
+    snacks.push({x: w/2, y: h/2, xSpeed: 3, ySpeed: 5, color: "red",
+                r: 6, poison: true});
 }
 
 function drawSnack(s) {
