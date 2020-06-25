@@ -1,0 +1,7 @@
+create a list(flex) for entry
+
+listen to click/check
+
+onclick, removeChild to remove entry
+onclick, insertBefore(this) to add entry
+oncheck, change the css as finished
