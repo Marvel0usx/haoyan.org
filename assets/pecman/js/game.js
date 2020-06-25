@@ -1,15 +1,27 @@
 window.addEventListener("load", init);
 
 const PECMAN_RADIUS = 30;
+const SNACK_INIT_RADIUS = 5;
 var canvas, ctx;
 var h, w;
-var fury;
-var cursor = {
-    x: 0,
-    y: 0,
-    x_prev: 0,
-    y_prev: 0
+
+var player = {
+    x: undefined,
+    y: undefined,
+    xPrev: 0,
+    yPrev: 0,
+    color: "yellow"
 }
+
+var snacks = [{
+    x: undefined,
+    y: undefined,
+    xSpeed: 1,
+    ySpeed: 2,
+    color: undefined,
+    r: SNACK_INIT_RADIUS,
+    fury: false
+}]
 
 function init() {
     // initialize canvas
@@ -24,41 +36,35 @@ function init() {
     fury = false;
     
     canvas.addEventListener("mousemove", function(evt) {
-        cursor.x = evt.clientX;
-        cursor.y = evt.clientY;
+        player.x = evt.clientX;
+        player.y = evt.clientY;
     });
     
-    // alternative for setInterval(animate, 100)
-    requestAnimationFrame(animate);
+    generateSnacks();
+    mainloop();
 }
 
-function animate() {
+function mainloop() {
+    ctx.clearRect(0, 0, w, h);
     drawPecman();
-    requestAnimationFrame(animate);
+    snacks.forEach(function(s) {drawSnack(s);});
+    snacks.forEach(function(s) {moveSnack(s);});
+    requestAnimationFrame(mainloop);
 }
 
 function drawPecman() {
-    var color;
-    ctx.clearRect(0, 0, w, h);
-    
     // save the current canvas settings.
     ctx.save()
-    
-    if (fury) {
-        color = "red";
-    } else {
-        color = "yellow";
-    }
 
     // translate canvas origin, let (x, y) map to (0, 0).
-    ctx.translate(cursor.x, cursor.y);
+    ctx.translate(player.x, player.y);
 
     // align the pec-man with the trace of mouse
-    var degree = Math.atan2(cursor.y - cursor.y_prev, cursor.x - cursor.x_prev);
+    var degree = Math.atan2(player.y - player.yPrev, player.x - player.xPrev);
     ctx.rotate(degree);
 
     // draw pec-man
-    ctx.fillStyle = color;
+    ctx.fillStyle = player.color;
     ctx.beginPath();
     ctx.arc(0, 0, PECMAN_RADIUS, Math.PI / 7, -Math.PI / 7, false);
     ctx.lineTo(PECMAN_RADIUS/12, PECMAN_RADIUS/15)
@@ -68,6 +74,50 @@ function drawPecman() {
     ctx.restore()
     
     // update mouse coordinates.
-    cursor.x_prev = cursor.x;
-    cursor.y_prev = cursor.y;
+    player.xPrev = player.x;
+    player.yPrev = player.y;
+}
+
+function generateSnacks() {
+    snacks[0].color = "yellow";
+    snacks[0].x = w/2;
+    snacks[0].y = h/2;
+}
+
+function drawSnack(s) {
+    ctx.save();
+    ctx.fillStyle = s.color;
+    ctx.translate(s.x, s.y);
+    ctx.beginPath();
+    ctx.arc(0, 0, s.r, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.restore();
+}
+
+function moveSnack(s) {
+    s.x += s.xSpeed;
+    s.y += s.ySpeed;
+
+    detectCollisionWithWalls(s);
+}
+
+function detectCollisionWithWalls(s) {
+    // collision w/ left or right
+    if (s.x - s.r < 0) {
+        // change direction
+        s.xSpeed = -s.xSpeed;
+        s.x = s.r;
+    } else if (s.x + s.r > w) {
+        s.xSpeed = -s.xSpeed;
+        // reset position at collision point
+        s.x = w - s.r;
+    }
+    // collision w/ top or bottom
+    if (s.y - s.r < 0) {
+        s.ySpeed = -s.ySpeed;
+        s.y = s.r;
+    } else if (s.y + s.r > h) {
+        s.ySpeed = -s.ySpeed;
+        s.y = h - s.r;
+    }
 }
