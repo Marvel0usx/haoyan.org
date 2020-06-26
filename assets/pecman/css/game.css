@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 html, body {
     font-family: 'Press Start 2P', cursive;
     font-size: 16pt;
@@ -11,7 +12,7 @@ h2 {
     margin: 20px 0 10px 0;
 }
 
-.game {
+#game {
     display: flex;
     flex-flow: column nowrap;
     text-align: center;
@@ -45,4 +46,33 @@ h2 {
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     border: 5px dashed white;
+}
+
+#win {
+    color: gold;
+}
+
+#lose {
+    color: rgb(221, 96, 96);
+}
+
+#lose,
+#win {
+    display: none;
+    margin-top: 40%;
+    text-align: center;
+}
+
+.btn-again {
+    font-family: inherit;
+    font-size: 0.8rem;
+    padding: 1.4rem;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.13);
+    border: 0;
+    border-radius: 0.2rem;
+}
+
+.btn-again:hover {
+    background-color: blueviolet;
 }

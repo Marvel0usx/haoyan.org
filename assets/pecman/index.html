@@ -7,7 +7,7 @@
         <script src="js/game.js"></script>
     </head>
     <body>
-        <section class="game">
+        <section class="game" id="game">
             <h2>Pecman Rush</h2>
             <div class="score-board">
                 <div id="lives"></div>
@@ -15,11 +15,17 @@
             </div>
             <canvas id="gameCvs"></canvas>
         </section>
+
         <div id="win">
-
+            <p>Congrats! You Won!</p>
+            <p>Your score is </p>
+            <button class="btn-again">Play Again</button>
         </div>
+        
         <div id="lose">
-
+            <p>It never comes easy!</p>
+            <p>You lost</p>
+            <button class="btn-again">Try Again!</button>
         </div>
     </body>
 </html>

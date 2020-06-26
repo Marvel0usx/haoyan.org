@@ -3,7 +3,7 @@ window.addEventListener("load", init);
 const PECMAN_RADIUS = 30;
 const SNACK_INIT_NUM = 3;
 const SNACK_INIT_RADIUS = 5;
-var LEVEL = 6;
+var LEVEL = 0;
 // canvas and access object.
 var canvas, ctx;
 // score board elements
@@ -13,12 +13,13 @@ var h, w;
 // update the heading of player after 6 ticks.
 var clock = 6;
 // array of snacks on the canvas.
-var snacks = []
+var snacks = [];
 var numPoisonSnacks = 0, numGoodSnacks = 0;
 var colorToEat = undefined;
+var gameRunning = false;
 
 const colors = ["#70d6ff", "#ff70a6", "#ff9770", "#ffd670", "#e9ff70",
-                  "#2ec4b6", "#deaaff", "#f77f00", "#8338ec", "white"];
+                  "#2ec4b6", "#deaaff", "#f77f00", "#8338ec", "#ffffff"];
 
 var player = {
     x: undefined,
@@ -49,18 +50,94 @@ function init() {
         player.x = evt.clientX;
         player.y = evt.clientY;
     });
-    
+
     canvas.addEventListener("mousedown", function(evt) {
-        player.fury = true;
+        if (player.score >= 500 && !player.fury) {
+            player.fury = true;
+            player.score -= 500;
+        }
     });
     
     canvas.addEventListener("mouseup", function(evt) {
         player.fury = false;
     });
 
-    generateSnacks();
-    updateBanner();
+    document.querySelector(".btn-again").addEventListener("click", function() {
+        document.querySelector("#game").style.display = "flex";
+        document.querySelector("#win").style.display = "none";
+        resetEnv();
+        levelUp();
+        mainloop();
+    });
+
+    document.querySelector(".btn-again").addEventListener("click", function() {
+        document.querySelector("#game").style.display = "flex";
+        document.querySelector("#lose").style.display = "none";
+        resetEnv();
+        levelUp();
+        mainloop();
+    });
+
+    levelUp();
     mainloop();
+}
+
+function levelUp() {
+    LEVEL++;
+    snacks = [];
+    setTimeout(function() {
+        generateSnacks();
+        countSnacks();
+        gameRunning = true;
+    }, 1000);
+}
+
+function countSnacks() {
+    colorToEat = snacks[0].color;
+    snacks.forEach(function(s) {
+        if (s.color !== colorToEat) {
+            numPoisonSnacks++;
+        } else {
+            numGoodSnacks++;
+        }
+    });
+}
+
+function mainloop() {
+    if (gameRunning) {
+        ctx.clearRect(0, 0, w, h);
+        updateBanner();
+        updateScoreBoard();
+        snacks.forEach(function(s) {drawSnack(s);});
+        snacks.forEach(function(s, index) {moveSnack(s, index)});
+        drawPecman();
+        if (player.lives <= -1) {
+            gameRunning = false;
+            showLoseScreen();
+        }
+        if (LEVEL >= 10) {
+            gameRunning = false;
+            showWinScreen();
+        }
+        if (numGoodSnacks === 0) {
+            levelUp();
+        }
+        requestAnimationFrame(mainloop);
+    }
+}
+
+function generateSnacks() {
+    for (var i = 0; i < LEVEL + SNACK_INIT_NUM; i++) {
+        var s = {
+            x: w/2,
+            y: h/2,
+            xSpeed: 2 * LEVEL * Math.random() - LEVEL,
+            ySpeed: 2 * LEVEL * Math.random() - LEVEL,
+            color: randColor(),
+            r: randSize()
+        }
+        snacks.push(s);
+    }
 }
 
 function updateBanner() {
@@ -75,38 +152,10 @@ function updateBanner() {
         case "#deaaff": colorText = "Mauve"; break;
         case "#f77f00": colorText = "Tangerine"; break;
         case "#8338ec": colorText = "Blue Violet"; break;
+        case "#ffffff": colorText = "white"; break;
     }
     document.querySelector(".game > h2").textContent = "Eat " + colorText + "!";
     document.querySelector(".game > h2").style.color = colorToEat;
-}
-
-function mainloop() {
-    ctx.clearRect(0, 0, w, h);
-    updateScoreBoard();
-    snacks.forEach(function(s) {drawSnack(s);});
-    snacks.forEach(function(s, index) {moveSnack(s, index)});
-    drawPecman();
-    requestAnimationFrame(mainloop);
-}
-
-function generateSnacks() {
-    for (var i = 0; i < LEVEL + SNACK_INIT_NUM; i++) {
-        var s = {
-            x: w/2,
-            y: h/2,
-            xSpeed: 2 * LEVEL * Math.random() - LEVEL,
-            ySpeed: 2 * LEVEL * Math.random() - LEVEL,
-            color: randColor(),
-            r: randSize()
-        }
-        snacks.push(s);
-        if (s.color !== colorToEat) {
-            numPoisonSnacks++;
-        } else {
-            numGoodSnacks++;
-        }
-    }
-    colorToEat = snacks[0].color;
 }
 
 function drawPecman() {
@@ -200,11 +249,20 @@ function detectCollisionWithPlayer(s, index) {
     if (distanceBtwCenter < s.r + PECMAN_RADIUS) {
         snacks.splice(index, 1);
         if (s.color !== colorToEat) {
-            player.lives--;
-            numPoisonSnacks--;
+            if (player.fury) {
+                numPoisonSnacks--;
+            } else {
+                player.lives--;
+                numPoisonSnacks--;
+            }
         } else {
-            player.score += 100;
-            numGoodSnacks--;
+            if (player.fury) {
+                numGoodSnacks--;
+                player.score += 10;
+            } else {
+                player.score += 100;
+                numGoodSnacks--;
+            }
         }
     }
 }
@@ -220,4 +278,23 @@ function updateScoreBoard() {
         img.src = "./images/pecman.png";
         lives.append(img);
     }
+}
+
+function showLoseScreen() {
+    document.querySelector("#game").style.display = "none";
+    document.querySelector("#lose").style.display = "block";
+}
+
+function showWinScreen() {
+    document.querySelector("#game").style.display = "none";
+    document.querySelector("#win").style.display = "block";
+}
+
+function resetEnv() {
+    LEVEL = 0;
+    score = 0;
+    lives = 3;
+    numGoodSnacks = 0;
+    numPoisonSnacks = 0;
+    colorToEat = undefined;
 }
