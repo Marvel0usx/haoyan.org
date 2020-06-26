@@ -3,6 +3,7 @@ window.addEventListener("load", init);
 const PECMAN_RADIUS = 30;
 const SNACK_INIT_NUM = 3;
 const SNACK_INIT_RADIUS = 5;
+var LEVEL_MAX = 18;
 var LEVEL = 0;
 // canvas and access object.
 var canvas, ctx;
@@ -17,6 +18,7 @@ var snacks = [];
 var numPoisonSnacks = 0, numGoodSnacks = 0;
 var colorToEat = undefined;
 var gameRunning = false;
+var liveUpRound = 3;
 
 const colors = ["#70d6ff", "#ff70a6", "#ff9770", "#ffd670", "#e9ff70",
                   "#2ec4b6", "#deaaff", "#f77f00", "#8338ec", "#ffffff"];
@@ -42,9 +44,9 @@ function init() {
     // initialize environment
     h = canvas.height;
     w = canvas.width;
-    fury = false;
     score = document.querySelector("#score");
     lives = document.querySelector("#lives");
+    resetEnv();
     
     canvas.addEventListener("mousemove", function(evt) {
         player.x = evt.clientX;
@@ -62,17 +64,17 @@ function init() {
         player.fury = false;
     });
 
-    document.querySelector(".btn-again").addEventListener("click", function() {
-        document.querySelector("#game").style.display = "flex";
+    document.querySelector(".btn-again.win").addEventListener("click", function() {
         document.querySelector("#win").style.display = "none";
+        document.querySelector("#game").style.display = "flex";
         resetEnv();
         levelUp();
         mainloop();
     });
 
-    document.querySelector(".btn-again").addEventListener("click", function() {
-        document.querySelector("#game").style.display = "flex";
+    document.querySelector(".btn-again.lose").addEventListener("click", function() {
         document.querySelector("#lose").style.display = "none";
+        document.querySelector("#game").style.display = "flex";
         resetEnv();
         levelUp();
         mainloop();
@@ -85,11 +87,11 @@ function init() {
 function levelUp() {
     LEVEL++;
     snacks = [];
-    setTimeout(function() {
-        generateSnacks();
-        countSnacks();
-        gameRunning = true;
-    }, 1000);
+    if (LEVEL % liveUpRound == 0)
+        player.lives++;
+    generateSnacks();
+    countSnacks();
+    gameRunning = true;
 }
 
 function countSnacks() {
@@ -113,11 +115,10 @@ function mainloop() {
         drawPecman();
         if (player.lives <= -1) {
             gameRunning = false;
-            showLoseScreen();
-        }
-        if (LEVEL >= 10) {
+            showScreen("#lose");
+        } else if (LEVEL >= LEVEL_MAX) {
             gameRunning = false;
-            showWinScreen();
+            showScreen("#win");
         }
         if (numGoodSnacks === 0) {
             levelUp();
@@ -280,20 +281,19 @@ function updateScoreBoard() {
     }
 }
 
-function showLoseScreen() {
+function showScreen(query) {
     document.querySelector("#game").style.display = "none";
-    document.querySelector("#lose").style.display = "block";
-}
-
-function showWinScreen() {
-    document.querySelector("#game").style.display = "none";
-    document.querySelector("#win").style.display = "block";
+    document.querySelector(query).style.display = "block";
+    document.querySelector(query + " > p.score").textContent = "Your score is " + player.score;
 }
 
 function resetEnv() {
     LEVEL = 0;
-    score = 0;
-    lives = 3;
+    player.fury = false;
+    player.score = 0;
+    player.lives = 3;
+    player.x = w/2;
+    player.y = h - PECMAN_RADIUS * 4;
     numGoodSnacks = 0;
     numPoisonSnacks = 0;
     colorToEat = undefined;
