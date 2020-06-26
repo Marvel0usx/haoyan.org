@@ -4,9 +4,21 @@ const PECMAN_RADIUS = 30;
 const SNACK_INIT_NUM = 3;
 const SNACK_INIT_RADIUS = 5;
 var LEVEL = 6;
+// canvas and access object.
 var canvas, ctx;
+// score board elements
+var score, lives;
+// height and width of the canvas.
 var h, w;
+// update the heading of player after 6 ticks.
 var clock = 6;
+// array of snacks on the canvas.
+var snacks = []
+var numPoisonSnacks = 0, numGoodSnacks = 0;
+var colorToEat = undefined;
+
+const colors = ["#70d6ff", "#ff70a6", "#ff9770", "#ffd670", "#e9ff70",
+                  "#2ec4b6", "#deaaff", "#f77f00", "#8338ec", "white"];
 
 var player = {
     x: undefined,
@@ -14,10 +26,10 @@ var player = {
     xPrev: 0,
     yPrev: 0,
     fury: false,
-    degree: 0
+    degree: 0,
+    lives: 3,
+    score: 0
 }
-
-var snacks = []
 
 function init() {
     // initialize canvas
@@ -30,30 +42,71 @@ function init() {
     h = canvas.height;
     w = canvas.width;
     fury = false;
+    score = document.querySelector("#score");
+    lives = document.querySelector("#lives");
     
     canvas.addEventListener("mousemove", function(evt) {
         player.x = evt.clientX;
         player.y = evt.clientY;
     });
-
+    
     canvas.addEventListener("mousedown", function(evt) {
         player.fury = true;
     });
-
+    
     canvas.addEventListener("mouseup", function(evt) {
         player.fury = false;
     });
-    
+
     generateSnacks();
+    updateBanner();
     mainloop();
+}
+
+function updateBanner() {
+    var colorText;
+    switch(colorToEat) {
+        case "#70d6ff": colorText = "Maya Blue"; break;
+        case "#ff70a6": colorText = "Tickle Me Pink"; break;
+        case "#ff9770": colorText = "Atomic Tangerine"; break;
+        case "#ffd670": colorText = "Salomie"; break;
+        case "#e9ff70": colorText = "Honeysuckle"; break;
+        case "#2ec4b6": colorText = "Light Sea Green"; break;
+        case "#deaaff": colorText = "Mauve"; break;
+        case "#f77f00": colorText = "Tangerine"; break;
+        case "#8338ec": colorText = "Blue Violet"; break;
+    }
+    document.querySelector(".game > h2").textContent = "Eat " + colorText + "!";
+    document.querySelector(".game > h2").style.color = colorToEat;
 }
 
 function mainloop() {
     ctx.clearRect(0, 0, w, h);
+    updateScoreBoard();
     snacks.forEach(function(s) {drawSnack(s);});
     snacks.forEach(function(s, index) {moveSnack(s, index)});
     drawPecman();
     requestAnimationFrame(mainloop);
+}
+
+function generateSnacks() {
+    for (var i = 0; i < LEVEL + SNACK_INIT_NUM; i++) {
+        var s = {
+            x: w/2,
+            y: h/2,
+            xSpeed: 2 * LEVEL * Math.random() - LEVEL,
+            ySpeed: 2 * LEVEL * Math.random() - LEVEL,
+            color: randColor(),
+            r: randSize()
+        }
+        snacks.push(s);
+        if (s.color !== colorToEat) {
+            numPoisonSnacks++;
+        } else {
+            numGoodSnacks++;
+        }
+    }
+    colorToEat = snacks[0].color;
 }
 
 function drawPecman() {
@@ -94,24 +147,7 @@ function drawPecman() {
     player.yPrev = player.y;
 }
 
-function generateSnacks() {
-    for (var i = 0; i < LEVEL + SNACK_INIT_NUM; i++) {
-        var s = {
-            x: w/2,
-            y: h/2,
-            xSpeed: 2 * LEVEL * Math.random() - LEVEL,
-            ySpeed: 2 * LEVEL * Math.random() - LEVEL,
-            color: randColor(),
-            r: randSize(),
-            poison: !!Math.round(Math.random())
-        }
-        snacks.push(s);
-    }
-}
-
 function randColor() {
-    var colors = ["#70d6ff", "#ff70a6", "#ff9770", "#ffd670", "#e9ff70",
-                  "#2ec4b6", "#deaaff", "#f77f00", "#8338ec", "white"];
     var cIdx = Math.round(Math.random() * (colors.length - 1));
     return colors[cIdx];
 }
@@ -163,5 +199,25 @@ function detectCollisionWithPlayer(s, index) {
     var distanceBtwCenter = Math.sqrt(Math.pow(player.x - s.x, 2) + Math.pow(player.y - s.y, 2));
     if (distanceBtwCenter < s.r + PECMAN_RADIUS) {
         snacks.splice(index, 1);
+        if (s.color !== colorToEat) {
+            player.lives--;
+            numPoisonSnacks--;
+        } else {
+            player.score += 100;
+            numGoodSnacks--;
+        }
+    }
+}
+
+function updateScoreBoard() {
+    score.textContent = player.score;
+    if (lives.length === player.lives) {
+        return;
+    }
+    lives.innerHTML = "";
+    for (var i = 0; i < player.lives; i++) {
+        var img = document.createElement("img");
+        img.src = "./images/pecman.png";
+        lives.append(img);
     }
 }

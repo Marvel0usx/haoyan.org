@@ -1,13 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 html, body {
-    font-size: 20pt;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16pt;
     margin: 0;
     min-height: 100%;
     background-color: #1d3557;
 }
 
 h2 {
+    margin: 20px 0 10px 0;
+}
+
+.game {
+    display: flex;
+    flex-flow: column nowrap;
     text-align: center;
     color: white;
+}
+
+.score-board {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.score-board > div {
+    margin: 0 10px 0 10px;
+}
+
+#lives > img {
+    background-image: url("./images/pecman.png");
+    width: 20px;
+    height: 20px;
 }
 
 #gameCvs {
