@@ -1,28 +1,23 @@
 window.addEventListener("load", init);
 
 const PECMAN_RADIUS = 30;
+const SNACK_INIT_NUM = 3;
 const SNACK_INIT_RADIUS = 5;
+var LEVEL = 6;
 var canvas, ctx;
 var h, w;
+var clock = 6;
 
 var player = {
     x: undefined,
     y: undefined,
     xPrev: 0,
     yPrev: 0,
-    color: "yellow",
+    fury: false,
     degree: 0
 }
 
-var snacks = [{
-    x: undefined,
-    y: undefined,
-    xSpeed: 1,
-    ySpeed: 2,
-    color: undefined,
-    r: SNACK_INIT_RADIUS,
-    poison: false
-}]
+var snacks = []
 
 function init() {
     // initialize canvas
@@ -40,6 +35,14 @@ function init() {
         player.x = evt.clientX;
         player.y = evt.clientY;
     });
+
+    canvas.addEventListener("mousedown", function(evt) {
+        player.fury = true;
+    });
+
+    canvas.addEventListener("mouseup", function(evt) {
+        player.fury = false;
+    });
     
     generateSnacks();
     mainloop();
@@ -47,9 +50,9 @@ function init() {
 
 function mainloop() {
     ctx.clearRect(0, 0, w, h);
-    drawPecman();
     snacks.forEach(function(s) {drawSnack(s);});
-    snacks.forEach(function(s) {moveSnack(s);});
+    snacks.forEach(function(s, index) {moveSnack(s, index)});
+    drawPecman();
     requestAnimationFrame(mainloop);
 }
 
@@ -61,13 +64,23 @@ function drawPecman() {
     ctx.translate(player.x, player.y);
 
     // align the pec-man with the trace of mouse
+    var newDegree = Math.atan2(player.y - player.yPrev, player.x - player.xPrev);
+    clock--;
     if (player.x !== player.xPrev || player.y !== player.yPrev) {
-        player.degree = Math.atan2(player.y - player.yPrev, player.x - player.xPrev);
+        if (Math.abs(newDegree - player.degree) > Math.PI / 180) {
+            if (clock <= 0) {
+                player.degree = newDegree;
+                clock = 6;   
+            }
+        }
     }
     ctx.rotate(player.degree);
 
     // draw pec-man
-    ctx.fillStyle = player.color;
+    if (player.fury)
+        ctx.fillStyle = "#e63946";
+    else
+        ctx.fillStyle = "yellow";
     ctx.beginPath();
     ctx.arc(0, 0, PECMAN_RADIUS, Math.PI / 7, -Math.PI / 7, false);
     ctx.lineTo(PECMAN_RADIUS/12, PECMAN_RADIUS/15)
@@ -82,11 +95,29 @@ function drawPecman() {
 }
 
 function generateSnacks() {
-    snacks[0].color = "yellow";
-    snacks[0].x = w/2;
-    snacks[0].y = h/2;
-    snacks.push({x: w/2, y: h/2, xSpeed: 3, ySpeed: 5, color: "red",
-                r: 6, poison: true});
+    for (var i = 0; i < LEVEL + SNACK_INIT_NUM; i++) {
+        var s = {
+            x: w/2,
+            y: h/2,
+            xSpeed: 2 * LEVEL * Math.random() - LEVEL,
+            ySpeed: 2 * LEVEL * Math.random() - LEVEL,
+            color: randColor(),
+            r: randSize(),
+            poison: !!Math.round(Math.random())
+        }
+        snacks.push(s);
+    }
+}
+
+function randColor() {
+    var colors = ["#70d6ff", "#ff70a6", "#ff9770", "#ffd670", "#e9ff70",
+                  "#2ec4b6", "#deaaff", "#f77f00", "#8338ec", "white"];
+    var cIdx = Math.round(Math.random() * (colors.length - 1));
+    return colors[cIdx];
+}
+
+function randSize() {
+    return Math.round(Math.random() * (SNACK_INIT_RADIUS + LEVEL)) + SNACK_INIT_RADIUS;
 }
 
 function drawSnack(s) {
@@ -99,11 +130,12 @@ function drawSnack(s) {
     ctx.restore();
 }
 
-function moveSnack(s) {
+function moveSnack(s, index) {
     s.x += s.xSpeed;
     s.y += s.ySpeed;
 
     detectCollisionWithWalls(s);
+    detectCollisionWithPlayer(s, index);
 }
 
 function detectCollisionWithWalls(s) {
@@ -124,5 +156,12 @@ function detectCollisionWithWalls(s) {
     } else if (s.y + s.r > h) {
         s.ySpeed = -s.ySpeed;
         s.y = h - s.r;
+    }
+}
+
+function detectCollisionWithPlayer(s, index) {
+    var distanceBtwCenter = Math.sqrt(Math.pow(player.x - s.x, 2) + Math.pow(player.y - s.y, 2));
+    if (distanceBtwCenter < s.r + PECMAN_RADIUS) {
+        snacks.splice(index, 1);
     }
 }
