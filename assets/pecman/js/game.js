@@ -51,6 +51,8 @@ function init() {
     canvas.addEventListener("mousemove", function(evt) {
         player.x = evt.clientX;
         player.y = evt.clientY;
+        if (player.score < 0)
+            player.fury = false;
     });
 
     canvas.addEventListener("mousedown", function(evt) {
@@ -251,6 +253,7 @@ function detectCollisionWithPlayer(s, index) {
         snacks.splice(index, 1);
         if (s.color !== colorToEat) {
             if (player.fury) {
+                player.score -= 50;
                 numPoisonSnacks--;
             } else {
                 player.lives--;
