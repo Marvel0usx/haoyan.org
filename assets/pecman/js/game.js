@@ -143,6 +143,17 @@ function levelUp() {
 }
 
 function countSnacks() {
+    snacks.sort(function compare(s1, s2) {
+        var c1 = s1.color.toUpperCase();
+        var c2 = s2.color.toUpperCase();
+        if (c1 < c1) {
+            return -1;
+        }
+        if (c1 > c1) {
+            return 1;
+        }
+        return 0;
+    });
     colorToEat = snacks[0].color;
     numGoodSnacks = 0;
     snacks.forEach(function(s) {
