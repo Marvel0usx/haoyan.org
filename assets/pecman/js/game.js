@@ -364,7 +364,7 @@ function resetEnv() {
 function effectCollideWallSound(s) {
     let volume = 0.005 * s.r;
     let id = soundHitWall.play();
-    soundHitWall.volume(volume);
+    soundHitWall.volume(volume, id);
 }
 
 function effectEatPoison() {

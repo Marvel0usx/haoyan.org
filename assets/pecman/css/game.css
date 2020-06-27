@@ -47,7 +47,7 @@ h2 {
 }
 
 #lives > img {
-    background-image: url("./images/pecman.png");
+    background-image: url("../images/pecman.png");
     width: 20px;
     height: 20px;
 }
