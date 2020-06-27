@@ -1,13 +1,8 @@
 window.addEventListener("load", init);
 
-const PECMAN_RADIUS = 30;
-const SNACK_INIT_NUM = 3;
-const SNACK_INIT_RADIUS = 5;
-var LEVEL_MAX = 18;
-var LEVEL = 0;
 // canvas and access object.
 var canvas, ctx;
-// score board elements
+// score board element.
 var score, lives;
 // height and width of the canvas.
 var h, w;
@@ -15,13 +10,28 @@ var h, w;
 var clock = 6;
 // array of snacks on the canvas.
 var snacks = [];
-var numPoisonSnacks = 0, numGoodSnacks = 0;
-var colorToEat = undefined;
+// game state.
 var gameRunning = false;
-var liveUpRound = 3;
 
+// game settings.
+var numPoisonSnacks = 0, numGoodSnacks = 0;
+var liveUpRound = 3;
 const colors = ["#70d6ff", "#ff70a6", "#ff9770", "#ffd670", "#e9ff70",
-                  "#2ec4b6", "#deaaff", "#f77f00", "#8338ec", "#ffffff"];
+                "#2ec4b6", "#deaaff", "#f77f00", "#8338ec", "#ffffff"];
+var colorToEat = undefined;
+const PECMAN_RADIUS = 30;
+const SNACK_INIT_NUM = 3;
+const SNACK_INIT_RADIUS = 5;
+var LEVEL_MAX = 18;
+var LEVEL = 0;
+
+// sound effects.
+var soundHitWall;
+var soundLevelUp;
+var soundPoison;
+var soundScoreUp;
+var soundWin;
+var soundLose;
 
 var player = {
     x: undefined,
@@ -46,6 +56,7 @@ function init() {
     w = canvas.width;
     score = document.querySelector("#score");
     lives = document.querySelector("#lives");
+    setUpSoundEffects();
     resetEnv();
     
     canvas.addEventListener("mousemove", function(evt) {
@@ -59,6 +70,8 @@ function init() {
         if (player.score >= 500 && !player.fury) {
             player.fury = true;
             player.score -= 500;
+        } else if (player.score < 0) {
+            player.fury = false;
         }
     });
     
@@ -86,18 +99,43 @@ function init() {
     mainloop();
 }
 
+function setUpSoundEffects() {
+    soundHitWall = new Howl({
+        src: ["./sound/plop.mp3"],
+        onload: function() {
+            console.log("Loaded sound.");
+        }
+    });
+    soundLevelUp = new Howl({
+        src: ["./sound/level-up.mp3"]
+    });
+    soundScoreUp = new Howl({
+        src: ["./sound/score-up.mp3"]
+    });
+    soundPoison = new Howl({
+        src: ["./sound/poison.mp3"]
+    });
+    soundWin = new Howl({
+        src: ["./sound/win.mp3"]
+    });
+    soundLose = new Howl({
+        src: ["./sound/lose.mp3"]
+    });
+}
+
 function levelUp() {
     LEVEL++;
     snacks = [];
     if (LEVEL % liveUpRound == 0)
         player.lives++;
     generateSnacks();
-    countSnacks();
+    numGoodSnacks = -1;
     gameRunning = true;
 }
 
 function countSnacks() {
     colorToEat = snacks[0].color;
+    numGoodSnacks = 0;
     snacks.forEach(function(s) {
         if (s.color !== colorToEat) {
             numPoisonSnacks++;
@@ -117,30 +155,36 @@ function mainloop() {
         drawPecman();
         if (player.lives <= -1) {
             gameRunning = false;
+            effectLoseSound();
             showScreen("#lose");
         } else if (LEVEL >= LEVEL_MAX) {
             gameRunning = false;
+            effectWinSound();
             showScreen("#win");
         }
         if (numGoodSnacks === 0) {
             levelUp();
+            effectLevelUpSound();
         }
         requestAnimationFrame(mainloop);
     }
 }
 
 function generateSnacks() {
-    for (var i = 0; i < LEVEL + SNACK_INIT_NUM; i++) {
-        var s = {
-            x: w/2,
-            y: h/2,
-            xSpeed: 2 * LEVEL * Math.random() - LEVEL,
-            ySpeed: 2 * LEVEL * Math.random() - LEVEL,
-            color: randColor(),
-            r: randSize()
+    setTimeout(function() {
+        for (var i = 0; i < LEVEL + SNACK_INIT_NUM; i++) {
+            var s = {
+                x: w/2,
+                y: h/2,
+                xSpeed: 2 * LEVEL * Math.random() - LEVEL,
+                ySpeed: 2 * LEVEL * Math.random() - LEVEL,
+                color: randColor(),
+                r: randSize()
+            };
+            snacks.push(s);
         }
-        snacks.push(s);
-    }
+        countSnacks();
+    }, 1300);
 }
 
 function updateBanner() {
@@ -227,23 +271,31 @@ function moveSnack(s, index) {
 }
 
 function detectCollisionWithWalls(s) {
+    var collide = false;
     // collision w/ left or right
     if (s.x - s.r < 0) {
         // change direction
         s.xSpeed = -s.xSpeed;
         s.x = s.r;
+        collide = true;
     } else if (s.x + s.r > w) {
         s.xSpeed = -s.xSpeed;
         // reset position at collision point
         s.x = w - s.r;
+        collide = true;
     }
     // collision w/ top or bottom
     if (s.y - s.r < 0) {
         s.ySpeed = -s.ySpeed;
         s.y = s.r;
+        collide = true;
     } else if (s.y + s.r > h) {
         s.ySpeed = -s.ySpeed;
         s.y = h - s.r;
+        collide = true;
+    }
+    if (collide) {
+        effectCollideWallSound(s);
     }
 }
 
@@ -253,11 +305,13 @@ function detectCollisionWithPlayer(s, index) {
         snacks.splice(index, 1);
         if (s.color !== colorToEat) {
             if (player.fury) {
-                player.score -= 50;
+                player.score -= 100;
                 numPoisonSnacks--;
             } else {
+                effectEatPoison();
                 player.lives--;
                 numPoisonSnacks--;
+                effectEatPoison();
             }
         } else {
             if (player.fury) {
@@ -267,6 +321,7 @@ function detectCollisionWithPlayer(s, index) {
                 player.score += 100;
                 numGoodSnacks--;
             }
+            effectScoreUp();
         }
     }
 }
@@ -300,4 +355,44 @@ function resetEnv() {
     numGoodSnacks = 0;
     numPoisonSnacks = 0;
     colorToEat = undefined;
+}
+
+/*
+ * Sound effects are free under the Creative Common 0 License.
+ * Credit to http://www.theallsounds.com/
+ */
+function effectCollideWallSound(s) {
+    let volume = 0.005 * s.r;
+    let id = soundHitWall.play();
+    soundHitWall.volume(volume);
+}
+
+function effectEatPoison() {
+    soundPoison.play();
+    canvas.setAttribute("class", "shake");
+    canvas.style.border = "5px dashed red";
+    setTimeout(function() {
+        canvas.style.border = "5px dashed white";
+        canvas.removeAttribute("class");
+    }, 300);
+}
+
+function effectScoreUp() {
+    soundScoreUp.play();
+    score.style.color = "yellow";
+    setTimeout(function() {
+        score.style.color = "white";
+    }, 300);
+}
+
+function effectLevelUpSound() {
+    soundLevelUp.play();
+}
+
+function effectWinSound() {
+    soundWin.play();
+}
+
+function effectLoseSound(){
+    soundLose.play();
 }
