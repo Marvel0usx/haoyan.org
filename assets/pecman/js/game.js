@@ -59,17 +59,24 @@ function init() {
     setUpSoundEffects();
     resetEnv();
     
+    document.querySelector("#btn-start").addEventListener("click", function() {
+        document.querySelector("#game").style.display = "flex";
+        this.parentNode.style.display = "none";
+        levelUp();
+        mainloop();
+    });
+    
     canvas.addEventListener("mousemove", function(evt) {
         player.x = evt.clientX;
         player.y = evt.clientY;
         if (player.score < 0)
-            player.fury = false;
+        player.fury = false;
     });
-
+    
     canvas.addEventListener("mousedown", function(evt) {
         if (player.score >= 500 && !player.fury) {
             player.fury = true;
-            player.score -= 500;
+            player.score -= 100 * LEVEL;
         } else if (player.score < 0) {
             player.fury = false;
         }
@@ -94,9 +101,6 @@ function init() {
         levelUp();
         mainloop();
     });
-
-    levelUp();
-    mainloop();
 }
 
 function setUpSoundEffects() {
@@ -107,19 +111,24 @@ function setUpSoundEffects() {
         }
     });
     soundLevelUp = new Howl({
-        src: ["./sound/level-up.mp3"]
+        src: ["./sound/level-up.mp3"],
+        volume: 0.3
     });
     soundScoreUp = new Howl({
-        src: ["./sound/score-up.mp3"]
+        src: ["./sound/score-up.mp3"],
+        volume: 0.3
     });
     soundPoison = new Howl({
-        src: ["./sound/poison.mp3"]
+        src: ["./sound/poison.mp3"],
+        volume:0.4
     });
     soundWin = new Howl({
-        src: ["./sound/win.mp3"]
+        src: ["./sound/win.mp3"],
+        volume: 0.8
     });
     soundLose = new Howl({
-        src: ["./sound/lose.mp3"]
+        src: ["./sound/lose.mp3"],
+        volume: 0.8
     });
 }
 
