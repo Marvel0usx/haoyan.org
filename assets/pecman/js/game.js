@@ -331,7 +331,6 @@ function detectCollisionWithPlayer(s, index) {
                 effectEatPoison();
                 player.lives--;
                 numPoisonSnacks--;
-                effectEatPoison();
             }
         } else {
             if (player.fury) {
@@ -341,8 +340,8 @@ function detectCollisionWithPlayer(s, index) {
                 player.score += 100;
                 numGoodSnacks--;
             }
-            effectScoreUp();
         }
+        effectScoreChange();
     }
 }
 
@@ -397,7 +396,7 @@ function effectEatPoison() {
     }, 300);
 }
 
-function effectScoreUp() {
+function effectScoreChange() {
     soundScoreUp.play();
     score.style.color = "yellow";
     setTimeout(function() {
