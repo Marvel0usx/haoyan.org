@@ -59,6 +59,7 @@ function init() {
     setUpSoundEffects();
     resetEnv();
     
+    // event bindings
     document.querySelector("#btn-start").addEventListener("click", function() {
         document.querySelector("#game").style.display = "flex";
         this.parentNode.style.display = "none";
@@ -173,6 +174,8 @@ function mainloop() {
         snacks.forEach(function(s) {drawSnack(s);});
         snacks.forEach(function(s, index) {moveSnack(s, index)});
         drawPecman();
+
+        // game state update
         if (player.lives <= -1) {
             gameRunning = false;
             effectLoseSound();
@@ -358,12 +361,18 @@ function updateScoreBoard() {
     }
 }
 
+/*
+ * Helper function to show win/lose screen.
+ */
 function showScreen(query) {
     document.querySelector("#game").style.display = "none";
     document.querySelector(query).style.display = "block";
     document.querySelector(query + " > p.score").textContent = "Your score is " + player.score;
 }
 
+/*
+ * Reset environment when restart.
+ */
 function resetEnv() {
     LEVEL = 0;
     player.fury = false;
