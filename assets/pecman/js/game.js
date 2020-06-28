@@ -125,11 +125,11 @@ function setUpSoundEffects() {
     });
     soundWin = new Howl({
         src: ["./sound/win.mp3"],
-        volume: 0.8
+        volume: 0.6
     });
     soundLose = new Howl({
         src: ["./sound/lose.mp3"],
-        volume: 0.8
+        volume: 0.6
     });
 }
 
@@ -138,6 +138,7 @@ function levelUp() {
     snacks = [];
     if (LEVEL % liveUpRound == 0)
         player.lives++;
+    player.fury = false;
     generateSnacks();
     numGoodSnacks = -1;
     gameRunning = true;
@@ -223,6 +224,7 @@ function updateBanner() {
         case "#f77f00": colorText = "Tangerine"; break;
         case "#8338ec": colorText = "Blue Violet"; break;
         case "#ffffff": colorText = "white"; break;
+        default: colorText = "XXX";
     }
     document.querySelector(".game > h2").textContent = "Eat " + colorText + "!";
     document.querySelector(".game > h2").style.color = colorToEat;
@@ -424,3 +426,9 @@ function effectWinSound() {
 function effectLoseSound(){
     soundLose.play();
 }
+
+//TODO: add mark for fury mode
+
+//TODO: invert color and prompt text
+
+//TODO: add language support
