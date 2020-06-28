@@ -10,6 +10,9 @@ var h, w;
 var clock = 6;
 // array of snacks on the canvas.
 var snacks = [];
+// boss round
+var isBossRound = false;
+var bossRoundAllowExit = false;
 // game state.
 var gameRunning = false;
 
@@ -24,6 +27,8 @@ const SNACK_INIT_NUM = 3;
 const SNACK_INIT_RADIUS = 5;
 const ROUND_PER_FURY_MARK = 5;
 const LEVEL_MAX = 18;
+const BOSS_DIFFICULTY = 3;
+const BOSS_ON_ROUND = 10;
 var LEVEL = 0;
 
 // sound effects.
@@ -181,7 +186,16 @@ function levelUp() {
     if (LEVEL % ROUND_PER_FURY_MARK === 0)
         player.furyCds++;
     player.fury = false;
-    generateSnacks();
+    if (LEVEL % BOSS_ON_ROUND == 0) {
+        isBossRound = true;
+        bossRoundAllowExit = false;
+        bossRound();
+        for (var i = 0; i <= BOSS_DIFFICULTY; i++) {
+            generateSnacks(4000 * i + 1300, i === BOSS_DIFFICULTY);
+        }
+    } else {
+        generateSnacks(1300, undefined);
+    }
     numGoodSnacks = -1;
     gameRunning = true;
 }
@@ -198,7 +212,7 @@ function countSnacks() {
         }
         return 0;
     });
-    colorToEat = snacks[0].color;
+    colorToEat = snacks[Math.round(Math.random() * (snacks.length - 1))].color;
     numGoodSnacks = 0;
     snacks.forEach(function(s) {
         if (s.color !== colorToEat) {
@@ -229,14 +243,23 @@ function mainloop() {
             showScreen("#win");
         }
         if (numGoodSnacks === 0) {
-            levelUp();
-            effectLevelUpSound();
+            if (isBossRound) {
+                if (bossRoundAllowExit) {
+                    levelUp();
+                    effectLevelUpSound();
+                    isBossRound = false;
+                    bossRoundAllowExit = false;
+                }
+            } else {
+                levelUp();
+                effectLevelUpSound();
+            }
         }
         requestAnimationFrame(mainloop);
     }
 }
 
-function generateSnacks() {
+function generateSnacks(delay, bossFinalRound) {
     setTimeout(function() {
         for (var i = 0; i < LEVEL + SNACK_INIT_NUM; i++) {
             var s = {
@@ -250,7 +273,8 @@ function generateSnacks() {
             snacks.push(s);
         }
         countSnacks();
-    }, 1300);
+        bossRoundAllowExit = bossFinalRound;
+    }, delay);
 }
 
 function updateBanner() {
@@ -388,6 +412,8 @@ function showScreen(query) {
  */
 function resetEnv() {
     LEVEL = 0;
+    isBossRound = false;
+    bossRoundAllowExit = false;
     player.fury = false;
     player.furyCds = 0;
     player.score = 0;
@@ -437,6 +463,14 @@ function effectWinSound() {
 
 function effectLoseSound(){
     soundLose.play();
+}
+
+function bossRound() {
+    var prompt = document.querySelector("#boss");
+    prompt.style.display = "block";
+    setTimeout(function() {
+        prompt.style.display = "none";
+    }, 1000);
 }
 
 //TODO: invert color and prompt text

@@ -90,11 +90,21 @@ div.cd {
     color: rgb(221, 96, 96);
 }
 
-#lose,
+#lose,  
 #win {
     display: none;
     margin-top: 32vh;
     text-align: center;
+}
+
+#boss {
+    display: none;
+    margin-top: 32vh;
+    text-align: center;
+    background: -webkit-linear-gradient(#eee, rgb(255, 238, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 600ms cubic-bezier(0.8, 0.32, 0, 1.93);
 }
 
 .shake {
