@@ -38,6 +38,7 @@ var soundPoison;
 var soundScoreUp;
 var soundWin;
 var soundLose;
+var muteWhich = 0;
 
 var player = {
     x: undefined,
@@ -147,6 +148,8 @@ function init() {
         levelUp();
         mainloop();
     });
+
+    document.querySelector(".btn-sound").addEventListener("click", mute);
 }
 
 function setUpSoundEffects() {
@@ -473,6 +476,32 @@ function bossRound() {
     }, 1000);
 }
 
-//TODO: invert color and prompt text
-
-//TODO: add language support
+// mute background = 1
+// mute site = 2
+// unmute = 0
+function mute() {
+    if (muteWhich === 0) {
+        document.querySelector("audio").pause();
+        document.querySelector(".btn-sound").style.backgroundImage = 'url("./images/unmute-game.png")';
+        muteWhich = 1;
+    } else if (muteWhich === 1) {
+        soundWin.mute(true);
+        soundLose.mute(true);
+        soundPoison.mute(true);
+        soundScoreUp.mute(true);
+        soundLevelUp.mute(true);
+        soundHitWall.mute(true);
+        document.querySelector(".btn-sound").style.backgroundImage = 'url("./images/mute.png")';
+        muteWhich = 2;
+    } else {
+        document.querySelector("audio").play();
+        soundWin.mute(false);
+        soundLose.mute(false);
+        soundPoison.mute(false);
+        soundScoreUp.mute(false);
+        soundLevelUp.mute(false);
+        soundHitWall.mute(false);
+        document.querySelector(".btn-sound").style.backgroundImage = 'url("./images/unmute-site.png")';
+        muteWhich = 0;
+    }
+}
