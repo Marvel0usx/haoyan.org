@@ -14,11 +14,17 @@ h2 {
     margin: 20px 0 10px 0;
 }
 
+div.cd {
+    display: inline-block;
+    background-image: image("../images/cd.png");
+    width: 20px;
+    height: 20px;
+}
+
 .score-board {
+    margin: 0 auto;
     display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    width: 100%;
+    flex-flow: row nowrap;
 }
 
 .score-board > div {
@@ -47,9 +53,9 @@ h2 {
 }
 
 #lives > img {
-    background-image: url("../images/pecman.png");
     width: 20px;
     height: 20px;
+    background-image: url("../images/pecman.png");
 }
 
 #gameCvs {
@@ -62,6 +68,11 @@ h2 {
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     border: 5px dashed white;
+}
+
+#fury-cd > img{
+    width: 20px;
+    height: 20px;
 }
 
 #start{

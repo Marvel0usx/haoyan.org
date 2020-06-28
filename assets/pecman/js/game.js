@@ -22,7 +22,8 @@ var colorToEat = undefined;
 const PECMAN_RADIUS = 30;
 const SNACK_INIT_NUM = 3;
 const SNACK_INIT_RADIUS = 5;
-var LEVEL_MAX = 18;
+const ROUND_PER_FURY_MARK = 5;
+const LEVEL_MAX = 18;
 var LEVEL = 0;
 
 // sound effects.
@@ -39,9 +40,47 @@ var player = {
     xPrev: 0,
     yPrev: 0,
     fury: false,
+    furyCds: 0,
     degree: 0,
     lives: 3,
-    score: 0
+    score: 0,
+    draw: function() {
+        // save the current canvas settings.
+        ctx.save()
+
+        // translate canvas origin, let (x, y) map to (0, 0).
+        ctx.translate(this.x, this.y);
+
+        // align the pec-man with the trace of mouse
+        var newDegree = Math.atan2(this.y - this.yPrev, this.x - this.xPrev);
+        clock--;
+        if (this.x !== this.xPrev || this.y !== this.yPrev) {
+            if (Math.abs(newDegree - this.degree) > Math.PI / 180) {
+                if (clock <= 0) {
+                    this.degree = newDegree;
+                    clock = 6;   
+                }
+            }
+        }
+        ctx.rotate(this.degree);
+
+        // draw pec-man
+        if (this.fury)
+            ctx.fillStyle = "#e63946";
+        else
+            ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.arc(0, 0, PECMAN_RADIUS, Math.PI / 7, -Math.PI / 7, false);
+        ctx.lineTo(PECMAN_RADIUS/12, PECMAN_RADIUS/15)
+        ctx.fill();
+
+        // restore the saved settings to avoid local settings changing global.
+        ctx.restore()
+        
+        // update mouse coordinates.
+        this.xPrev = this.x;
+        this.yPrev = this.y;
+    }
 }
 
 function init() {
@@ -174,7 +213,7 @@ function mainloop() {
         updateScoreBoard();
         snacks.forEach(function(s) {drawSnack(s);});
         snacks.forEach(function(s, index) {moveSnack(s, index)});
-        drawPecman();
+        player.draw();
 
         // game state update
         if (player.lives <= -1) {
@@ -228,44 +267,6 @@ function updateBanner() {
     }
     document.querySelector(".game > h2").textContent = "Eat " + colorText + "!";
     document.querySelector(".game > h2").style.color = colorToEat;
-}
-
-function drawPecman() {
-    // save the current canvas settings.
-    ctx.save()
-
-    // translate canvas origin, let (x, y) map to (0, 0).
-    ctx.translate(player.x, player.y);
-
-    // align the pec-man with the trace of mouse
-    var newDegree = Math.atan2(player.y - player.yPrev, player.x - player.xPrev);
-    clock--;
-    if (player.x !== player.xPrev || player.y !== player.yPrev) {
-        if (Math.abs(newDegree - player.degree) > Math.PI / 180) {
-            if (clock <= 0) {
-                player.degree = newDegree;
-                clock = 6;   
-            }
-        }
-    }
-    ctx.rotate(player.degree);
-
-    // draw pec-man
-    if (player.fury)
-        ctx.fillStyle = "#e63946";
-    else
-        ctx.fillStyle = "yellow";
-    ctx.beginPath();
-    ctx.arc(0, 0, PECMAN_RADIUS, Math.PI / 7, -Math.PI / 7, false);
-    ctx.lineTo(PECMAN_RADIUS/12, PECMAN_RADIUS/15)
-    ctx.fill();
-
-    // restore the saved settings to avoid local settings changing global.
-    ctx.restore()
-    
-    // update mouse coordinates.
-    player.xPrev = player.x;
-    player.yPrev = player.y;
 }
 
 function randColor() {
