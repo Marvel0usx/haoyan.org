@@ -3,7 +3,7 @@ window.addEventListener("load", init);
 // canvas and access object.
 var canvas, ctx;
 // score board element.
-var score, lives;
+var score, lives, cds;
 // height and width of the canvas.
 var h, w;
 // update the heading of player after 6 ticks.
@@ -95,6 +95,7 @@ function init() {
     w = canvas.width;
     score = document.querySelector("#score");
     lives = document.querySelector("#lives");
+    cds = document.querySelector("#fury-cd");
     setUpSoundEffects();
     resetEnv();
     
@@ -114,9 +115,9 @@ function init() {
     });
     
     canvas.addEventListener("mousedown", function(evt) {
-        if (player.score >= 500 && !player.fury) {
+        if (player.furyCds > 0 && !player.fury) {
             player.fury = true;
-            player.score -= 100 * LEVEL;
+            player.furyCds--;
         } else if (player.score < 0) {
             player.fury = false;
         }
@@ -177,6 +178,8 @@ function levelUp() {
     snacks = [];
     if (LEVEL % liveUpRound == 0)
         player.lives++;
+    if (LEVEL % ROUND_PER_FURY_MARK === 0)
+        player.furyCds++;
     player.fury = false;
     generateSnacks();
     numGoodSnacks = -1;
@@ -353,14 +356,21 @@ function detectCollisionWithPlayer(s, index) {
 
 function updateScoreBoard() {
     score.textContent = player.score;
-    if (lives.length === player.lives) {
-        return;
+    if (cds.childElementCount !== player.furyCds) {
+        cds.innerHTML = "";
+        for (var i = 0; i < player.furyCds; i++) {
+            var img = document.createElement("img");
+            img.src = "./images/ready.png";
+            cds.append(img);
+        }
     }
-    lives.innerHTML = "";
-    for (var i = 0; i < player.lives; i++) {
-        var img = document.createElement("img");
-        img.src = "./images/pecman.png";
-        lives.append(img);
+    if (lives.childElementCount !== player.lives) {
+        lives.innerHTML = "";
+        for (var i = 0; i < player.lives; i++) {
+            var img = document.createElement("img");
+            img.src = "./images/pecman.png";
+            lives.append(img);
+        }
     }
 }
 
@@ -379,6 +389,7 @@ function showScreen(query) {
 function resetEnv() {
     LEVEL = 0;
     player.fury = false;
+    player.furyCds = 0;
     player.score = 0;
     player.lives = 3;
     player.x = w/2;
@@ -427,8 +438,6 @@ function effectWinSound() {
 function effectLoseSound(){
     soundLose.play();
 }
-
-//TODO: add mark for fury mode
 
 //TODO: invert color and prompt text
 

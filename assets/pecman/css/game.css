@@ -52,6 +52,12 @@ div.cd {
     color: white;
 }
 
+#fury-cd > img{
+    width: 20px;
+    height: 20px;
+    background-image: url("../images/ready.png");
+}
+
 #lives > img {
     width: 20px;
     height: 20px;
@@ -68,11 +74,6 @@ div.cd {
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     border: 5px dashed white;
-}
-
-#fury-cd > img{
-    width: 20px;
-    height: 20px;
 }
 
 #start{
