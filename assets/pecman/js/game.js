@@ -362,7 +362,7 @@ function detectCollisionWithPlayer(s, index) {
         snacks.splice(index, 1);
         if (s.color !== colorToEat) {
             if (player.fury) {
-                player.score -= 100;
+                player.score -= isBossRound ? 50 : 80;
                 numPoisonSnacks--;
             } else {
                 effectEatPoison();
@@ -372,10 +372,10 @@ function detectCollisionWithPlayer(s, index) {
         } else {
             if (player.fury) {
                 numGoodSnacks--;
-                player.score += 10;
+                player.score += isBossRound ? 10 * BOSS_DIFFICULTY : 10;
             } else {
-                player.score += 100;
                 numGoodSnacks--;
+                player.score += isBossRound ? 100 * BOSS_DIFFICULTY : 100;
             }
         }
         effectScoreChange();
@@ -480,9 +480,12 @@ function promptBossRound() {
     }, 1000);
 }
 
-// mute background = 1
-// mute site = 2
-// unmute = 0
+/*
+ * Mute the sound effect indicated by muteWhich.
+ *  - unmute : 0,
+ *  - mute background: 1,
+ *  - mute site: 2
+ */
 function mute() {
     if (muteWhich === 0) {
         document.querySelector("audio").pause();
