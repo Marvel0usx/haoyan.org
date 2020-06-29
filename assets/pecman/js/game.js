@@ -188,11 +188,12 @@ function levelUp() {
         player.lives++;
     if (LEVEL % ROUND_PER_FURY_MARK === 0)
         player.furyCds++;
-    player.fury = false;
+    if (player.fury)
+        player.fury = false;
     if (LEVEL % BOSS_ON_ROUND == 0) {
         isBossRound = true;
         bossRoundAllowExit = false;
-        bossRound();
+        promptBossRound();
         for (var i = 0; i <= BOSS_DIFFICULTY; i++) {
             generateSnacks(4000 * i + 1300, i === BOSS_DIFFICULTY);
         }
@@ -216,6 +217,7 @@ function countSnacks() {
         return 0;
     });
     colorToEat = snacks[Math.round(Math.random() * (snacks.length - 1))].color;
+    updateBanner();
     numGoodSnacks = 0;
     snacks.forEach(function(s) {
         if (s.color !== colorToEat) {
@@ -229,7 +231,6 @@ function countSnacks() {
 function mainloop() {
     if (gameRunning) {
         ctx.clearRect(0, 0, w, h);
-        updateBanner();
         updateScoreBoard();
         snacks.forEach(function(s) {drawSnack(s);});
         snacks.forEach(function(s, index) {moveSnack(s, index)});
@@ -382,7 +383,8 @@ function detectCollisionWithPlayer(s, index) {
 }
 
 function updateScoreBoard() {
-    score.textContent = player.score;
+    if (score.textContent != player.score)
+        score.textContent = player.score;
     if (cds.childElementCount !== player.furyCds) {
         cds.innerHTML = "";
         for (var i = 0; i < player.furyCds; i++) {
@@ -415,6 +417,8 @@ function showScreen(query) {
  */
 function resetEnv() {
     LEVEL = 0;
+    snacks = [];
+    liveUpRound = 3;
     isBossRound = false;
     bossRoundAllowExit = false;
     player.fury = false;
@@ -468,7 +472,7 @@ function effectLoseSound(){
     soundLose.play();
 }
 
-function bossRound() {
+function promptBossRound() {
     var prompt = document.querySelector("#boss");
     prompt.style.display = "block";
     setTimeout(function() {
