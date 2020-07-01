@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Game - Type of the Dead</title>
-        <script src="js/game.js"></script>
+        <!-- <script src="js/game.js"></script> -->
+        <script src="js/wordbank.js"></script>
         <link rel="stylesheet" href="css/game.css">
     </head>
     <body>
@@ -29,12 +30,32 @@
             <p id="seconds">3</p>
         </div>
 
-        <div id="game">
-            <p id="level"></p>
-            <p id="time"></p>
-            <p id="prompt"></p>
-            <p id="typed"></p>
-        </div>
+        <section id="game">
+            <header class="game-header">
+                <div class="container">
+                    <a href="../../index.html">haoyan<span class="tiny">.org</span></a>
+                    <h3 id="level-disp">Level 1 - GRE Vocabulary</h3>
+                    <ul class="game-data-list">
+                        <li id="timer">
+                            <span id="sec">5</span><span>.</span><span id="milisec">0</span>
+                        </li>
+                        <li>
+                            <span id="wpm">50wpm</span>
+                            <span id="accuracy">94%</span>
+                        </li>
+                    </ul>
+                    <img src="./icons/muted.png">
+                </div>
+            </header>
+            <div class="progress"></div>
+            <div class="game-window">
+                <div class="prompt"></div>
+                <div class="typed"></div>
+            </div>
+            <section class="wiki">
+
+            </section>
+        </section>
 
         <section id="win">
             <header>
@@ -49,11 +70,6 @@
             </header>
             <button class="again">Try Again!</button>
         </section>
-
-        <aside id="stats" class="flex-container">
-            <div id="rate">Correct Rate: 100%</div>
-            <div id="speed">Speed: 0wpm</div>
-        </aside>
 
     </body>
 </html>
