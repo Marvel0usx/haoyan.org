@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 html {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 20pt;
     color: rgba(59, 119, 231, 0.8);
     background-color: rgba(0, 0, 0, 0.05);
@@ -85,6 +87,7 @@ section#game {
 }
 
 .game-header img {
+    transform: translateY(2px);
     max-width: 1em;
     margin-left: 20px;
     height: auto;
@@ -97,7 +100,9 @@ section#game {
 }
 
 .game-header a {
-    margin: 0;
+    position: relative;
+    left: 1.5em;
+    font-weight: 600;
     font-size: 0.8em;
     width: 33.3%;
     text-align: left;
@@ -105,7 +110,28 @@ section#game {
     color: inherit;
 }
 
+.game-header a::before {
+    content: "";
+    width: 1em;
+    height: 1em;
+    background-image: url("../icons/back.png");
+    background-size: 1em 1em;
+    position: absolute;
+    left: -1.2em;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.game-header a {
+    transition: transform 0.3s ease;
+}
+
+.game-header a:hover {
+    transform: scale(1.1) translateX(4%);
+}
+
 .game-header h3 {
+    font-weight: 400;
     margin: 0;
     font-size: 0.8em;
     width: 33.3%;
@@ -127,12 +153,18 @@ section#game {
 }
 
 .game-header li {
+    margin: 0 4px;
     font-size: 0.8em;
     display: inline-block;
 }
+
 #game .progress {
     height: 0.2em;
     width: 100%;
     background-color: green;
     opacity: 70%;
+}
+
+#timer {
+    font-weight: 600;
 }
