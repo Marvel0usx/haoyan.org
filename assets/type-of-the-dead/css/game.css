@@ -63,14 +63,7 @@ button:hover {
     border: 1px dashed navy;
 }
 
-#home,
-#countdown,
-#win,
-#lose {
-    display: none;
-}
-
-section#game {
+#game {
     display: flex;
     flex-flow: column;
     min-width: 100%;
@@ -165,6 +158,29 @@ section#game {
     color: rgb(100, 100, 100);
 }
 
+.prompt {
+    position: relative;
+}
+
+.prompt::after
+ {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    border: 1px solid black;
+    width: 100%;
+    transform: translateX(-100%);
+}
+
+.anchor {
+    position: relative;
+    background-image: url("../icons/anchor.png");
+    background-size: 10px 10px;
+    width: 10px;
+    height: 10px;
+    bottom: -0.2em;
+}
+
 #game .progress {
     height: 0.2em;
     width: 100%;
@@ -174,4 +190,11 @@ section#game {
 
 #timer {
     font-weight: 600;
+}
+
+#countdown,
+#game,
+#win,
+#lose {
+    display: none;
 }

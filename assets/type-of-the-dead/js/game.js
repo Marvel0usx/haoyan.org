@@ -36,7 +36,7 @@ function setupListeners() {
 }
 
 function setDictionary() {
-    var diff = document.querySelector("#diff-select");
+    let diff = document.querySelector("#diff-select");
     dictionary = wordBank[diff.options[diff.selectedIndex].value];
 }
 
@@ -92,13 +92,13 @@ function onGamePage() {
 }
 
 function mainloop() {
-    var chIdx = 0;
-    for (var i = 0; i < 5; i++) {
-        var wordToType = randWord();
-        var pass = false;
+    let chIdx = 0;
+    for (let i = 0; i < 5; i++) {
+        let wordToType = randWord();
+        let pass = false;
         while (!pass) {
             while (buffer.length) {
-                var ch = buffer.shift();
+                let ch = buffer.shift();
                 if (ch == wordToType[chIdx]) {
                     updateTypoDisp("");
                     chIdx++;
@@ -131,3 +131,16 @@ function recordKey(evt) {
     buffer.push(evt.key);
 }
 
+function shiftAnchor() {
+    let length = wordToTypeDisp.textContent.length;
+    let unitPercent = 100 / length;
+    let anchor = document.querySelector(".anchor");
+    if (anchor.style.display !== "relative")
+        anchor.style.display = "relative";
+    if (!anchor.style.length)
+        anchor.style.left = "0%";
+    else {
+        let currPos = parseFloat(anchor.style.left);
+        anchor.style.left = (currPos + unitPercent).toString() + "%";
+    }
+}
