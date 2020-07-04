@@ -1,16 +1,17 @@
 document.addEventListener("DOMContentLoaded", init);
 
 var homePage, countDownPage, gamePage, winPage, losePage, statsDisplay;
-var speedDisp, accuracyDisp, levelDisp, wordToTypeDisp, wordTypedDisp, typoDisp, progressBar;
-var speed, isRunning, dictionary;
+var wpmDisp, accuracyDisp, levelDisp, wordToTypeDisp, wordTypedDisp, typoDisp, progressBar;
+var isRunning, dictionary;
 var presented = new Set();
 var timer;
 var wordToType;
 var chIdx = 0;
 var LEVEL = 1;
 var MAX_LEVEL = 3;
-var numTypo = 0;
 var startTime;
+var totalNumChar;
+var totalTypo;
 var totalTimeElapsed;
 var totalWordTyped;
 
@@ -27,7 +28,7 @@ function setupBindings() {
     winPage = document.querySelector("#win");
     losePage = document.querySelector("#lose");
     statsDisplay = document.querySelector("#stats");
-    speedDisp = document.querySelector("#speed");
+    wpmDisp = document.querySelector("#wpm");
     accuracyDisp = document.querySelector("#accuracy");
     levelDisp = document.querySelector("#level-disp");
     wordToTypeDisp = document.querySelector(".prompt");
@@ -42,19 +43,16 @@ function setupListeners() {
         setDictionary();
         onCountDownPage();
     });
-    document.querySelector("button.again").addEventListener("click", function() {
-        onHomePage();
-        alert("fuck!");
-    });
 }
 
 
 function onHomePage() {
     isRunning = false;
-    speed = 0;
     presented.clear();
     totalTimeElapsed = 0;
     totalWordTyped = 0;
+    totalNumChar = 0;
+    totalTypo = 0;
     setDisplay(homePage, "block");
     setDisplay(losePage, "none");
     setDisplay(winPage, "none");
@@ -137,11 +135,12 @@ function updateGameState(evt) {
     let ch = evt.key;
     if (ch === wordToType.charAt(chIdx)) {
         chIdx++;
+        totalNumChar++;
         typoDisp.textContent = "";
         wordTypedDisp.textContent += ch;
         shiftAnchor();
     } else {
-        numTypo++;
+        totalTypo++;
         typoDisp.textContent = ch;
     }
     if (chIdx >= wordToType.length) {
@@ -149,7 +148,8 @@ function updateGameState(evt) {
         let endTime = new Date();
         //in ms
         let timeDiff = endTime - startTime;
-        
+        totalTimeElapsed += timeDiff;
+        totalWordTyped++;
         clearTimeout(timer);
         chIdx = 0;
         wordTypedDisp.textContent = "";
@@ -176,17 +176,26 @@ function shiftAnchor() {
 function onWinPage() {
     setDisplay(winPage, "block");
     setDisplay(gamePage, "none");
+    levelDisp.textContent = "Game Is Over";
 }
 
 function onLosePage() {
     setDisplay(losePage, "block");
     setDisplay(gamePage, "none");
+    levelDisp.textContent = "Game Is Over";
+}
+
+function displayPage(which) {
+    switch(which) {}
 }
 
 function updateStats() {
+    if (!isRunning)
+        return;
     levelDisp.textContent = ["Level", LEVEL, "-", dictionary.name].join(" ");
-    accuracyDisp.textContent = (numTypo / wordToType.length).toFixed(2) + "%";
-    speedDisp.textContent = speed + "wpm";
+    let accuracy = 1 - totalTypo / totalNumChar;
+    accuracyDisp.textContent = accuracy > 0 ? (accuracy * 100).toFixed(1).toString() + "%" : "0%";
+    wpmDisp.textContent = (totalWordTyped / totalTimeElapsed * 60000).toFixed(2) + "wpm";
     requestAnimationFrame(updateStats);
 }
 

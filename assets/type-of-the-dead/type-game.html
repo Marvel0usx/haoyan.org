@@ -9,6 +9,27 @@
         <link rel="stylesheet" href="css/game.css">
     </head>
     <body>
+        <header class="game-header">
+            <div class="container">
+                <div class="back">
+                    <a href="../../index.html">haoyan<span class="tiny">.org</span></a>
+                </div>
+                <h3 id="level-disp"></h3>
+                <ul class="game-data-list">
+                    <li id="timer">
+                        <span id="sec">5</span><span>.</span><span id="milisec">0</span>
+                    </li>
+                    <li>
+                        <span id="wpm" title="Words Per Minute">0wpm</span>
+                    </li>
+                    <li>
+                        <span id="accuracy" title="Accuracy">100%</span>
+                    </li>
+                </ul>
+                <img src="./icons/muted.png">
+            </div>
+        </header>
+        <div class="progress"></div>
         <section id="home">
             <header>
                 <h2>Try To Type as Fast as You Can</h2>
@@ -31,27 +52,6 @@
         </div>
 
         <section id="game">
-            <header class="game-header">
-                <div class="container">
-                    <div class="back">
-                        <a href="../../index.html">haoyan<span class="tiny">.org</span></a>
-                    </div>
-                    <h3 id="level-disp"></h3>
-                    <ul class="game-data-list">
-                        <li id="timer">
-                            <span id="sec">5</span><span>.</span><span id="milisec">0</span>
-                        </li>
-                        <li>
-                            <span id="wpm">50wpm</span>
-                        </li>
-                        <li>
-                            <span id="accuracy">94%</span>
-                        </li>
-                    </ul>
-                    <img src="./icons/muted.png">
-                </div>
-            </header>
-            <div class="progress"></div>
             <div class="game-window">
                 <div class="text-left">
                     <div>
@@ -69,11 +69,10 @@
             </header>
             <button class="again">Play Again</button>
         </section>
-
+        
         <section id="lose">
             <header>
                 <h2>It never comes easy!</h2>
-            </header>
             <button class="again">Try Again!</button>
         </section>
 
