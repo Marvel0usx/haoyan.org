@@ -13,7 +13,6 @@ var startTime;
 var totalNumChar;
 var totalTypo;
 var totalTimeElapsed;
-var totalWordTyped;
 
 function init() {
     setupBindings();
@@ -50,9 +49,9 @@ function onHomePage() {
     isRunning = false;
     presented.clear();
     totalTimeElapsed = 0;
-    totalWordTyped = 0;
     totalNumChar = 0;
     totalTypo = 0;
+    progressBar.style.display = "block";
     setDisplay(homePage, "block");
     setDisplay(losePage, "none");
     setDisplay(winPage, "none");
@@ -149,7 +148,6 @@ function updateGameState(evt) {
         //in ms
         let timeDiff = endTime - startTime;
         totalTimeElapsed += timeDiff;
-        totalWordTyped++;
         clearTimeout(timer);
         chIdx = 0;
         wordTypedDisp.textContent = "";
@@ -177,12 +175,14 @@ function onWinPage() {
     setDisplay(winPage, "block");
     setDisplay(gamePage, "none");
     levelDisp.textContent = "Game Is Over";
+    progressBar.style.display = "none";
 }
 
 function onLosePage() {
     setDisplay(losePage, "block");
     setDisplay(gamePage, "none");
     levelDisp.textContent = "Game Is Over";
+    progressBar.style.display = "none";
 }
 
 function displayPage(which) {
@@ -195,7 +195,14 @@ function updateStats() {
     levelDisp.textContent = ["Level", LEVEL, "-", dictionary.name].join(" ");
     let accuracy = 1 - totalTypo / totalNumChar;
     accuracyDisp.textContent = accuracy > 0 ? (accuracy * 100).toFixed(1).toString() + "%" : "0%";
-    wpmDisp.textContent = (totalWordTyped / totalTimeElapsed * 60000).toFixed(2) + "wpm";
+    let speed = Math.round(totalNumChar / 6 / totalTimeElapsed * 60000);
+    if (speed !== speed) {
+        wpmDisp.textContent = "0wpm";
+    } else if (speed === Infinity) {
+        wpmDisp.textContent = "100wpm";
+    } else {
+        wpmDisp.textContent = speed + "wpm";
+    }
     requestAnimationFrame(updateStats);
 }
 
