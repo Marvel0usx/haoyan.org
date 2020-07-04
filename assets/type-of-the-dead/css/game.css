@@ -17,6 +17,22 @@ h2 {
     outline: 2px dashed navy;
 }
 
+footer {
+    position: fixed;
+    min-width: 100%;
+    bottom: 0; 
+    font-size: 0.4em; 
+    text-align: center;
+}
+
+footer::before {
+    content: "";
+    display: inline-block;
+    border-bottom: 1px solid rgba(59, 119, 231, 0.8);
+    margin-bottom: -5px;
+    width: 80%;
+}
+
 button {
     color: rgb(228, 39, 102);
     font-size: x-large;
@@ -167,7 +183,7 @@ button:hover {
     content: "";
     position: absolute;
     bottom: 0;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     width: 100%;
     transform: translateX(-100%);
 }

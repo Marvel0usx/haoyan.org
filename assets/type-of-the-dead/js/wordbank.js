@@ -1,5 +1,6 @@
 const wordBank = {
     "easy": {
+            name: "GRE Core Vocabulary",
             1: ['zeal',
                 'lucid',
                 'waver',
@@ -54,6 +55,7 @@ const wordBank = {
                 'philanthropic']
         },
     "mid": {
+            name: "Human Muscles",
             1: ['axial',
                 'belly',
                 'abduct',
@@ -201,6 +203,7 @@ const wordBank = {
                 'quadriceps tendon']
         },
     "hard": {
+            name: "Medical Terminologies",
             1: ['Bulla',
                 'Emesis',
                 'Angina',
