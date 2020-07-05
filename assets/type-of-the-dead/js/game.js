@@ -70,7 +70,7 @@ function resetEnv() {
     totalNumChar = 0;
     totalTypo = 0;
     chIdx = 0;
-    LEVEL = 1;
+    LEVEL = 3;
     wordLeft = WORD_PER_LEVEL;
     progressBar.style.width = "100%";
     wordTypedDisp.textContent = "";
@@ -140,6 +140,10 @@ function isValidCh(ch) {
 
 function randWord() {
     numTypo = 0;
+    if (wordLeft <= 0) {
+        wordLeft = WORD_PER_LEVEL;
+        LEVEL++;
+    }
     do {
         if (presented.size === dictionary[LEVEL].length) {
             // dictionary depleted
@@ -156,12 +160,6 @@ function randWord() {
 function updateGameState(evt) {
     if (!isRunning)
         return;
-    if (wordLeft <= 0) {
-        wordLeft = WORD_PER_LEVEL;
-        LEVEL++;
-    }
-    if (LEVEL >= MAX_LEVEL)
-        onWinPage();
     let ch = evt.key;
     if (ch === wordToType.charAt(chIdx)) {
         chIdx++;
@@ -184,13 +182,13 @@ function updateGameState(evt) {
         wordTypedDisp.textContent = "";
         shiftAnchor();
         randWord();
-        wordLeft--;
+        wordLeft--
         wordToTypeDisp.textContent = wordToType
         newTimer();
         progressBar.style.width = "100%";
     }
 }
-
+    
 function shiftAnchor() {
     let length = wordToTypeDisp.textContent.length;
     let unitPercent = 100 / length;
@@ -203,9 +201,10 @@ function shiftAnchor() {
         anchor.style.left = (chIdx * unitPercent).toString() + "%";
     }
 }
-
+    
 function onWinPage() {
     isRunning = false;
+    clearTimeout(timer);
     setDisplay(winPage, "block");
     setDisplay(gamePage, "none");
     levelDisp.textContent = "Game Is Over";
@@ -214,6 +213,7 @@ function onWinPage() {
 
 function onLosePage() {
     isRunning = false;
+    clearTimeout(timer);
     setDisplay(losePage, "block");
     setDisplay(gamePage, "none");
     levelDisp.textContent = "Game Is Over";
@@ -225,6 +225,8 @@ function displayPage(which) {
 }
 
 function updateStats() {
+    if (LEVEL > MAX_LEVEL)
+        onWinPage();
     if (!isRunning)
         return;
     levelDisp.textContent = ["Level", LEVEL, "-", dictionary.name].join(" ");
