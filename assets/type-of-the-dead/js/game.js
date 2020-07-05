@@ -70,7 +70,7 @@ function resetEnv() {
     totalNumChar = 0;
     totalTypo = 0;
     chIdx = 0;
-    LEVEL = 3;
+    LEVEL = 1;
     wordLeft = WORD_PER_LEVEL;
     progressBar.style.width = "100%";
     wordTypedDisp.textContent = "";
