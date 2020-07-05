@@ -219,10 +219,6 @@ button:hover {
     opacity: 70%;
 }
 
-#timer {
-    font-weight: 600;
-}
-
 #countdown,
 #game,
 #win,

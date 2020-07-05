@@ -42,6 +42,13 @@ function setupListeners() {
         setDictionary();
         onCountDownPage();
     });
+    document.querySelectorAll(".again").forEach(
+        function(ele) {
+            ele.addEventListener("click", function() {
+                onHomePage();
+            });
+        }
+    );
 }
 
 
@@ -51,6 +58,9 @@ function onHomePage() {
     totalTimeElapsed = 0;
     totalNumChar = 0;
     totalTypo = 0;
+    chIdx = 0;
+    wordTypedDisp.textContent = "";
+    levelDisp.textContent = "";
     progressBar.style.display = "block";
     setDisplay(progressBar, "none")
     setDisplay(gameStatusBar, "none");
@@ -72,6 +82,7 @@ function onCountDownPage() {
 * Display countdown in the given element and invoke callback.
 */
 function countDown(seconds, element, callback) {
+    element.textContent = seconds;
     var countdown = setInterval(function() {
         seconds--;
         element.textContent = seconds;
@@ -101,6 +112,8 @@ function onGamePage() {
     randWord();
     wordToTypeDisp.textContent = wordToType;
     isRunning = true;
+    // reset anchor position
+    shiftAnchor();
     newTimer();
     updateStats();
 }
