@@ -1,18 +1,21 @@
 document.addEventListener("DOMContentLoaded", init);
 
+const MAX_LEVEL = 3;
+const WORD_PER_LEVEL = 10;
+
 var homePage, countDownPage, gamePage, winPage, losePage;
 var wpmDisp, accuracyDisp, levelDisp, wordToTypeDisp, wordTypedDisp, typoDisp, progressBar;
 var isRunning, dictionary;
 var presented = new Set();
 var timer;
 var wordToType;
-var chIdx = 0;
-var LEVEL = 1;
-var MAX_LEVEL = 3;
+var chIdx;
+var LEVEL;
 var startTime;
 var totalNumChar;
 var totalTypo;
 var totalTimeElapsed;
+var wordLeft;
 
 function init() {
     setupBindings();
@@ -51,22 +54,27 @@ function setupListeners() {
     );
 }
 
-
 function onHomePage() {
+    resetEnv();
+    setDisplay(progressBar, "none")
+    setDisplay(gameStatusBar, "none");
+    setDisplay(homePage, "block");
+    setDisplay(losePage, "none");
+    setDisplay(winPage, "none");
+}
+
+function resetEnv() {
     isRunning = false;
     presented.clear();
     totalTimeElapsed = 0;
     totalNumChar = 0;
     totalTypo = 0;
     chIdx = 0;
+    LEVEL = 1;
+    wordLeft = WORD_PER_LEVEL;
+    progressBar.style.width = "100%";
     wordTypedDisp.textContent = "";
     levelDisp.textContent = "";
-    progressBar.style.display = "block";
-    setDisplay(progressBar, "none")
-    setDisplay(gameStatusBar, "none");
-    setDisplay(homePage, "block");
-    setDisplay(losePage, "none");
-    setDisplay(winPage, "none");
 }
 
 /*
@@ -148,6 +156,12 @@ function randWord() {
 function updateGameState(evt) {
     if (!isRunning)
         return;
+    if (wordLeft <= 0) {
+        wordLeft = WORD_PER_LEVEL;
+        LEVEL++;
+    }
+    if (LEVEL >= MAX_LEVEL)
+        onWinPage();
     let ch = evt.key;
     if (ch === wordToType.charAt(chIdx)) {
         chIdx++;
@@ -170,8 +184,10 @@ function updateGameState(evt) {
         wordTypedDisp.textContent = "";
         shiftAnchor();
         randWord();
+        wordLeft--;
         wordToTypeDisp.textContent = wordToType
         newTimer();
+        progressBar.style.width = "100%";
     }
 }
 
@@ -180,15 +196,16 @@ function shiftAnchor() {
     let unitPercent = 100 / length;
     let anchor = document.querySelector(".anchor");
     if (anchor.style.display !== "relative")
-        anchor.style.display = "relative";
+    anchor.style.display = "relative";
     if (!anchor.style.length)
-        anchor.style.left = "0%";
+    anchor.style.left = "0%";
     else {
         anchor.style.left = (chIdx * unitPercent).toString() + "%";
     }
 }
 
 function onWinPage() {
+    isRunning = false;
     setDisplay(winPage, "block");
     setDisplay(gamePage, "none");
     levelDisp.textContent = "Game Is Over";
@@ -196,6 +213,7 @@ function onWinPage() {
 }
 
 function onLosePage() {
+    isRunning = false;
     setDisplay(losePage, "block");
     setDisplay(gamePage, "none");
     levelDisp.textContent = "Game Is Over";
@@ -220,24 +238,19 @@ function updateStats() {
     } else {
         wpmDisp.textContent = speed + "wpm";
     }
+    if (progressBar.style.width === "") {
+        progressBar.style.width = "100%";
+    } else {
+        var percent = parseFloat(progressBar.style.width);
+        percent -= 100 / 300;
+        progressBar.style.width = percent + "%";
+    }
     requestAnimationFrame(updateStats);
-}
-
-function updateTimer(sec, milisec) {
-    document.querySelector("#sec").textContent = sec;
-    document.querySelector("#milisec").textContent = milisec;
 }
 
 function newTimer() {
     startTime = new Date();
     timer = setTimeout(function() {
-        isRunning = false;
         onLosePage();
     }, 5000);
-}
-
-function updateProgressBar() {
-    if (progressBar.style.width == "0") {
-
-    }
 }
