@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", init);
 
-var homePage, countDownPage, gamePage, winPage, losePage, statsDisplay;
+var homePage, countDownPage, gamePage, winPage, losePage;
 var wpmDisp, accuracyDisp, levelDisp, wordToTypeDisp, wordTypedDisp, typoDisp, progressBar;
 var isRunning, dictionary;
 var presented = new Set();
@@ -26,7 +26,6 @@ function setupBindings() {
     gamePage = document.querySelector("#game");
     winPage = document.querySelector("#win");
     losePage = document.querySelector("#lose");
-    statsDisplay = document.querySelector("#stats");
     wpmDisp = document.querySelector("#wpm");
     accuracyDisp = document.querySelector("#accuracy");
     levelDisp = document.querySelector("#level-disp");
@@ -34,6 +33,7 @@ function setupBindings() {
     wordTypedDisp = document.querySelector(".typed");
     typoDisp = document.querySelector(".typo");
     progressBar = document.querySelector(".progress");
+    gameStatusBar = document.querySelector(".game-data-list");
 }
 
 function setupListeners() {
@@ -52,6 +52,8 @@ function onHomePage() {
     totalNumChar = 0;
     totalTypo = 0;
     progressBar.style.display = "block";
+    setDisplay(progressBar, "none")
+    setDisplay(gameStatusBar, "none");
     setDisplay(homePage, "block");
     setDisplay(losePage, "none");
     setDisplay(winPage, "none");
@@ -91,6 +93,8 @@ function setDisplay(frame, mode) {
 * Function that handles typing and updates statistics.
 */
 function onGamePage() {
+    setDisplay(progressBar, "block");
+    setDisplay(gameStatusBar, "block");
     setDisplay(countDownPage, "none");
     setDisplay(gamePage, "block");
     setDictionary();
@@ -217,4 +221,10 @@ function newTimer() {
         isRunning = false;
         onLosePage();
     }, 5000);
+}
+
+function updateProgressBar() {
+    if (progressBar.style.width == "0") {
+
+    }
 }

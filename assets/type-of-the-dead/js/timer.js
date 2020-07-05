@@ -18,4 +18,3 @@ function countDown() {
 function displayCountDown() {
     console.log()
 }
-
