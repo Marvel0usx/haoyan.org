@@ -51,6 +51,10 @@ button:hover {
     transition: 0.2s;
 }
 
+button:active {
+    outline: none;
+}
+
 #home,
 #countdown,
 #win,

@@ -21,6 +21,10 @@ div.cd {
     height: 20px;
 }
 
+button:active {
+    outline: none;
+}
+
 .score-board {
     margin: 0 auto;
     display: flex;
