@@ -160,6 +160,11 @@ function randWord() {
 function updateGameState(evt) {
     if (!isRunning)
         return;
+    if (evt.altKey || evt.shiftKey || evt.ctrlKey) {
+        evt.preventDefault();
+        evt.stopPropagation() 
+        return;
+    }
     let ch = evt.key;
     if (ch === wordToType.charAt(chIdx)) {
         chIdx++;
