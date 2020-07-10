@@ -5,6 +5,10 @@
   src: url('../assets/resources/MAIAN.TTF') format('truetype');
 }
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 html, body {
     font-family: 'Maiandra GD', 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 400;
@@ -22,13 +26,13 @@ body {
         "guitar header sidebar"
         "guitar main   sidebar";
     grid-template-rows: 80px 1fr;
-    grid-template-columns: 14.4% auto 14.4%;
-    column-gap: 6.4%;
-    box-sizing: border-box;
+    grid-template-columns: 14.4vw auto 14.4vw;
+    column-gap: 7%;
 }
 
 main {
     grid-area: main;
+    text-align: justify;
 }
 
 header.side {
@@ -67,6 +71,25 @@ div.align-container {
     min-height: 100%;
     min-width: 100%;
     position: relative;
+    overflow: hidden;
+}
+
+div.string {
+    width: 1px;
+    height: 100%;
+    border-left: 1px solid #606060;
+}
+
+div.guitar::after {
+    content: "";
+    width: 14vw;
+    height: 14vw;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    transform: translateY(50%);
+    border: 1px solid #606060;
+    border-radius: 50%;
 }
 
 ol.guitar {
@@ -83,8 +106,12 @@ ol.guitar {
     justify-content: space-evenly;
 }
 
-div.string {
-    width: 1px;
-    height: 100%;
-    border-left: 1px solid #606060;
+ul.navbar {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ol.navbar.secondary {
+    list-style: none;
 }
