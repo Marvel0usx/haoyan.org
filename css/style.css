@@ -75,9 +75,10 @@ div.align-container {
 }
 
 div.string {
-    width: 1px;
     height: 100%;
-    border-left: 1px solid #606060;
+    width: fit-content;
+    border-left-style: solid;
+    border-left-width: 2px;
 }
 
 div.guitar::after {
@@ -88,9 +89,17 @@ div.guitar::after {
     left: 0;
     bottom: 0;
     transform: translateY(50%);
-    border: 1px solid #606060;
+    border: 2px solid #aaa;
     border-radius: 50%;
+    z-index: -1;
 }
+
+div.E { border-left-color: #656565;}
+div.A { border-left-color: #757575;}
+div.D { border-left-color: #858585;}
+div.G,
+div.B,
+div.e { border-left-color: #999;}
 
 ol.guitar {
     list-style: none;
