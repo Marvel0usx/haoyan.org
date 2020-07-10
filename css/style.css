@@ -139,25 +139,34 @@ div.string {
     height: 100%;
     width: fit-content;
     border-left-style: solid;
-    border-left-width: 2px;
+    border-left-width: 1px;
 }
 
-div.guitar::after {
+div.guitar::after,
+div.guitar::before {
     content: "";
     width: 14vw;
     height: 14vw;
     position: fixed;
     left: 0;
     bottom: 0;
-    transform: translateY(50%);
-    border: 2px solid #aaa;
     border-radius: 50%;
     z-index: -1;
 }
 
-div.E { border-left-color: #656565;}
-div.A { border-left-color: #757575;}
-div.D { border-left-color: #858585;}
+div.guitar::after {
+    border: 1px solid #656565;
+    transform: translateY(50%);
+}
+
+div.guitar::before {
+    border: 16px solid #bbb;
+    transform: translateY(50%) scale(0.8, 0.8);
+}
+
+div.E { border-left-color: #656565; }
+div.A { border-left-color: #757575; }
+div.D { border-left-color: #858585; }
 div.G,
 div.B,
-div.e { border-left-color: #999;}
+div.e { border-left-color: #999; }
