@@ -117,6 +117,8 @@ div.title:hover::after {
 div.align-container {
     min-height: 100%;
     min-width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
     position: relative;
     overflow: hidden;
 }
@@ -145,8 +147,8 @@ div.string {
 div.guitar::after,
 div.guitar::before {
     content: "";
-    width: 14vw;
-    height: 14vw;
+    width: 14.4vw;
+    height: 14.4vw;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -170,3 +172,9 @@ div.D { border-left-color: #858585; }
 div.G,
 div.B,
 div.e { border-left-color: #999; }
+
+.square {
+    width: 60px;
+    height: 60px;
+    
+}
