@@ -10,54 +10,61 @@
     </head>
 
     <body>
-        <header class="side">
+        <div class="toolbar">
             <div class="lang-select">
-                <button class="square">EN</button>
-                <button class="square">文</button>
+                <div class="align-container">
+                    <a href="#" class="square en on"><span>EN</span></a>
+                    <a href="#" class="square zn-ch"><span>文</span></a>
+                </div>
             </div>
+            <a href="#" class="rect control"></a>
+            <audio autoplay loop preload="true">
+                <source src="assets/resources/bg.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        <header class="side">
             <nav>
                 <ul class="navbar">
-                    <li class="child">
+                    <li class="home active">
                         <a href="#">
-                            <span class="text">Home</span>
-                            <span class="nav-dot"></span>
-                            <span class="nav-flat-line"></span>
+                            <div class="text">Home</div>
+                            <div class="nav-dot"></div>
+                            <div class="nav-line onhover"></div>
+                            <div class="nav-line onactive"></div>
                         </a>
                     </li>
-                    <li class="child">
-                        <a href="#project.html">
-                            <span class="text">Project</span>
-                            <span class="nav-dot"></span>
-                            <span class="nav-flat-line"></span>
+                    <li class="project">
+                        <a href="/project.html">
+                            <div class="text">Project</div>
+                            <div class="nav-dot"></div>
+                            <div class="nav-line onhover"></div>
+                            <div class="nav-line onactive"></div>
                         </a>
                     </li>
-                    <li class="parent">
-                        <a href="#gallery.html">
-                            <span class="text">Gallery</span>
-                            <span class="nav-dot"></span>
-                            <span class="nav-flat-line"></span>
+                    <li class="gallery">
+                        <a href="/gallery.html">
+                            <div class="text">Gallery</div>
+                            <div class="nav-dot"></div>
+                            <div class="nav-line onhover"></div>
+                            <div class="nav-line onactive"></div>
                         </a>
-                        <ol class="child">
-                            <li class="child">
-                                <a href="#recent">
-                                    <span class="text">What's New</span>
-                                </a>
-                            <li class="child">
-                                <a href="#nature">
-                                    <span class="text">Nature &amp; Wildlife</span>
-                                </a>
-                            </li>
-                            <li class="child">
-                                <a href="#travel">
-                                    <span class="text">Travel &amp; Landscape</span>
-                                </a>
-                            </li>
-                            <li class="child">
-                                <a href="#culture">
-                                    <span class="text">Culture &amp; City</span>
-                                </a>
-                            </li>
-                        </ol>
+                    </li>
+                    <li class="about">
+                        <a href="/about.html">
+                            <div class="text">About</div>
+                            <div class="nav dot"></div>
+                            <div class="nav-line onhover"></div>
+                            <div class="nav-line onactive"></div>
+                        </a>
+                    </li>
+                    <li class="misc">
+                        <a href="/404.html">
+                            <div class="text">Misc</div>
+                            <div class="nav-dot"></div>
+                            <div class="nav-line onhover"></div>
+                            <div class="nav-line onactive"></div>
+                        </a>
                     </li>
                 </ul>
             </nav>

@@ -66,16 +66,6 @@ aside {
     min-height: 100%;
 }
 
-ul.navbar {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-ol.navbar.secondary {
-    list-style: none;
-}
-
 /* title-header decorations and transitions */
 div.title {
     transition: color 0.3s cubic-bezier(0, 0, 0, 1.1) 0.1s;
@@ -120,6 +110,7 @@ div.title:hover::before {
 div.title:hover::after {
     transform: translateY(-1.08em) scale(1, 3);
 }
+
 
 /* the guitar figure */
 div.align-container {
@@ -181,10 +172,11 @@ div.G,
 div.B,
 div.e { border-left-color: #999; }
 
+
 /* languages toggle */
 div.lang-select {
     width: 100%;
-    max-height: ;
+    max-height: 40px;
 }
 
 a.square {
@@ -219,4 +211,34 @@ a.square.on {
 
 a.square.on span {
     color: white;
+}
+
+
+/* sidebar */
+.side nav {
+    width: 100%;
+    height: 100%;
+}
+
+ul.navbar {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul.navbar a 
+    text-decoration: none;
+}
+
+ul.navbar li {
+}
+
+div.nav-line {
+    border-left: 1px solid #505050;
+    width: 1px;
+
 }
