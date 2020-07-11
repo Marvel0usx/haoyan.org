@@ -216,7 +216,7 @@ a.square.on span {
 
 /* sidebar */
 :root {
-    --active-height: 6.2;
+    --active-height: 7;
     --unit-height: 25px;
 }
 
@@ -266,7 +266,8 @@ li.nav-item {
     width: 1;
     height: 0;
     border-left: 1px solid #555;
-    /* transform: translateY(-1 * calc(var(--inavtive-height) * var(--unit-height))); */
+    position: absolute;
+    top: 0;
 }
 
 [data-nav-active="false"] div.nav-dot {
@@ -281,7 +282,8 @@ li.nav-item {
     width: 1px;
     height: calc(var(--active-height) * var(--unit-height));
     border-left-color: #555;
-    /* transform: translateY(calc(-1 * var(--inactive-height) * var(--unit-height))); */
+    position: absolute;
+    top: 0;
 }
 
 [data-nav-active="false"]:hover div.nav-dot,
