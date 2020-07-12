@@ -35,7 +35,6 @@ div.toolbar {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    margin: 0 auto;
 }
 
 header.side {
@@ -227,20 +226,20 @@ li.nav-item:nth-child(6) { --inavtive-height: 4; }
 }
 
 ul.nav-list {
-    width: 65%;
-    margin: 12% auto;
+    width: 60%;
+    margin: 12% 0;
     padding: 0;
     display: flex;
     flex-flow: row nowrap;
     position: relative;
     list-style: none;
-    justify-content: space-evenly;
 }
 
 li.nav-item {
-    width: 5px;
+    width: 15%;
     display: flex;
     flex-direction: column;
+    /* transform: translateX(100%); */
 }
 
 ul.nav-list a {
@@ -261,12 +260,11 @@ div.nav-item:hover a {
 }
 
 [data-nav-active="false"] div.nav-line.onhover {
-    width: 1;
     height: 0;
     border-left: 1px solid #505050;
     position: absolute;
     top: 0;
-    transition: height 0.3s linear 0.3s;
+    transition: height 0.3s linear 0.1s;
 }
 
 [data-nav-active="false"] div.nav-dot {
@@ -275,8 +273,8 @@ div.nav-item:hover a {
     margin-left: -3px;
     border: 1px solid #bbb;
     border-radius: 50%;
-    transition: background-color 0.5s linear 0.6s,
-                transform 0.1s linear 0.5s;
+    transition: background-color 0.5s linear 0.3s,
+                transform 0.1s linear 0.3s;
 }
 
 [data-nav-active="false"]:hover div.nav-line.onhover,
@@ -304,12 +302,7 @@ div.nav-item:hover a {
     height: 0;
 }
 
-[data-nav-active="false"] div.text {
-    opacity: 0;
-}
-
 [data-nav-active="false"]:hover div.text {
-    opacity: 1;
     position: absolute;
     transform: translate(
         -50%,
