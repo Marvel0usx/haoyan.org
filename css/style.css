@@ -242,17 +242,17 @@ ul.nav-list {
     justify-content: space-evenly;
 }
 
+li.nav-item {
+    width: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
 ul.nav-list a {
     /* for center-align of absolutely displayed link text */
     color: #505050;
     position: relative;
     text-decoration: none;
-}
-
-li.nav-item {
-    width: 5px;
-    display: flex;
-    flex-direction: column;
 }
 
 div.nav-item:hover a {
@@ -271,6 +271,7 @@ div.nav-item:hover a {
     border-left: 1px solid #505050;
     position: absolute;
     top: 0;
+    transition: height 0.3s linear 0.3s;
 }
 
 [data-nav-active="false"] div.nav-dot {
@@ -279,6 +280,8 @@ div.nav-item:hover a {
     margin-left: -3px;
     border: 1px solid #bbb;
     border-radius: 50%;
+    transition: background-color 0.5s linear 0.6s,
+                transform 0.1s linear 0.5s;
 }
 
 [data-nav-active="false"]:hover div.nav-line.onhover,
