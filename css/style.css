@@ -30,11 +30,6 @@ body {
     column-gap: 7%;
 }
 
-main {
-    grid-area: main;
-    text-align: justify;
-}
-
 div.toolbar {
     grid-area: toolbar;
     display: flex;
