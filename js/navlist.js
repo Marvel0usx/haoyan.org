@@ -35,20 +35,24 @@ function setListeners() {
             shuffleText(navTextEles[textIdx], "", textIdx);
             });
         });
-        
+            
         navLnks.forEach(function(lnk, textIdx) {
             lnk.addEventListener("mouseleave", function() {
                 /* hide text when mouse leaves */
                 onhover[textIdx] = false;
                 navTextEles[textIdx].textContent = "";
                 navTextEles[textIdx].style.display = "none";
+                document.querySelector("[data-nav-active='hold']").dataset.navActive = "true";
             });
-        });
-        
-        navLnks.forEach(function(lnk, textIdx) {
-            lnk.addEventListener("mouseenter", function() {
+
+            lnk.addEventListener("mouseenter", function(evt) {
                 /* enabling shuffle */
                 onhover[textIdx] = true;
+                navLnks.forEach(function() {
+                    if (evt.target.dataset.navActive == "false") {
+                        document.querySelector("[data-nav-active='true']").dataset.navActive = "hold";
+                    }
+                });
             });
         });
     }

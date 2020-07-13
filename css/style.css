@@ -239,7 +239,6 @@ li.nav-item {
     width: 15%;
     display: flex;
     flex-direction: column;
-    /* transform: translateX(100%); */
 }
 
 ul.nav-list a {
@@ -249,11 +248,8 @@ ul.nav-list a {
     text-decoration: none;
 }
 
-div.nav-item:hover a {
-    height: var(--active-height);
-}
-
 /* effects of lines */
+[data-nav-active="hold"] div.nav-line,
 [data-nav-active="false"] div.nav-line {
     height: calc(var(--inavtive-height) * var(--unit-height));
     border-left: 1px solid #bbb;
@@ -267,6 +263,7 @@ div.nav-item:hover a {
     transition: height 0.3s linear 0.1s;
 }
 
+[data-nav-active="hold"] div.nav-dot,
 [data-nav-active="false"] div.nav-dot {
     width: 7px;
     height: 7px;
@@ -277,14 +274,18 @@ div.nav-item:hover a {
                 transform 0.1s linear 0.3s;
 }
 
-[data-nav-active="false"]:hover div.nav-line.onhover,
-[data-nav-active="true"] div.nav-line.onhover {
+[data-nav-active="false"]:hover div.nav-line.onhover{
     /* for easy selecting instead of being too narrow */
-    width: 15px;
+    width: 100%;
     height: calc(var(--active-height) * var(--unit-height));
     border-left-color: #505050;
     position: absolute;
     top: 0;
+}
+
+[data-nav-active="hold"] div.nav-line.onhover,
+[data-nav-active="true"] div.nav-line.onhover {
+    height: 0;
 }
 
 [data-nav-active="false"]:hover div.nav-dot,
@@ -294,12 +295,22 @@ div.nav-item:hover a {
     border: none;
     background-color: #505050;
     border-radius: 50%;
+}
+
+[data-nav-active="false"]:hover div.nav-dot {
     transform: translateY(calc((var(--active-height) - var(--inavtive-height)) * var(--unit-height)));
+}
+
+[data-nav-active="true"] div.nav-dot {
+    transform: translate(-3px, calc(var(--active-height) * var(--unit-height)));
 }
 
 /* active, no hover*/
 [data-nav-active="true"] div.nav-line {
-    height: 0;
+    height: calc(var(--active-height) * var(--unit-height));
+    border-left: 1px solid #505050;
+    position: absolute;
+    top: 0;    
 }
 
 [data-nav-active="false"]:hover div.text {
