@@ -270,8 +270,11 @@ ul.nav-list a {
     margin-left: -3px;
     border: 1px solid #bbb;
     border-radius: 50%;
-    transition: background-color 0.5s linear 0.3s,
-                transform 0.1s linear 0.3s;
+    transition: background-color 0.5s linear 0.3s;
+}
+
+[data-nav-active="false"] div.nav-dot {
+    transition: transform 0.1s linear 0.3s;
 }
 
 [data-nav-active="false"]:hover div.nav-line.onhover{
@@ -317,6 +320,14 @@ ul.nav-list a {
     position: absolute;
     transform: translate(
         -50%,
-        calc((var(--active-height) - var(--inavtive-height)) * var(--unit-height) - 8px /* for easy selecting */)
+        calc((var(--active-height) - var(--inavtive-height)) * var(--unit-height) - 8px /*for easy selecting */)
+    );
+}
+
+[data-nav-active="true"] div.text {
+    position: absolute;
+    transform: translate(
+        -50%,
+        calc(var(--active-height) * var(--unit-height) - 8px)
     );
 }

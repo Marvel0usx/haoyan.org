@@ -33,29 +33,48 @@ function setListeners() {
             shuffledCount = 0;
             shuffleChIdx = 0;
             shuffleText(navTextEles[textIdx], "", textIdx);
-            });
         });
+    });
             
-        navLnks.forEach(function(lnk, textIdx) {
-            lnk.addEventListener("mouseleave", function() {
-                /* hide text when mouse leaves */
-                onhover[textIdx] = false;
-                navTextEles[textIdx].textContent = "";
-                navTextEles[textIdx].style.display = "none";
-                document.querySelector("[data-nav-active='hold']").dataset.navActive = "true";
-            });
+    navLnks.forEach(function(lnk, textIdx) {
+        lnk.addEventListener("mouseleave", function() {
+            /* hide text when mouse leaves */
+            onhover[textIdx] = false;
+            navTextEles[textIdx].textContent = "";
+            navTextEles[textIdx].style.display = "none";
+            let lnk = document.querySelector("[data-nav-active='hold']");
+            if (lnk) {
+                lnk.dataset.navActive = "true";
+                let t = document.querySelector("[data-nav-active='true'] div.text");
+                let idx = findLiIdx(t);
+                shuffleTextIdx = idx;
+                shuffledCount = 0;
+                shuffleChIdx = 0;
+                shuffleText(t, "", idx);
+            }
+        });
 
-            lnk.addEventListener("mouseenter", function(evt) {
-                /* enabling shuffle */
-                onhover[textIdx] = true;
-                navLnks.forEach(function() {
-                    if (evt.target.dataset.navActive == "false") {
-                        document.querySelector("[data-nav-active='true']").dataset.navActive = "hold";
+        lnk.addEventListener("mouseenter", function(evt) {
+            /* enabling shuffle */
+            onhover[textIdx] = true;
+            if (evt.target.dataset.navActive == "false") {
+                navLnks.forEach(function(lnk) {
+                    if (lnk.dataset.navActive == "true") {
+                        lnk.dataset.navActive = "hold";
                     }
                 });
-            });
+            }
         });
-    }
+    });
+}
+
+function findLiIdx(text) {
+    let idx = 0;
+    let ul = text.parentElement.parentElement;
+    while (text.parentElement !== ul.children[idx])
+        idx++;
+    return idx;
+}
     
 function shuffleText(textEle, textCnt, textIdx) {
     if (shuffledCount >= shuffleTimes) {
