@@ -7,34 +7,31 @@ main {
 
 article#about {
     flex-basis: 45%;
-    max-height: 80%;
     text-align: justify;
 }
 
-div.sec-col {
+main div.sec-col {
     flex-basis: 45%;
-    max-height: 80%;
     display: flex;
     flex-flow: column nowrap;
 }
 
 footer {
     flex-basis: 100%;
-    max-height: 20%;
 }
 
 summary:focus {
     outline: none;
 }
 
-ul {
+main ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-ul.equip img,
-a img {
+main ul.equip img,
+main a img {
     width: 1em;
     height: 1em;
     position: relative;
@@ -67,18 +64,18 @@ blockquote {
     height: 1em;
     width: 1em;
     position: absolute;
-    /* left: -1.2em; */
+    left: -1.5em;
     top: 0.1em;
     display: block;
 }
 
-a:link {
+main a:link {
     font-weight: 600;
     color: #c04851;
     text-decoration: none;
 }
 
-a:visited {
+main a:visited {
     color: #555;
 }
 
@@ -91,7 +88,7 @@ p.contact-info {
 p.copy-right {
     position: relative;
     text-align: center;
-    margin: 5em auto 1em auto;
+    margin: 0 auto;
 }
 
 p.copy-right::before {
