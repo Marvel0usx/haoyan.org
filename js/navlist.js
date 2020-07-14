@@ -48,7 +48,7 @@ function setListeners() {
             if (lnk) {
                 lnk.dataset.navActive = "true";
                 let t = document.querySelector("[data-nav-active='true'] div.text");
-                let idx = findLiIdx(t);
+                let idx = findLiIdx(t.parentElement.parentElement);
                 shuffleTextIdx = idx;
                 shuffledCount = 0;
                 shuffleChIdx = 0;
@@ -72,10 +72,10 @@ function setListeners() {
     });
 }
 
-function findLiIdx(text) {
+function findLiIdx(li) {
     let idx = 0;
-    let ul = text.parentElement.parentElement;
-    while (text.parentElement !== ul.children[idx])
+    let ul = li.parentElement;
+    while (li !== ul.children[idx])
         idx++;
     return idx;
 }
