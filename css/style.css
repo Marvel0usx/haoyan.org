@@ -248,6 +248,10 @@ ul.nav-list a {
     text-decoration: none;
 }
 
+ul.nav-list a:active {
+    outline: none;
+}
+
 /* effects of lines */
 [data-nav-active="hold"] div.nav-line,
 [data-nav-active="false"] div.nav-line {
