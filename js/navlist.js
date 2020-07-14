@@ -37,7 +37,9 @@ function setListeners() {
     });
             
     navLnks.forEach(function(lnk, textIdx) {
-        lnk.addEventListener("mouseleave", function() {
+        lnk.addEventListener("mouseleave", function(evt) {
+            if (evt.target.dataset.navActive == "true")
+                return;
             /* hide text when mouse leaves */
             onhover[textIdx] = false;
             navTextEles[textIdx].textContent = "";
@@ -50,6 +52,7 @@ function setListeners() {
                 shuffleTextIdx = idx;
                 shuffledCount = 0;
                 shuffleChIdx = 0;
+                t.style.display = "block";
                 shuffleText(t, "", idx);
             }
         });
@@ -61,6 +64,7 @@ function setListeners() {
                 navLnks.forEach(function(lnk) {
                     if (lnk.dataset.navActive == "true") {
                         lnk.dataset.navActive = "hold";
+                        lnk.querySelector("div.text").style.display = "none";
                     }
                 });
             }
