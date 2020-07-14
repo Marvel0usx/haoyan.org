@@ -1,0 +1,8 @@
+header.top {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+header.top div.title {
+    margin: 0 10px;
+}
