@@ -1,0 +1,67 @@
+main {
+    display: flex;
+    flex-flow: row wrap;
+    overflow-y: auto;
+}
+
+article#about {
+    
+}
+
+summary:focus {
+    outline: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul.equip {
+    list-style-type: none;
+}
+
+ul.equip img {
+    width: 1em;
+    height: 1em;
+    position: relative;
+    top: 0.1em;
+    margin-right: 0.5em;
+}
+
+figcaption {
+    color: dimgrey;
+}
+
+blockquote {
+    text-align: justify;
+}
+
+a {
+    text-decoration: none;
+    color: #bbb;
+}
+
+a:visited {
+    columns: #555;
+}
+
+p.contact-info {
+    position: relative;
+    left: 2em;
+}
+
+p.copy-right {
+    position: relative;
+    text-align: center;
+    margin: 5em auto 1em auto;
+}
+
+p.copy-right::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    border-bottom: 1px solid #555;
+}
