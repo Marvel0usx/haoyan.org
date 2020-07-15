@@ -98,3 +98,7 @@ function shuffleText(textEle, textCnt, textIdx) {
 function randChar() {
     return String.fromCharCode(Math.round(Math.random() * 87) + 35);
 }
+
+function playbackCtrl() {
+    sessionStorage.setItem("audioCtrl", "pause");
+}
