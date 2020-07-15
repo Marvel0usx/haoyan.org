@@ -32,7 +32,7 @@ function fadeIn(audio) {
         audio.volume = 0;
         audio.play();
     }
-    if (audio.volume < 1) {
+    if (audio.volume + volumeStep < 1) {
         audio.volume += volumeStep;
     } else {
         audio.volume = 1;
@@ -42,7 +42,7 @@ function fadeIn(audio) {
 }
 
 function fadeOut(audio) {
-    if (audio.volume > 0) {
+    if (audio.volume - volumeStep > 0) {
         audio.volume -= volumeStep;
     } else {
         audio.volume = 0;
