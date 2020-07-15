@@ -1,6 +1,6 @@
 window.onload = init;
 
-var navTextEles, navDots, navLnks;
+var navTextEles, navDots, navLnks, audioCtrl;
 var shuffledCount, shuffleTextIdx, shuffleChIdx;
 const shuffleTimes = 2;
 const navTextCnts = ["Home", "Projects", "Gallery", "Calendar", "About", "Misc"];
@@ -9,12 +9,14 @@ var onhover = [false, false, false, false, false, false];
 function init() {
     setBindings();
     setListeners();
+    syncPageSettings();
 }
 
 function setBindings() {
     navTextEles = document.querySelectorAll("ul.nav-list div.text");
     navLnks = document.querySelectorAll("ul.nav-list a");
     navDots = document.querySelectorAll("ul.nav-list div.nav-dot");
+    audioCtrl = document.querySelector("div.toolbar a.music")
 }
 
 function setListeners() {
@@ -70,6 +72,12 @@ function setListeners() {
             }
         });
     });
+
+    audioCtrl.addEventListener("click", function(evt) {
+        evt.preventDefault();
+        audioCtrl.classList.toggle("on");
+        toggleAudio();
+    });
 }
 
 function findLiIdx(li) {
@@ -97,4 +105,29 @@ function shuffleText(textEle, textCnt, textIdx) {
 
 function randChar() {
     return String.fromCharCode(Math.round(Math.random() * 87) + 35);
+}
+
+function toggleAudio() {
+    let state = sessionStorage.getItem("audioCtrl");
+    if (!state) {
+        sessionStorage.setItem("audioCtrl", "pause");
+    } else {
+        if (state === "play")
+            sessionStorage.setItem("audioCtrl", "pause");
+        else if (state === "pause")
+            sessionStorage.setItem("audioCtrl", "play");
+        else
+            sessionStorage.setItem("audioCtrl", "pause");
+    }
+}
+
+function syncPageSettings() {
+    // sync playback settings
+    let playbackState = sessionStorage.getItem("audioCtrl");
+    if (playbackState) {
+        if (playbackState === "play")
+            audioCtrl.classList.toggle("on", true);
+        else if (playbackState === "pause")
+            audioCtrl.classList.toggle("on", false);
+    }
 }
