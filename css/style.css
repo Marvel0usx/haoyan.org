@@ -51,6 +51,8 @@ header.top {
     grid-area: header;
     text-align: center;
     align-self: center;
+    display: flex;
+    flex-flow: row nowrap;
 }
 
 aside {
@@ -61,11 +63,26 @@ aside {
 
 
 /* title-header decorations and transitions */
-div.title {
+a.title {
+    position: relative;
+    text-decoration: none;
+    margin: 0 5px 0 5px;
     transition: color 0.3s cubic-bezier(0, 0, 0, 1.1) 0.1s;
 }
 
-div.title::before {
+a.title:link {
+    color: inherit;
+}
+
+a.title:visited {
+    color: unset;
+}
+
+a.title.on {
+    color: #c04851;
+}
+
+a.title::before {
     content: "";
     width: 1px;
     height: 100%;
@@ -80,7 +97,7 @@ div.title::before {
         height 0.3s ease-in-out;
 }
 
-div.title::after {
+a.title::after {
     content: "";
     position: absolute;
     background-color: #606060;
@@ -92,16 +109,23 @@ div.title::after {
     transition: transform 0.3s cubic-bezier(0, 0, 0, 1.1);
 }
 
-div.title:hover {
+a.title.on::before {
+    border-left-color: #c04851;
+}
+a.title.on::after {
+    background-color: #c04851;
+}
+
+a.title:hover {
     color: white;
 }
 
-div.title:hover::before {
+a.title:hover::before {
     height: 0;
     transform: translateY(1em);
 }
 
-div.title:hover::after {
+a.title:hover::after {
     transform: translateY(-1.07em) scale(1, 3);
 }
 
@@ -347,6 +371,6 @@ ul.nav-list a {
     );
 }
 
-*:active {
+*:active, * {
     outline: none !important;
 }

@@ -38,12 +38,11 @@ function lazyLoad() {
         root: document.querySelector("main"),
         rootMargin: "0px 0px 200px 0px"
     };
-    category = sessionStorage.getItem("galleryCategory");
+    category = sessionStorage.getItem("secNav");
     if (!category) {
-        category = "recent";
-        sessionStorage.setItem("galleryCategory", category);
+        category = "still";
+        sessionStorage.setItem("secNav", category);
     }
-    category = "city";
     lazyLoadObserver = new IntersectionObserver(onIntersection, obsOptions);
     cols = document.querySelectorAll("div.gallery-frame div.gallery-col");
     cols.forEach(function (_, colIdx) { setSentinel(colIdx); });

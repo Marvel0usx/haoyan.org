@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded", initNavbar);
 
-var navTextEles, navDots, navLnks, audioCtrl;
+var navTextEles, navDots, navLnks, audioCtrl, sectionNavs;
 var shuffledCount, shuffleTextIdx, shuffleChIdx;
 const shuffleTimes = 2;
 const navTextCnts = ["Home", "Projects", "Gallery", "Calendar", "About", "Misc"];
@@ -16,7 +16,8 @@ function setBindings() {
     navTextEles = document.querySelectorAll("ul.nav-list div.text");
     navLnks = document.querySelectorAll("ul.nav-list a");
     navDots = document.querySelectorAll("ul.nav-list div.nav-dot");
-    audioCtrl = document.querySelector("div.toolbar a.music")
+    audioCtrl = document.querySelector("div.toolbar a.music");
+    sectionNavs = document.querySelectorAll("header.top a.title");
 }
 
 function setListeners() {
@@ -77,6 +78,17 @@ function setListeners() {
         evt.preventDefault();
         audioCtrl.classList.toggle("on");
         toggleAudio();
+    });
+
+    sectionNavs.forEach((nav) => {
+        nav.addEventListener("click", () => {
+            nav.classList.toggle("on", true);
+            sessionStorage.setItem("sectionNav", nav.dataset.secNav);
+            sectionNavs.forEach((other) => {
+                if (other !== nav)
+                    other.classList.toggle("on", false);
+            });
+        });
     });
 }
 

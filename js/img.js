@@ -734,7 +734,7 @@ const IMG_SRC = {
             "height": 1500
         }
     ],
-    "recent": [
+    "still": [
         {
             "src": "/assets/images/img (29).jpg",
             "year": 2018,
