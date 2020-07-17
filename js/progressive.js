@@ -4,12 +4,13 @@ var cols, sentinels = [];
 
 const obsOptions = {
     root: document.querySelector("main"),
-    rootMargin: "0px 0px 200px 0px"
+    rootMargin: "0px 0px 20px 0px"
 };
 
 class Sentinel {
     constructor(colIdx) {
         this.colIdx = colIdx;
+        this.colWidth = parseFloat(cols[colIdx].clientWidth);
         this.imgIdx = nextImgIdx++;
         this.bindImg();
     }
@@ -26,9 +27,8 @@ class Sentinel {
     calcOffsetHeight() {
         let ow = IMG_SRC[category][this.imgIdx].width;
         let oh = IMG_SRC[category][this.imgIdx].height;
-        const cw = this.imgEle.offsetWidth;
-        let ch = oh * cw / ow;
-        return ch;
+        let ch = oh * this.colWidth / ow;
+        return Math.round(ch).toString() + "px" /* very important */;
     }
 
     get imgData() {
@@ -41,7 +41,9 @@ window.addEventListener("DOMContentLoaded", lazyLoad);
 function lazyLoad() {
     nextImgIdx = 0;
     while(sentinels.length !== 0) {
-        removeSentinel(sentinels.pop());
+        let s = sentinels.pop();
+        if (lazyLoadObserver)
+            lazyLoadObserver.unobserve(s.imgEle);
     }
     lazyLoadObserver = new IntersectionObserver(onIntersection, obsOptions);
     category = sessionStorage.getItem("secNav");
@@ -76,8 +78,6 @@ function setSentinel(colIdx) {
 }
 
 function removeSentinel(sentinel) {
-    if (lazyLoadObserver)
-        lazyLoadObserver.unobserve(sentinel.imgEle);
     for (var idx = 0; idx < sentinels.length; idx++) {
         if (sentinels[idx] === sentinel) {
             sentinels.splice(idx, 1);
