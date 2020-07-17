@@ -83,11 +83,12 @@ function setListeners() {
     sectionNavs.forEach((nav) => {
         nav.addEventListener("click", () => {
             nav.classList.toggle("on", true);
-            sessionStorage.setItem("sectionNav", nav.dataset.secNav);
+            sessionStorage.setItem("secNav", nav.dataset.secNav);
             sectionNavs.forEach((other) => {
                 if (other !== nav)
                     other.classList.toggle("on", false);
             });
+            sectionChange();
         });
     });
 }

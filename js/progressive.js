@@ -2,6 +2,11 @@ var nextImgIdx = 0;
 var lazyLoadObserver, category;
 var cols, sentinels = [];
 
+const obsOptions = {
+    root: document.querySelector("main"),
+    rootMargin: "0px 0px 200px 0px"
+};
+
 class Sentinel {
     constructor(colIdx) {
         this.colIdx = colIdx;
@@ -34,18 +39,18 @@ class Sentinel {
 window.addEventListener("DOMContentLoaded", lazyLoad);
 
 function lazyLoad() {
-    const obsOptions = {
-        root: document.querySelector("main"),
-        rootMargin: "0px 0px 200px 0px"
-    };
+    nextImgIdx = 0;
+    while(sentinels.length !== 0) {
+        removeSentinel(sentinels.pop());
+    }
+    lazyLoadObserver = new IntersectionObserver(onIntersection, obsOptions);
     category = sessionStorage.getItem("secNav");
     if (!category) {
         category = "still";
         sessionStorage.setItem("secNav", category);
     }
-    lazyLoadObserver = new IntersectionObserver(onIntersection, obsOptions);
     cols = document.querySelectorAll("div.gallery-frame div.gallery-col");
-    cols.forEach(function (_, colIdx) { setSentinel(colIdx); });
+    cols.forEach(function (col, colIdx) { col.innerHTML = ""; setSentinel(colIdx); });
 }
 
 function onIntersection(entries, observer) {
@@ -54,7 +59,6 @@ function onIntersection(entries, observer) {
             return;
         let thisSentinel = entry.target.sentinel;
         let imgData = thisSentinel.imgData;
-        observer.unobserve(entry.target);
         entry.target.src = imgData["src"];
         entry.target.classList.remove("lazy-load");
         setSentinel(thisSentinel.colIdx);
@@ -72,10 +76,16 @@ function setSentinel(colIdx) {
 }
 
 function removeSentinel(sentinel) {
+    if (lazyLoadObserver)
+        lazyLoadObserver.unobserve(sentinel.imgEle);
     for (var idx = 0; idx < sentinels.length; idx++) {
         if (sentinels[idx] === sentinel) {
             sentinels.splice(idx, 1);
             return;
         }
     }
+}
+
+function sectionChange() {
+    lazyLoad();
 }
