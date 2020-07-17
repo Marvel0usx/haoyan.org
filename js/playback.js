@@ -3,20 +3,22 @@ const FADE_IN_OUT_TIMEOUT = 25;
 var ctrlChkCntDown = 0;
 
 window.onload = function() {
-    sessionStorage.setItem("audioCtrl", "play");
+    sessionStorage.setItem("audioCtrl", "pause");
     var audio = document.querySelector("audio", document.querySelector("audio"));
-    observeAudioCtrl(audio);
+    observeAudioCtrl(audio, undefined);
 }
 
-function observeAudioCtrl(audio) {
+function observeAudioCtrl(audio, currState) {
     if (ctrlChkCntDown <= 0) {
         ctrlChkCntDown = CTRL_CHECK_TIMEOUT; 
         console.log("checking ctrl status: " + sessionStorage.getItem("audioCtrl"));
         let ctrl = sessionStorage.getItem("audioCtrl");
-        if (ctrl === "play") {
+        if (currState !== ctrl && ctrl === "play") {
             fadeIn(audio);
-        } else if (ctrl === "pause") {
+            currState = ctrl;
+        } else if (currState !== ctrl && ctrl === "pause") {
             fadeOut(audio);
+            currState = ctrl;
         }
     }
     requestAnimationFrame(function() {
