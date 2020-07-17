@@ -1,4 +1,4 @@
-window.onload = init;
+window.addEventListener("DOMContentLoaded", initNavbar);
 
 var navTextEles, navDots, navLnks, audioCtrl;
 var shuffledCount, shuffleTextIdx, shuffleChIdx;
@@ -6,7 +6,7 @@ const shuffleTimes = 2;
 const navTextCnts = ["Home", "Projects", "Gallery", "Calendar", "About", "Misc"];
 var onhover = [false, false, false, false, false, false];
 
-function init() {
+function initNavbar() {
     setBindings();
     setListeners();
     syncPageSettings();

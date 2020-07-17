@@ -1,5 +1,3 @@
-window.onload = init;
-
 var nextImgIdx = 0;
 var lazyLoadObserver, category;
 var cols, sentinels = [];
@@ -10,7 +8,7 @@ class Sentinel {
         this.imgIdx = nextImgIdx++;
         this.bindImg();
     }
-    
+
     bindImg() {
         this.imgEle = document.createElement("img");
         this.imgEle.draggable = false;
@@ -19,33 +17,36 @@ class Sentinel {
         cols[this.colIdx].appendChild(this.imgEle);
         this.imgEle.style.height = this.calcOffsetHeight();
     }
-    
+
     calcOffsetHeight() {
         let ow = IMG_SRC[category][this.imgIdx].width;
-        let oh = IMG_SRC[category][this.imgIdx].height;        
+        let oh = IMG_SRC[category][this.imgIdx].height;
         const cw = this.imgEle.offsetWidth;
         let ch = oh * cw / ow;
         return ch;
     }
-    
+
     get imgData() {
         return IMG_SRC[category][this.imgIdx];
     }
 }
 
-function init() {
+window.addEventListener("DOMContentLoaded", lazyLoad);
+
+function lazyLoad() {
     const obsOptions = {
         root: document.querySelector("main"),
-        rootMargin: "0px 0px 50px 0px"
+        rootMargin: "0px 0px 200px 0px"
     };
     category = sessionStorage.getItem("galleryCategory");
     if (!category) {
         category = "recent";
         sessionStorage.setItem("galleryCategory", category);
     }
+    category = "city";
     lazyLoadObserver = new IntersectionObserver(onIntersection, obsOptions);
     cols = document.querySelectorAll("div.gallery-frame div.gallery-col");
-    cols.forEach(function(_, colIdx) { setSentinel(colIdx); });
+    cols.forEach(function (_, colIdx) { setSentinel(colIdx); });
 }
 
 function onIntersection(entries, observer) {
