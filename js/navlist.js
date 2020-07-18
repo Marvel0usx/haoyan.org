@@ -57,6 +57,9 @@ function setListeners() {
                 shuffleChIdx = 0;
                 t.style.display = "block";
                 shuffleText(t, "", idx);
+                setTimeout(function() {
+                    t.textContent = navTextCnts[idx];
+                }, 200);
             }
         });
 
@@ -143,4 +146,22 @@ function syncPageSettings() {
         else if (playbackState === "pause")
             audioCtrl.classList.toggle("on", false);
     }
+
+    let navActive = sessionStorage.getItem("secNav");
+    if (navActive) {
+        switch (navActive) {
+            case "still":
+                sectionNavs[0].classList.toggle("on", true);
+                break;
+            case "nature":
+                sectionNavs[1].classList.toggle("on", true);
+                break;
+            case "city":
+                sectionNavs[2].classList.toggle("on", true);
+                break;
+            case "landscape":
+                sectionNavs[3].classList.toggle("on", true);
+                break;
+        }
+    }        
 }

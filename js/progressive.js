@@ -51,7 +51,7 @@ function lazyLoad() {
         category = "still";
         sessionStorage.setItem("secNav", category);
     }
-    cols = document.querySelectorAll("div.gallery-frame div.gallery-col");
+    cols = document.querySelectorAll("div.lazy-load div.lazy-col");
     cols.forEach(function (col, colIdx) { col.innerHTML = ""; setSentinel(colIdx); });
 }
 
