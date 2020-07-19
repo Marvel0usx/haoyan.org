@@ -76,15 +76,86 @@
 
     <header class="top">
         <a class="title on" data-sec-nav="">
-            <span class="text title">Portfolio</span>
+            <span class="text title">Project Portfolio</span>
         </a>
     </header>
 
     <main>
-        <div class="project-frame">
-            <div class="project-col lazy-col">
-            </div>
-        </div>
+        <article class="project">
+            <h3>Pacman Rush!</h3>
+            <p><q>Pacman Rush!</q> is an HTML5 game that challenges your speed of reaction, 
+                and how synchronized your mind and hand are. Play in this game will control 
+                the Pecman character with the mouse, eat all of the designated snack pellets, 
+                and dodge all of the others.</p>
+            <img class="thumbnail" src="/assets/images/pacman.png" alt="thumbnail of thie game - Pacman Rush">
+        </article>
+        <article class="project">
+            <h3></h3>
+            <p><q>Type SpeedTest</q> is another HTML5 game that I made to test how fast you can type. 
+                There are three different categories of vocabulary. Within each of the categories, 
+                there are three difficulty ranks, which is essentially the length of words. For each 
+                word it prompts, you will have 5 seconds to type it on the screen, and if done correctly, 
+                the game continues until you win, or lose.
+            </p>
+            <img class="thumbnail" src="/assets/images/type-game.png" alt="thumbnail for typing speed test">
+        </article>
+        <article class="project">
+            <h3>Game of Life</h3>
+            <p><q>Game of Life</q> is a simulation for living creatures' life cycle based on several concise rules. 
+                This visualizer is my attempt to understand Python's interpreter. Therefore, the core of this visualizer is 
+                written in C. Since I just had a course teaching C in the previous semester, I planned merely to write a 
+                bunch of C code to boost the speed up. Admittedly, the amount of calculation is not that intense in this case. 
+                Still, it does not fail for an experiment. I then studied the official documentation provided by Python, read 
+                the source code in Python's GitHub. After weeks of trying, I finished my C implementation for the core. 
+                However, the pride of completing this project is so insignificant compared to my eagerness to learn more about 
+                the mechanism behind the scene. I, therefore, began seeking better resources to learn. Finally, I arrived at 
+                a course online offered by UCSD, talking about Python's interpreter. <s> As if Gollum finally found his precious,</s> 
+                I started immediately to follow this course. In this course, I studied every single nitty-gritty in the Python's 
+                main interpreter loop; the implementation of Python's object; marveled at the idea of structural subtyping to 
+                make OOP out of C code; comprehended the relation of function, frame, closure, and code object; and learned 
+                the mechanism of generator. It was such an unexpected journey that I took in those weeks, and the knowledge 
+                had finally satisfied me.
+            </p>
+            <img class="thumbnail" src="/assets/images/game-of-life.png" alt="thumbnail for typing speed test">
+        </article>
+        <article class="project">
+            <h3>Emotional YouTube</h3>
+            <p><q>Emotional YouTube</q> is developed during and after the UofTHacks VI by Jenna Lu and I. It is a browser extension for Chrome.
+            </p>
+            
+            <p>This is the very first application that I  wrote with more than two languages, Python for the backend, and HTML/CSS/Js for 
+                the frontend. The idea of <q>wordcloud</q> is also amazingly handy when representing several keywords and their weight. 
+                This project is fairly straightforward: for backend, I will use Flask + SqlAlchemy to host the restful API, flask-Marshmellow 
+                for the schema of our database, and google's API to acquire data and analyze; for the frontend, I will then write a 
+                webpage to display the result.
+            </p>
+
+            <p> However, as the saying goes, the juicier your expectation is, the more shriveled you will get, the implementation 
+                never comes as easy as I imagined. To retrieve the comments of youtube videos, I initially made use of the combo - 
+                selenium, requests, and BeautifulSoup - to write a web-crawler. I employed selenium to scroll the page down and 
+                scrape HTML snippets out of youtube. I used BeautifulSoup to parse those HTML to obtain the comments. After the 
+                whole night, despite how hilarious the idea was, I managed to download thousands of comments in such an unspeakably 
+                disgraceful manner. At that time, the application needs two minutes to generate its analysis. That was intolerable, 
+                and I had to improve it. Using web-crawler to obtain data is like fighting an up-will battle - the data hide safely, 
+                and I have to search for it, arrived at it, and parse it - whereas using an API is way faster. Once I realized there 
+                must exist some sort of API that achieves the same thing, I found google's youtube data v3 out of thin air. After 
+                conquering the difficulty of data gathering, I quickly finished the analysis and word cloud part of the project.
+            </p>
+            
+            <p>Having the backend finished, I started to work on the frontend. Given that this was the first time I did frontend, 
+                I learned a lot again. The first thing was styling the page, and it took me hours to figure out a way to make the 
+                app nice looking and organized. I stumbled through setting negative margins, using <code>transform: translate()</code>, 
+                floating icon to the left, flex boxes, until finally, I found the <em>grid</em> layout the handiest. Though the 
+                problem was tiny, I was amazed by the number of options that js&CSS provide to me - it is the infinity nature of 
+                coding. Then, I worked with javascript for several days, learned about ajax requests, CORS and base-64 encoding of 
+                image.
+            </p>
+
+            <p>I finally finished this project, I was bewildered by the charm of js, and the agility of web-dev (in comparison to 
+                Tkinter and Qt). And not too surprisingly, this experience led me to the development of this site.
+            </p>
+            <img class="thumbnail" src="/assets/images/emotional-youtube.png" alt="thumbnail for emotional youtube">
+        </article>
     </main>
 
     <aside>

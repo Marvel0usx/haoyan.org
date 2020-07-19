@@ -163,5 +163,8 @@ function syncPageSettings() {
                 sectionNavs[3].classList.toggle("on", true);
                 break;
         }
+    } else {
+        sessionStorage.setItem("secNav", "still");
+        sectionNavs[0].classList.toggle("on", true);
     }        
 }

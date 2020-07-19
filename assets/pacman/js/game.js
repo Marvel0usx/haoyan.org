@@ -22,7 +22,7 @@ var liveUpRound = 3;
 const colors = ["#70d6ff", "#ff70a6", "#ff9770", "#ffd670", "#e9ff70",
                 "#2ec4b6", "#deaaff", "#f77f00", "#8338ec", "#ffffff"];
 var colorToEat = undefined;
-const PECMAN_RADIUS = 30;
+const PACMAN_RADIUS = 30;
 const SNACK_INIT_NUM = 3;
 const SNACK_INIT_RADIUS = 5;
 const ROUND_PER_FURY_MARK = 5;
@@ -76,18 +76,18 @@ var player = {
         else
             ctx.fillStyle = "yellow";
         ctx.beginPath();
-        ctx.arc(0, 0, PECMAN_RADIUS, Math.PI / 7, -Math.PI / 7, false);
-        ctx.lineTo(PECMAN_RADIUS/12, PECMAN_RADIUS/15)
+        ctx.arc(0, 0, PACMAN_RADIUS, Math.PI / 7, -Math.PI / 7, false);
+        ctx.lineTo(PACMAN_RADIUS/12, PACMAN_RADIUS/15);
         ctx.fill();
 
         // restore the saved settings to avoid local settings changing global.
-        ctx.restore()
+        ctx.restore();
         
         // update mouse coordinates.
         this.xPrev = this.x;
         this.yPrev = this.y;
     }
-}
+};
 
 function init() {
     // initialize canvas
@@ -358,7 +358,7 @@ function detectCollisionWithWalls(s) {
 
 function detectCollisionWithPlayer(s, index) {
     var distanceBtwCenter = Math.sqrt(Math.pow(player.x - s.x, 2) + Math.pow(player.y - s.y, 2));
-    if (distanceBtwCenter < s.r + PECMAN_RADIUS) {
+    if (distanceBtwCenter < s.r + PACMAN_RADIUS) {
         snacks.splice(index, 1);
         if (s.color !== colorToEat) {
             if (player.fury) {
@@ -397,7 +397,7 @@ function updateScoreBoard() {
         lives.innerHTML = "";
         for (var i = 0; i < player.lives; i++) {
             var img = document.createElement("img");
-            img.src = "./images/pecman.png";
+            img.src = "./images/pacman.png";
             lives.append(img);
         }
     }
@@ -426,7 +426,7 @@ function resetEnv() {
     player.score = 0;
     player.lives = 3;
     player.x = w/2;
-    player.y = h - PECMAN_RADIUS * 4;
+    player.y = h - PACMAN_RADIUS * 4;
     numGoodSnacks = 0;
     numPoisonSnacks = 0;
     colorToEat = undefined;
