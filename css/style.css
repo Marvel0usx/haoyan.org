@@ -35,11 +35,13 @@ div.toolbar {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    z-index: 5 !important;
 }
 
 header.side {
     font-family: 'Maiandra GD', 'Open Sans', sans-serif;
     grid-area: sidebar;
+    z-index: 5 !important;
 }
 
 header.top {
@@ -53,12 +55,14 @@ header.top {
     align-self: center;
     display: flex;
     flex-flow: row nowrap;
+    z-index: 5 !important;
 }
 
 aside {
     grid-area: guitar;
     min-width: 100%;
     min-height: 100%;
+    z-index: 5 !important;
 }
 
 
@@ -159,6 +163,7 @@ div.string {
     width: fit-content;
     border-left-style: solid;
     border-left-width: 1px;
+    z-index: 5 !important;
 }
 
 div.guitar::after,
@@ -170,7 +175,7 @@ div.guitar::before {
     left: 0;
     bottom: 0;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 0 !important;
 }
 
 div.guitar::after {
