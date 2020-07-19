@@ -10,16 +10,32 @@ main {
 article.project {
     width: 90%;
     margin: 20px;
-    padding: 5%;
+    padding: 3%;
     box-shadow: 2px 2px 3px 3px #ccc;
-    box-shadow: inset;
     border-radius: 5%;
 }
 
-article.project > img.thumbnail {
+article.project img.thumbnail {
     width: 300px;
     height: 200px;
     float: left;
-    display: block;
+    margin-right: 1em;
+}
+
+h3 {
     position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+h3::after {
+    content: "";
+    color: blueviolet;
+    background-image: url("../assets/icons/link.png");
+    background-size: cover;
+    height: 1em;
+    width: 1em;
+    position: absolute;
+    right: -1.5em;
+    top: 0.5em;
 }

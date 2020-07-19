@@ -374,3 +374,13 @@ ul.nav-list a {
 *:active, * {
     outline: none !important;
 }
+
+main a:link {
+    font-weight: 600;
+    color: #c04851;
+    text-decoration: none;
+}
+
+main a:visited {
+    color: #555;
+}
