@@ -94,6 +94,24 @@ function setListeners() {
             sectionChange();
         });
     });
+
+    let btn = document.querySelector("button.scroll-top");
+    let main = document.querySelector("main");
+    
+    function toggleScrollBtn() {
+        if (main.clientHeight < main.scrollHeight) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
+        }
+    }
+
+    toggleScrollBtn();
+    window.addEventListener("resize", toggleScrollBtn);
+
+    btn.addEventListener("click", () => {
+        main.scrollTo({top: 0, behavior: "smooth"});
+    });
 }
 
 function findLiIdx(li) {
@@ -147,6 +165,7 @@ function syncPageSettings() {
             audioCtrl.classList.toggle("on", false);
     }
 
+    if (sectionNavs.length !== 4) { return; }
     let navActive = sessionStorage.getItem("secNav");
     if (navActive) {
         switch (navActive) {

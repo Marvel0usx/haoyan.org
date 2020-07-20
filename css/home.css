@@ -2,4 +2,6 @@ main {
     grid-area: main;
     text-align: justify;
     overflow-y: auto;
+    display: flex;
+    flex-flow: row nowrap;
 }
