@@ -4,7 +4,7 @@ var cols, sentinels = [];
 
 const obsOptions = {
     root: document.querySelector("main"),
-    rootMargin: "0px 0px 20px 0px"
+    rootMargin: "0px 0px 200px 0px"
 };
 
 class Sentinel {
@@ -36,8 +36,6 @@ class Sentinel {
     }
 }
 
-window.addEventListener("DOMContentLoaded", lazyLoad);
-
 function lazyLoad() {
     nextImgIdx = 0;
     while(sentinels.length !== 0) {
@@ -59,7 +57,10 @@ function onIntersection(entries, observer) {
     entries.forEach(entry => {
         if (!entry.isIntersecting)
             return;
+        // if (mq1.matches)
+        //     return;
         let thisSentinel = entry.target.sentinel;
+        if (!thisSentinel) return;
         let imgData = thisSentinel.imgData;
         entry.target.src = imgData["src"];
         entry.target.classList.remove("lazy-load");
@@ -88,4 +89,45 @@ function removeSentinel(sentinel) {
 
 function sectionChange() {
     lazyLoad();
+}
+
+var mq1 = window.matchMedia("(max-width: 900px)");
+var mq2 = window.matchMedia("(min-width: 901px)");
+
+window.addEventListener("DOMContentLoaded", () => {
+    if (mq1.matches) {
+        let cs = document.querySelectorAll("div.gallery-col");
+        cs[2].parentNode.removeChild(cs[2]);
+        cs[1].parentNode.removeChild(cs[1]);
+    }
+    lazyLoad();
+});
+
+window.addEventListener("resize", () => {
+    if (mq1.matches) {
+        oneColView();
+    }
+    if (mq2.matches) {
+        return;
+        // threeColView();
+    }
+});
+
+function oneColView() {
+    let cols = document.querySelectorAll("div.gallery-col");
+    if (cols.length != 1) {
+        lazyLoadObserver.disconnect();
+        sentinels.forEach(function(s) {
+            s.imgEle.parentNode.removeChild(s.imgEle);
+        });
+        sentinels = [];
+        var imgs = document.querySelectorAll("div.gallery-frame img:not(.lazy-load)");
+        imgs.forEach((img) => {
+            cols[0].appendChild(img);
+        });
+        cols[2].parentNode.removeChild(cols[2]);
+        cols[1].parentNode.removeChild(cols[1]);
+        nextImgIdx -= 3;
+        setSentinel(0);
+    }
 }

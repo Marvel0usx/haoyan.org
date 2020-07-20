@@ -24,3 +24,14 @@ div.gallery-frame > div > img {
     width: 100%;
     margin-bottom: 5%;
 }
+
+@media all and (max-width: 900px) {    
+    div.gallery-col {
+        width: 100%;
+    }
+    
+    div.gallery-col img {
+        width: 100% !imptortan;
+        height: auto !important;
+    }
+}

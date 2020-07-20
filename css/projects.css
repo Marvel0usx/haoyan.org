@@ -37,9 +37,10 @@ h3 {
     display: inline-block;
     margin-top: 0;
     margin-bottom: 0;
+    margin-left: 1.5em;
 }
 
-h3::after {
+h3::before {
     content: "";
     background-image: url("../assets/icons/link.png");
     background-size: contain;
@@ -47,6 +48,23 @@ h3::after {
     height: 1em;
     width: 1em;
     position: absolute;
-    right: -1.5em;
+    left: -1.5em;
     top: 0.5em;
+}
+
+@media all and (max-width: 999px) {
+    article.project:hover {
+        transform: scale(1.02);
+    }
+
+    article.project img.thumbnail {
+        float: none;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    details {
+        margin-top: 1em;
+    }
 }
