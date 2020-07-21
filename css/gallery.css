@@ -12,12 +12,12 @@ div.gallery-frame {
     justify-content: space-around;
 }
 
-div.col-1,
-div.col-2,
-div.col-3 {
-    width: 32%;
-    display: flex;
-    flex-flow: column nowrap;
+@media all and (min-width: 901px) {
+    div.gallery-frame > div.gallery-col {
+        width: 32%;
+        display: flex;
+        flex-flow: column nowrap;
+    }
 }
 
 div.gallery-frame > div > img {
@@ -31,7 +31,13 @@ div.gallery-frame > div > img {
     }
     
     div.gallery-col img {
-        width: 100% !imptortan;
+        width: 100% !important;
         height: auto !important;
+    }
+}
+
+@media all an (max-width: 870) {
+    a.title {
+        font-size: 10px;
     }
 }
