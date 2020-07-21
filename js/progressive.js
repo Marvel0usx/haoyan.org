@@ -4,7 +4,7 @@ var cols, sentinels = [];
 
 const obsOptions = {
     root: document.querySelector("main"),
-    rootMargin: "0px 0px 200px 0px"
+    rootMargin: "0px 0px 0px 0px",
 };
 
 class Sentinel {

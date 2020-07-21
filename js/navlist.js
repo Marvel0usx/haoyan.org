@@ -91,6 +91,7 @@ function setListeners() {
                 if (other !== nav)
                     other.classList.toggle("on", false);
             });
+            
             sectionChange();
         });
     });
