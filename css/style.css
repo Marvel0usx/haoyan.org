@@ -41,7 +41,6 @@ div.toolbar {
 div.toolbar-2 {
     max-height: 20%;
     width: 100%;
-    
 }
 
 header.side {
@@ -436,3 +435,29 @@ main {
 } 
 
 /* media queries */
+@media all and (max-width: 620px) {
+    body {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 100%;
+        height: 100%;
+    }
+
+    header.top {
+        height: 10%;
+        top: 1em;
+    }
+
+    main {
+        margin: 0 3em;
+        height: 90%;
+    }
+
+    aside,
+    div.toolbar,
+    div.toolbar2,
+    header.side {
+        grid-area: unset;
+        display: none;
+    }
+}
