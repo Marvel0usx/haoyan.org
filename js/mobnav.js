@@ -1,6 +1,7 @@
 var pageNames = ["/home.html", "/projects.html", "/gallery.html", "/calendar.html", "/about.html", "/misc.html"];
 var mobileQuery = window.matchMedia("(max-width: 620px)");
 var touchStartPtX, touchEndPtX;
+const PAGE_NAV_THRESHOLD = 200px;
 
 if (!sessionStorage.getItem("pageIdx")) {
     let thisUrl = window.location.pathname;
@@ -37,11 +38,11 @@ window.addEventListener("DOMContentLoaded", () => {
     }, false);
     window.addEventListener("touchend", (evt) => {
         touchEndPtX = evt.changedTouches[0].clientX;
-        if (touchEndPtX - touchStartPtX < -50) {
+        if (touchEndPtX - touchStartPtX < -PAGE_NAV_THRESHOLD) {
             pageIdx = (pageIdx + 1 >= pageNames.length) ? 0 : pageIdx + 1;
             sessionStorage.setItem("pageIdx", pageIdx.toString());
             window.location.replace(pageNames[pageIdx]);
-        } else if (touchEndPtX - touchStartPtX > 50) {
+        } else if (touchEndPtX - touchStartPtX > PAGE_NAV_THRESHOLD) {
             pageIdx = (pageIdx - 1 < 0) ? pageNames.length - 1 : pageIdx - 1;
             sessionStorage.setItem("pageIdx", pageIdx.toString());
             window.location.replace(pageNames[pageIdx]);
