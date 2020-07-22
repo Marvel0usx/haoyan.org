@@ -39,8 +39,10 @@ div.toolbar {
 }
 
 div.toolbar-2 {
-    max-height: 20%;
+    height: 20%;
     width: 100%;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 header.side {
