@@ -100,3 +100,9 @@ p.copy-right::before {
     width: 100%;
     border-bottom: 1px solid #555;
 }
+
+@media all and (max-width: 620px) {
+    main > * {
+        flex-basis: 100% !important;
+    }
+}

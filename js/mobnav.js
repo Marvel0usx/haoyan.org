@@ -37,11 +37,11 @@ window.addEventListener("DOMContentLoaded", () => {
     }, false);
     window.addEventListener("touchend", (evt) => {
         touchEndPtX = evt.changedTouches[0].clientX;
-        if (touchEndPtX - touchStartPtX > 50) {
+        if (touchEndPtX - touchStartPtX < -50) {
             pageIdx = (pageIdx + 1 >= pageNames.length) ? 0 : pageIdx + 1;
             sessionStorage.setItem("pageIdx", pageIdx.toString());
             window.location.replace(pageNames[pageIdx]);
-        } else if (touchEndPtX - touchStartPtX < -50) {
+        } else if (touchEndPtX - touchStartPtX > 50) {
             pageIdx = (pageIdx - 1 < 0) ? pageNames.length - 1 : pageIdx - 1;
             sessionStorage.setItem("pageIdx", pageIdx.toString());
             window.location.replace(pageNames[pageIdx]);

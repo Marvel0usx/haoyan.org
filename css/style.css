@@ -449,7 +449,8 @@ main {
     }
 
     main {
-        margin: 0 3em;
+        margin: 0;
+        padding: 0 10%;
         height: 90%;
     }
 
