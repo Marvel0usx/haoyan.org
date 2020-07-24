@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Game - Pacman</title>
+        <link rel="icon" href="images/pacman.png">
+        <link rel="stylesheet" href="css/game.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+        <script src="js/game.js"></script>
+    </head>
+    <body>
+        <div id="start">
+            <h2 style="display: inline-block; margin-left: 40px;">Pacman Rush!</h2><div class="btn-sound"></div>
+            <p><span style="color: #70d6ff">Move</span>
+                <span style="color: #ff70a6">Pacman</span>
+                <span style="color: #ff9770">To</span>
+                <span style="color: #ffd670">Eat</span>
+                <span style="color: #e9ff70">Snacks</span>
+                <span style="color: #2ec4b6">In</span>
+                <span style="color: #deaaff">Designated</span>
+                <span style="color: #f77f00">Color</span>
+            </p>
+            <button id="btn-start" class="btn-again">START</button>
+        </div>
+
+        <section class="game" id="game">
+            <h2>Pacman Rush</h2>
+            <audio src="./sound/bg.mp3" id="audioPlayer" autoplay loop>
+            </audio>
+            <div class="score-board">
+                <div id="fury-cd"></div>
+                <div id="lives"></div>
+                <div id="score">Score: 100</div>
+            </div>
+            <canvas id="gameCvs"></canvas>
+        </section>
+
+        <div id="boss">
+            <h2>BOSS Round!</h2>
+        </div>
+
+        <div id="win">
+            <p>Congrats! You Won!</p>
+            <p class="score"></p>
+            <button class="btn-again win">Play Again</button>
+        </div>
+        
+        <div id="lose">
+            <p>It never comes easy!</p>
+            <p>You lost</p>
+            <p class="score"></p>
+            <button class="btn-again lose">Try Again!</button>
+        </div>
+    </body>
+</html>

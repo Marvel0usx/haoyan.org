@@ -1,0 +1,108 @@
+main {
+    display: flex;
+    flex-flow: row wrap;
+    overflow-y: auto;
+    justify-content: space-between;
+}
+
+article#about {
+    flex-basis: 45%;
+    text-align: justify;
+}
+
+main div.sec-col {
+    flex-basis: 45%;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+footer {
+    flex-basis: 100%;
+}
+
+summary:focus {
+    outline: none;
+}
+
+main ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+main ul.equip img,
+main a img {
+    width: 1em;
+    height: 1em;
+    position: relative;
+    top: 0.1em;
+    margin-right: 0.5em;
+}
+
+figure {
+    margin-left: 0;
+}
+
+figcaption {
+    color: #7a7374;
+}
+
+blockquote {
+    text-align: justify;
+    margin: 0;
+}
+
+[download] {
+    position: relative;
+    margin-left: 1.5em;
+}
+
+[download]::before {
+    content: "";
+    background-image: url("../assets/icons/link.png");
+    background-size: cover;
+    height: 1em;
+    width: 1em;
+    position: absolute;
+    left: -1.5em;
+    top: 0.1em;
+    display: block;
+}
+
+main a:link {
+    font-weight: 600;
+    color: #c04851;
+    text-decoration: none;
+}
+
+main a:visited {
+    color: #555;
+}
+
+p.contact-info {
+    margin: 0;
+    position: relative;
+    left: 2em;
+}
+
+p.copy-right {
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+}
+
+p.copy-right::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    border-bottom: 1px solid #555;
+}
+
+@media all and (max-width: 620px) {
+    main > * {
+        flex-basis: 100% !important;
+    }
+}

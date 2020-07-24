@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+html, body {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16pt;
+    margin: 0;
+    height: 100%;
+    min-width: 100%;
+    background-color: #1d3557;
+    overflow: hidden;
+}
+
+h2 {
+    margin: 20px 0 10px 0;
+}
+
+div.cd {
+    display: block;
+    background-image: image("../images/cd.png");
+    width: 20px;
+    height: 20px;
+}
+
+button:active {
+    outline: none;
+}
+
+.score-board {
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.score-board > div {
+    margin: 0 10px 0 10px;
+}
+
+.btn-again {
+    font-family: inherit;
+    font-size: 0.8rem;
+    padding: 1.4rem;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.13);
+    border: 0;
+    border-radius: 0.2rem;
+}
+
+.btn-again:hover {
+    background-color: blueviolet;
+}
+
+.btn-sound {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url("../images/unmute-site.png");
+    background-size: contain;
+    opacity: 0.4;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.btn-sound:hover {
+    opacity: 0.8;
+}
+
+.shake {
+    left: 0% !important;
+    top: 0% !important;
+    
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 0.3s;
+    
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+}
+
+/* Credit to https://www.w3schools.com/howto/howto_css_shake_image.asp */
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+#game {
+    display: none;
+    flex-flow: column nowrap;
+    text-align: center;
+    color: white;
+}
+
+#fury-cd > img{
+    width: 20px;
+    height: 20px;
+    background-image: url("../images/ready.png");
+}
+
+#lives > img {
+    width: 20px;
+    height: 20px;
+    background-image: url("../images/pecman.png");
+}
+
+#gameCvs {
+    cursor: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    border: 5px dashed white;
+}
+
+#start{
+    color: yellow;
+    margin-top: 32vh;
+    text-align: center;
+}
+
+#win {
+    color: gold;
+}
+
+#lose {
+    color: rgb(221, 96, 96);
+}
+
+#lose,  
+#win {
+    display: none;
+    margin-top: 32vh;
+    text-align: center;
+}
+
+#boss {
+    display: none;
+    margin-top: 32vh;
+    text-align: center;
+    background: -webkit-linear-gradient(#eee, rgb(255, 238, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
