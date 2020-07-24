@@ -1,5 +1,3 @@
-window.addEventListener("DOMContentLoaded", initNavbar);
-
 var navTextEles, navDots, navLnks, audioCtrl, sectionNavs;
 var shuffledCount, shuffleTextIdx, shuffleChIdx;
 const shuffleTimes = 2;
@@ -96,23 +94,23 @@ function setListeners() {
         });
     });
 
-    let btn = document.querySelector("button.scroll-top");
-    let main = document.querySelector("main");
-    
-    function toggleScrollBtn() {
-        if (main.clientHeight < main.scrollHeight) {
-            btn.style.display = "block";
-        } else {
-            btn.style.display = "none";
-        }
-    }
-
-    toggleScrollBtn();
     window.addEventListener("resize", toggleScrollBtn);
+    
+}
 
-    btn.addEventListener("click", () => {
-        main.scrollTo({top: 0, behavior: "smooth"});
-    });
+function toggleScrollBtn() {
+    let main = document.querySelector("main");
+    let btn = document.querySelector("button.scroll-top");
+    if (main.clientHeight < main.scrollHeight) {
+        btn.addEventListener("click", () => {
+            main.scrollTo({top: 0, behavior: "smooth"});
+        });
+        btn.style.display = "block";
+        return true;
+    } else {
+        btn.style.display = "none";
+        return false;
+    }
 }
 
 function findLiIdx(li) {

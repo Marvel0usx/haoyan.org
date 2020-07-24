@@ -43,6 +43,12 @@ div.toolbar-2 {
     width: 100%;
     display: flex;
     flex-flow: row wrap;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+div.toolbar-2.loaded {
+    opacity: 1;
 }
 
 header.side {
@@ -81,6 +87,8 @@ a.title {
     text-decoration: none;
     margin: 0 5px 0 5px;
     transition: color 0.3s cubic-bezier(0, 0, 0, 1.1) 0.1s;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
 }
 
 a.title:link {
@@ -95,7 +103,7 @@ a.title.on {
     color: #c04851;
 }
 
-a.title::before {
+a.title.loaded::before {
     content: "";
     width: 1px;
     height: 100%;
@@ -110,7 +118,7 @@ a.title::before {
         height 0.3s ease-in-out;
 }
 
-a.title::after {
+a.title.loaded::after {
     content: "";
     position: absolute;
     background-color: #606060;
@@ -129,17 +137,21 @@ a.title.on::after {
     background-color: #c04851;
 }
 
-a.title:hover {
+a.title.loaded:hover {
     color: white;
 }
 
-a.title:hover::before {
+a.title.loaded:hover::before {
     height: 0;
     transform: translateY(1em);
 }
 
-a.title:hover::after {
+a.title.loaded:hover::after {
     transform: translateY(-1.07em) scale(1, 3);
+}
+
+a.title.loaded {
+    opacity: 1;
 }
 
 
@@ -168,33 +180,51 @@ ol.guitar {
 }
 
 div.string {
-    height: 100%;
+    height: 0;
     width: fit-content;
     border-left-style: solid;
     border-left-width: 1px;
     z-index: 5 !important;
+    transition: height 0.2s linear;
+}
+
+div.string.loaded {
+    height: 100%;
 }
 
 div.guitar::after,
 div.guitar::before {
     content: "";
     width: 14.4vw;
-    height: 14.4vw;
+    height: 7.2vw;
     position: fixed;
     left: 0;
-    bottom: 0;
-    border-radius: 50%;
-    z-index: 0 !important;
+    bottom: 200px;
+    /* border-radius: 50%; */
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 4s ease-in-out;
 }
 
 div.guitar::after {
+    border-bottom-left-radius: calc(1px + 7.2vw);
+    border-bottom-right-radius: calc(1px + 7.2vw);
     border: 1px solid #656565;
-    transform: translateY(50%);
+    border-top: 0;
+    transform: rotate(180deg);
 }
 
 div.guitar::before {
+    border-bottom-left-radius: calc(16px + 7.2vw);
+    border-bottom-right-radius: calc(16px + 7.2vw);
     border: 16px solid #bbb;
-    transform: translateY(50%) scale(0.8, 0.8);
+    border-top: 0;
+    transform: translateY(10%) scale(0.8, 0.8) rotate(180deg);
+}
+
+div.guitar.loaded::before,
+div.guitar.loaded::after {
+    opacity: 1;
 }
 
 div.E { border-left-color: #656565; }
@@ -218,12 +248,16 @@ a.square {
     border: 1px solid #707070;
     text-decoration: none;
     background-color: transparent;
-    opacity: 0.7;
-    transition: opacity 0.2s ease-in-out;
     border-collapse: separate;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
 }
 
-a.square:hover {
+a.square.loaded {
+    opacity: 0.7;
+}
+
+a.square.loaded:hover {
     opacity: 1;
 }
 
@@ -327,6 +361,21 @@ ul.nav-list a {
 
 
 /* effects of lines */
+div.nav-line:not(.loaded) {
+    height: 0 !important;
+    transition: height 0.2s linear;
+}
+
+div.nav-dot:not(.loaded) {
+    opacity: 0;
+    transition: opactiy 0.2s ease-in-out;
+}
+
+div.nav-dot:not(.loaded) + div.text {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
 [data-nav-active="hold"] div.nav-line,
 [data-nav-active="false"] div.nav-line {
     height: calc(var(--inavtive-height) * var(--unit-height));

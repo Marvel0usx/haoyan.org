@@ -1,7 +1,7 @@
 var pageNames = ["/home.html", "/projects.html", "/gallery.html", "/calendar.html", "/about.html", "/misc.html"];
 var mobileQuery = window.matchMedia("(max-width: 620px)");
 var touchStartPtX, touchEndPtX;
-const PAGE_NAV_THRESHOLD = 200px;
+const PAGE_NAV_THRESHOLD = 200;
 
 if (!sessionStorage.getItem("pageIdx")) {
     let thisUrl = window.location.pathname;
