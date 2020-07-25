@@ -1,6 +1,6 @@
 const TIMEOUT = 100;
 
-window.addEventListener("DOMContentLoaded", () => {
+function navlistTransition() {
     const strings = document.querySelectorAll("div.string");
     const navlines = document.querySelectorAll("div.nav-line");
     const navdots = document.querySelectorAll("div.nav-dot");
@@ -9,8 +9,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const toolbarBtns = document.querySelectorAll("div.toolbar a.square");
     const toolbar2 = document.querySelector("div.toolbar-2");
     const secNavs = document.querySelectorAll("a.title");
-    // const navText = document.querySelectorAll("li.nav-item div.text");
-
+    
     secNavs.forEach((nav, idx) => {
         setTimeout(() => nav.classList.toggle("loaded", true), idx * TIMEOUT);
     });
@@ -31,9 +30,6 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         }, idx * TIMEOUT);
     });
-    setTimeout(() => {
-        initNavbar();
-    }, navlines.length * TIMEOUT);
     toggleScrollBtn();
     setTimeout(() => {
         toolbar2.classList.toggle("loaded", true);
@@ -41,4 +37,4 @@ window.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
         main.classList.toggle("loaded", true);
     }, 600);
-})
+}

@@ -406,7 +406,7 @@ div.nav-dot:not(.loaded) + div.text {
     transition: transform 0.1s linear 0.3s;
 }
 
-[data-nav-active="false"]:hover div.nav-line.onhover{
+[data-nav-active="false"]:hover div.nav-line.onhover {
     /* for easy selecting instead of being too narrow */
     width: 100%;
     height: calc(var(--active-height) * var(--unit-height));
@@ -420,7 +420,7 @@ div.nav-dot:not(.loaded) + div.text {
     height: 0;
 }
 
-[data-nav-active="false"]:hover div.nav-dot,
+[data-nav-active="false"]:hover div.nav-dot.loaded,
 [data-nav-active="true"] div.nav-dot {
     width: 7px;
     height: 7px;
@@ -429,7 +429,7 @@ div.nav-dot:not(.loaded) + div.text {
     border-radius: 50%;
 }
 
-[data-nav-active="false"]:hover div.nav-dot {
+[data-nav-active="false"]:hover div.nav-dot.loaded {
     transform: translateY(calc((var(--active-height) - var(--inavtive-height)) * var(--unit-height)));
 }
 

@@ -4,9 +4,12 @@ const shuffleTimes = 2;
 const navTextCnts = ["Home", "Projects", "Gallery", "Calendar", "About", "Misc"];
 var onhover = [false, false, false, false, false, false];
 
+window.addEventListener("DOMContentLoaded", initNavbar);
+
 function initNavbar() {
     setBindings();
     setListeners();
+    navlistTransition();
     syncPageSettings();
 }
 
