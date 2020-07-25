@@ -1,4 +1,4 @@
-main {
+main.loaded {
     grid-area: main;
     text-align: justify;
     overflow-y: auto;

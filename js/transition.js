@@ -34,7 +34,5 @@ function navlistTransition() {
     setTimeout(() => {
         toolbar2.classList.toggle("loaded", true);
     }, 600);
-    setTimeout(() => {
-        main.classList.toggle("loaded", true);
-    }, 600);
+    main.classList.toggle("loaded", true);
 }

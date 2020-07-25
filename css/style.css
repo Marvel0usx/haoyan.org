@@ -82,7 +82,12 @@ aside {
 
 main {
     opacity: 0;
-    transition: opacity 0.3s linear;
+    transition: opacity 0.4s ease-in-out;
+    -webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    -ms-text-rendering: optimizeLegibility;
+    -o-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;
 }
 
 /* title-header decorations and transitions */

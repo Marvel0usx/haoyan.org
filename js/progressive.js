@@ -65,6 +65,7 @@ function onIntersection(entries, observer) {
         let imgData = thisSentinel.imgData;
         entry.target.src = imgData["src"];
         entry.target.classList.remove("lazy-load");
+        entry.target.classList.add("loaded");
         setSentinel(thisSentinel.colIdx);
         removeSentinel(thisSentinel);
         entry.target.sentinel = undefined;

@@ -1,4 +1,4 @@
-main {
+main.loaded {
     display: flex;
     flex-flow: row wrap;
     overflow-y: auto;
@@ -100,6 +100,26 @@ p.copy-right::before {
     height: 1px;
     width: 100%;
     border-bottom: 1px solid #555;
+}
+
+h3 {
+    color: #c04851;
+    text-decoration: underline;
+}
+
+@media all and (max-width: 920px) {
+    main div.sec-col {
+        flex-basis: 100%;
+    }
+
+    article#about, article#quote, article#equip, article#misc {
+        width: 100%;
+        flex-basis: 100%;
+    }
+
+    figure {
+        float: left;
+    }
 }
 
 @media all and (max-width: 620px) {
