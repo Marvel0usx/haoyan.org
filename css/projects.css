@@ -5,6 +5,7 @@ main {
     display: flex;
     flex-flow: column;
     align-items: center;
+    opacity: 1;
 }
 
 article.project {

@@ -4,4 +4,5 @@ main {
     overflow-y: auto;
     display: flex;
     flex-flow: row nowrap;
+    opacity: 1;
 }

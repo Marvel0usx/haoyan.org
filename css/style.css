@@ -80,6 +80,10 @@ aside {
     z-index: 5 !important;
 }
 
+main {
+    opacity: 0;
+    transition: opacity 0.3s linear;
+}
 
 /* title-header decorations and transitions */
 a.title {
@@ -199,11 +203,8 @@ div.guitar::before {
     height: 7.2vw;
     position: fixed;
     left: 0;
-    bottom: 200px;
-    /* border-radius: 50%; */
+    bottom: 0;
     z-index: 0;
-    opacity: 0;
-    transition: opacity 4s ease-in-out;
 }
 
 div.guitar::after {
@@ -211,7 +212,6 @@ div.guitar::after {
     border-bottom-right-radius: calc(1px + 7.2vw);
     border: 1px solid #656565;
     border-top: 0;
-    transform: rotate(180deg);
 }
 
 div.guitar::before {
@@ -219,12 +219,14 @@ div.guitar::before {
     border-bottom-right-radius: calc(16px + 7.2vw);
     border: 16px solid #bbb;
     border-top: 0;
-    transform: translateY(10%) scale(0.8, 0.8) rotate(180deg);
 }
 
-div.guitar.loaded::before,
 div.guitar.loaded::after {
-    opacity: 1;
+    transform: rotate(180deg);
+}
+
+div.guitar.loaded::before {
+    transform: translateY(10%) scale(0.8, 0.8) rotate(180deg);
 }
 
 div.E { border-left-color: #656565; }
@@ -436,7 +438,7 @@ div.nav-dot:not(.loaded) + div.text {
 }
 
 /* active, no hover*/
-[data-nav-active="true"] div.nav-line {
+[data-nav-active="true"] div.nav-line.loaded {
     height: calc(var(--active-height) * var(--unit-height));
     border-left: 1px solid #505050;
     position: absolute;

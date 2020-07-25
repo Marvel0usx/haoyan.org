@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
     secNavs.forEach((nav, idx) => {
         setTimeout(() => nav.classList.toggle("loaded", true), idx * TIMEOUT);
     });
-    guitar.classList.toggle("loaded");
+    guitar.classList.toggle("loaded", true);
     toolbarBtns.forEach((btn, idx) => {
         setTimeout(() => btn.classList.toggle("loaded", true), idx * TIMEOUT * 2);
     });
@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
             if (idx < navdots.length) {
                 setTimeout(() => {
                     navdots[idx].classList.toggle("loaded", true);
-                }, 4 * TIMEOUT);
+                }, 5 * TIMEOUT);
             }
         }, idx * TIMEOUT);
     });

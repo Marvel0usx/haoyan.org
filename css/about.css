@@ -3,6 +3,7 @@ main {
     flex-flow: row wrap;
     overflow-y: auto;
     justify-content: space-between;
+    opacity: 1;
 }
 
 article#about {
