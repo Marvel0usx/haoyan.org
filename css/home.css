@@ -6,3 +6,8 @@ main {
     flex-flow: row nowrap;
     opacity: 1;
 }
+
+#welcome {
+    height: 100%;
+    width: 100%;
+}
