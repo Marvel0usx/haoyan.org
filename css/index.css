@@ -5,8 +5,7 @@ html, body {
     padding: 0;
 }
 
-iframe#current,
-iframe#next {
+.pt-page {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -14,10 +13,20 @@ iframe#next {
     right: 0;
     width: 100%;
     height: 100%;
-    border: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
     display: block;
+    visibility: hidden;
+    transform: translate(0, 0);
 }
 
-iframe#next {
+.pt-current-page {
+    z-index: 9;
+    visibility: visible;
+}
+
+.pt-next-page {
+    z-index: 1;
     visibility: hidden;
 }

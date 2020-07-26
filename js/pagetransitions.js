@@ -1,29 +1,55 @@
 var currPage, nextPage;
+var currPageAnimEnd, nextPageAnimEnd;
+var isAnimating;
 
 window.addEventListener("DOMContentLoaded", () => {
-    currPage = document.querySelector("iframe#current");
-    nextPage = document.querySelector("iframe#next");
-
     window.addEventListener("message", receiveMsg);
 });
 
 function receiveMsg(evt) {
     if (evt.origin !== window.origin) return;
-    /* load next page */
+    currPage = document.querySelector("iframe.pt-current-page");
+    nextPage = document.querySelector("iframe.pt-next-page");
+    /* load next page */    
     nextPage.src = evt.data.target;
-    if (evt.data.direction == "left") {
-        slideToLeft();
+    slideDirection(evt.data.direction);
+}
+
+function slideDirection(direction) {
+    if (isAnimating) return;
+    isAnimating = true;
+    var nextPageAnimClass, currentPageAnimClass;
+    if (direction == "left") {
+        nextPageAnimClass = "pt-page-moveFromRight";
+        currentPageAnimClass = "pt-page-moveToLeft";
     } else {
-        slideToRight();
+        nextPageAnimClass = "pt-page-moveFromLeft";
+        currentPageAnimClass = "pt-page-moveToRight";
     }
+    currPage.classList.add(currentPageAnimClass);
+    currPage.addEventListener("animationend", function _() {
+        currPage.removeEventListener("animationend", _);
+        currPageAnimEnd = true;
+        if (nextPageAnimEnd) {
+            resetPages();
+        }
+    });
+
+    nextPage.className = "pt-page pt-current-page " + nextPageAnimClass;
+    nextPage.addEventListener("animationend", function _() {
+        nextPage.removeEventListener("animationend", _);
+        nextPageAnimEnd = true;
+        if (currPageAnimEnd) {
+            resetPages();
+        }
+    });
 }
 
-function slideToLeft() {
-    currPage.classList.toggle(".pt-page-moveToLeft");
-    nextPage.classList.toggle(".pt-page-moveFromRight");
-}
-
-function slideToRight() {
-    currPage.classList.toggle(".pt-page-moveToRight");
-    nextPage.classList.toggle(".pt-page-moveFromLeft");
+function resetPages() {
+    currPageAnimEnd = false;
+    nextPageAnimEnd = false;
+    currPage.className = "pt-page pt-next-page";
+    nextPage.className = "pt-page pt-current-page";
+    currPage.innerHTML = "";
+    isAnimating = false;
 }
