@@ -76,6 +76,8 @@ function setListeners() {
                 });
             }
         });
+
+        lnk.addEventListener("click", (evt) => { evt.preventDefault(); navigate(evt.currentTarget.pathname); });
     });
 
     audioCtrl.addEventListener("click", function(evt) {
@@ -136,7 +138,7 @@ function shuffleText(textEle, textCnt, textIdx) {
     }
     shuffledCount++;
     textEle.textContent = textCnt + randChar();
-    requestAnimationFrame(function() {shuffleText(textEle, textCnt, textIdx)});
+    requestAnimationFrame(function() {shuffleText(textEle, textCnt, textIdx); });
 }
 
 function randChar() {

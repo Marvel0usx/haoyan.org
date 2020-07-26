@@ -5,7 +5,8 @@ html, body {
     padding: 0;
 }
 
-iframe#content {
+iframe#current,
+iframe#next {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -15,4 +16,8 @@ iframe#content {
     height: 100%;
     border: none;
     display: block;
+}
+
+iframe#next {
+    visibility: hidden;
 }
