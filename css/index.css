@@ -1,33 +1,34 @@
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+html,
+body {
+    width   : 100%;
+    height  : 100%;
+    margin  : 0;
+    padding : 0;
     overflow: hidden;
 }
 
 .pt-page {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    display: block;
+    position  : absolute;
+    top       : 0;
+    bottom    : 0;
+    left      : 0;
+    right     : 0;
+    width     : 100%;
+    height    : 100%;
+    border    : 0;
+    padding   : 0;
+    margin    : 0;
+    display   : block;
     visibility: hidden;
-    transform: translate(0, 0);
+    transform : translate(0, 0);
 }
 
 .pt-current-page {
-    z-index: 9;
+    z-index   : 9;
     visibility: visible;
 }
 
 .pt-next-page {
-    z-index: 1;
+    z-index   : 1;
     visibility: hidden;
 }

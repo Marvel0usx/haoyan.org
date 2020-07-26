@@ -9,7 +9,7 @@ function navlistTransition() {
     const toolbarBtns = document.querySelectorAll("div.toolbar a.square");
     const toolbar2 = document.querySelector("div.toolbar-2");
     const secNavs = document.querySelectorAll("a.title");
-    
+
     secNavs.forEach((nav, idx) => {
         setTimeout(() => nav.classList.toggle("loaded", true), idx * TIMEOUT);
     });

@@ -6,7 +6,7 @@ main.loaded {
   background-color: transparent;
   /* background   : radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%); */
   overflow        : hidden;
-  opacity: 1;
+  opacity         : 1;
 }
 
 #inf {
@@ -57,7 +57,7 @@ main.loaded {
 
 @media screen and (max-width: 620px) {
   #inf {
-    margin-top: 40%;
+    margin-top: 41%;
   }
 }
 

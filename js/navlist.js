@@ -22,8 +22,8 @@ function setBindings() {
 }
 
 function setListeners() {
-    navDots.forEach(function(dot, textIdx) {
-        dot.addEventListener("transitionend", function(evt) {
+    navDots.forEach(function (dot, textIdx) {
+        dot.addEventListener("transitionend", function (evt) {
             /* IMPORTANT: continue iff. this event is fired 
                by the last transition: transform */
             if (evt.propertyName !== "transform")
@@ -39,9 +39,9 @@ function setListeners() {
             shuffleText(navTextEles[textIdx], "", textIdx);
         });
     });
-            
-    navLnks.forEach(function(lnk, textIdx) {
-        lnk.addEventListener("mouseleave", function(evt) {
+
+    navLnks.forEach(function (lnk, textIdx) {
+        lnk.addEventListener("mouseleave", function (evt) {
             if (evt.target.dataset.navActive == "true")
                 return;
             /* hide text when mouse leaves */
@@ -58,17 +58,17 @@ function setListeners() {
                 shuffleChIdx = 0;
                 t.style.display = "block";
                 shuffleText(t, "", idx);
-                setTimeout(function() {
+                setTimeout(function () {
                     t.textContent = navTextCnts[idx];
                 }, 200);
             }
         });
 
-        lnk.addEventListener("mouseenter", function(evt) {
+        lnk.addEventListener("mouseenter", function (evt) {
             /* enabling shuffle */
             onhover[textIdx] = true;
             if (evt.target.dataset.navActive == "false") {
-                navLnks.forEach(function(lnk) {
+                navLnks.forEach(function (lnk) {
                     if (lnk.dataset.navActive == "true") {
                         lnk.dataset.navActive = "hold";
                         lnk.querySelector("div.text").style.display = "none";
@@ -80,7 +80,7 @@ function setListeners() {
         lnk.addEventListener("click", (evt) => { evt.preventDefault(); navigate(evt.currentTarget.pathname); });
     });
 
-    audioCtrl.addEventListener("click", function(evt) {
+    audioCtrl.addEventListener("click", function (evt) {
         evt.preventDefault();
         audioCtrl.classList.toggle("on");
         toggleAudio();
@@ -94,13 +94,13 @@ function setListeners() {
                 if (other !== nav)
                     other.classList.toggle("on", false);
             });
-            
+
             sectionChange();
         });
     });
 
     window.addEventListener("resize", toggleScrollBtn);
-    
+
 }
 
 function toggleScrollBtn() {
@@ -108,7 +108,7 @@ function toggleScrollBtn() {
     let btn = document.querySelector("button.scroll-top");
     if (main.clientHeight < main.scrollHeight) {
         btn.addEventListener("click", () => {
-            main.scrollTo({top: 0, behavior: "smooth"});
+            main.scrollTo({ top: 0, behavior: "smooth" });
         });
         btn.style.display = "block";
         return true;
@@ -125,7 +125,7 @@ function findLiIdx(li) {
         idx++;
     return idx;
 }
-    
+
 function shuffleText(textEle, textCnt, textIdx) {
     if (shuffledCount >= shuffleTimes) {
         shuffledCount = 0;
@@ -138,7 +138,7 @@ function shuffleText(textEle, textCnt, textIdx) {
     }
     shuffledCount++;
     textEle.textContent = textCnt + randChar();
-    requestAnimationFrame(function() {shuffleText(textEle, textCnt, textIdx); });
+    requestAnimationFrame(function () { shuffleText(textEle, textCnt, textIdx); });
 }
 
 function randChar() {
@@ -189,5 +189,5 @@ function syncPageSettings() {
     } else {
         sessionStorage.setItem("secNav", "still");
         sectionNavs[0].classList.toggle("on", true);
-    }        
+    }
 }

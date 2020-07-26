@@ -1,13 +1,13 @@
 main.loaded {
-    grid-area: main;
+    grid-area : main;
     text-align: justify;
     overflow-y: auto;
-    display: flex;
-    flex-flow: row nowrap;
-    opacity: 1;
+    display   : flex;
+    flex-flow : row nowrap;
+    opacity   : 1;
 }
 
 #welcome {
     height: 100%;
-    width: 100%;
+    width : 100%;
 }

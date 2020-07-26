@@ -1,9 +1,9 @@
 main.loaded {
-    display: flex;
-    flex-flow: row wrap;
-    overflow-y: auto;
+    display        : flex;
+    flex-flow      : row wrap;
+    overflow-y     : auto;
     justify-content: space-between;
-    opacity: 1;
+    opacity        : 1;
 }
 
 article#about {
@@ -13,8 +13,8 @@ article#about {
 
 main div.sec-col {
     flex-basis: 45%;
-    display: flex;
-    flex-flow: column nowrap;
+    display   : flex;
+    flex-flow : column nowrap;
 }
 
 footer {
@@ -27,16 +27,16 @@ summary:focus {
 
 main ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin         : 0;
+    padding        : 0;
 }
 
 main ul.equip img,
 main a img {
-    width: 1em;
-    height: 1em;
-    position: relative;
-    top: 0.1em;
+    width       : 1em;
+    height      : 1em;
+    position    : relative;
+    top         : 0.1em;
     margin-right: 0.5em;
 }
 
@@ -50,29 +50,29 @@ figcaption {
 
 blockquote {
     text-align: justify;
-    margin: 0;
+    margin    : 0;
 }
 
 [download] {
-    position: relative;
+    position   : relative;
     margin-left: 1.5em;
 }
 
 [download]::before {
-    content: "";
+    content         : "";
     background-image: url("../assets/icons/link.png");
-    background-size: cover;
-    height: 1em;
-    width: 1em;
-    position: absolute;
-    left: -1.5em;
-    top: 0.1em;
-    display: block;
+    background-size : cover;
+    height          : 1em;
+    width           : 1em;
+    position        : absolute;
+    left            : -1.5em;
+    top             : 0.1em;
+    display         : block;
 }
 
 main a:link {
-    font-weight: 600;
-    color: #c04851;
+    font-weight    : 600;
+    color          : #c04851;
     text-decoration: none;
 }
 
@@ -81,29 +81,29 @@ main a:visited {
 }
 
 p.contact-info {
-    margin: 0;
+    margin  : 0;
     position: relative;
-    left: 2em;
+    left    : 2em;
 }
 
 p.copy-right {
-    position: relative;
+    position  : relative;
     text-align: center;
-    margin: 0 auto;
+    margin    : 0 auto;
 }
 
 p.copy-right::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 1px;
-    width: 100%;
+    content      : "";
+    position     : absolute;
+    top          : 0;
+    left         : 0;
+    height       : 1px;
+    width        : 100%;
     border-bottom: 1px solid #555;
 }
 
 h3 {
-    color: #c04851;
+    color          : #c04851;
     text-decoration: underline;
 }
 
@@ -112,8 +112,11 @@ h3 {
         flex-basis: 100%;
     }
 
-    article#about, article#quote, article#equip, article#misc {
-        width: 100%;
+    article#about,
+    article#quote,
+    article#equip,
+    article#misc {
+        width     : 100%;
         flex-basis: 100%;
     }
 
@@ -123,7 +126,7 @@ h3 {
 }
 
 @media all and (max-width: 620px) {
-    main > * {
+    main>* {
         flex-basis: 100% !important;
     }
 }

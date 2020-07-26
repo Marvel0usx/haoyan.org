@@ -39,7 +39,7 @@ class Sentinel {
 
 function lazyLoad() {
     nextImgIdx = 0;
-    while(sentinels.length !== 0) {
+    while (sentinels.length !== 0) {
         let s = sentinels.pop();
         if (lazyLoadObserver)
             lazyLoadObserver.unobserve(s.imgEle);
@@ -63,7 +63,7 @@ function onIntersection(entries, observer) {
         let thisSentinel = entry.target.sentinel;
         if (!thisSentinel) return;
         let imgData = thisSentinel.imgData;
-        entry.target.src = imgData["src"];
+        entry.target.src = imgData.src;
         entry.target.classList.remove("lazy-load");
         entry.target.classList.add("loaded");
         setSentinel(thisSentinel.colIdx);
@@ -119,7 +119,7 @@ function oneColView() {
     let cols = document.querySelectorAll("div.gallery-col");
     if (cols.length != 1) {
         lazyLoadObserver.disconnect();
-        sentinels.forEach(function(s) {
+        sentinels.forEach(function (s) {
             s.imgEle.parentNode.removeChild(s.imgEle);
         });
         sentinels = [];
@@ -149,7 +149,7 @@ function threeColView() {
             newCol.classList.add("gallery-col");
             newCol.classList.add("lazy-col");
             gallery.appendChild(newCol);
-            
+
         }
         cols = document.querySelectorAll("div.gallery-frame > div.gallery-col");
         var colIdx = 2;

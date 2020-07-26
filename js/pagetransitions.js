@@ -10,7 +10,7 @@ function receiveMsg(evt) {
     if (evt.origin !== window.origin) return;
     currPage = document.querySelector("iframe.pt-current-page");
     nextPage = document.querySelector("iframe.pt-next-page");
-    /* load next page */    
+    /* load next page */
     nextPage.src = evt.data.target;
     slideDirection(evt.data.direction);
 }

@@ -21,7 +21,7 @@ if (!sessionStorage.getItem("pageIdx")) {
     pageIdx = parseInt(sessionStorage.getItem("pageIdx"));
 }
 
-var getPageIdx = () => { pageNames.forEach((name, idx) => {if (name == window.location.pathname) return idx; }); };
+var getPageIdx = () => { pageNames.forEach((name, idx) => { if (name == window.location.pathname) return idx; }); };
 
 window.addEventListener("DOMContentLoaded", () => {
     function prompt(evt) {
@@ -65,9 +65,9 @@ function navigate(pathname) {
     });
     if (currPageIdx == nextPageIdx) return;
     if (currPageIdx < nextPageIdx) {
-        window.parent.postMessage({target: pathname, direction: "left"}, "*");
+        window.parent.postMessage({ target: pathname, direction: "left" }, "*");
 
     } else {
-        window.parent.postMessage({target: pathname, direction: "right"}, "*");
+        window.parent.postMessage({ target: pathname, direction: "right" }, "*");
     }
 }
