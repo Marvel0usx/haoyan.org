@@ -4,27 +4,26 @@ var touchStartPtX, touchEndPtX;
 var pageIdx;
 const PAGE_NAV_THRESHOLD = 150;
 
-// if (!sessionStorage.getItem("pageIdx")) {
-//     let thisUrl = window.location.pathname;
-//     if (thisUrl === "/") {
-//         sessionStorage.setItem("pageIdx", "0");
-//         pageIdx = 0;
-//     } else {
-//         pageNames.forEach((url, idx) => {
-//             if (thisUrl === url) {
-//                 sessionStorage.setItem("pageIdx", idx.toString());
-//                 pageIdx = idx;
-//             }
-//         });
-//     }
-// } else {
-//     pageIdx = parseInt(sessionStorage.getItem("pageIdx"));
-// }
+if (!sessionStorage.getItem("pageIdx")) {
+    let thisUrl = window.location.pathname;
+    if (thisUrl === "/") {
+        sessionStorage.setItem("pageIdx", "0");
+        pageIdx = 0;
+    } else {
+        pageNames.forEach((url, idx) => {
+            if (thisUrl === url) {
+                sessionStorage.setItem("pageIdx", idx.toString());
+                pageIdx = idx;
+            }
+        });
+    }
+} else {
+    pageIdx = parseInt(sessionStorage.getItem("pageIdx"));
+}
 
 var getPageIdx = () => { pageNames.forEach((name, idx) => {if (name == window.location.pathname) return idx; }); };
 
 window.addEventListener("DOMContentLoaded", () => {
-    pageIdx = getPageIdx();
     function prompt(evt) {
         if (!mobileQuery.matches) {
             return;
@@ -66,10 +65,9 @@ function navigate(pathname) {
     });
     if (currPageIdx == nextPageIdx) return;
     if (currPageIdx < nextPageIdx) {
-        alert("l");
         window.parent.postMessage({target: pathname, direction: "left"}, "*");
+
     } else {
-        alert("r");
         window.parent.postMessage({target: pathname, direction: "right"}, "*");
     }
 }
