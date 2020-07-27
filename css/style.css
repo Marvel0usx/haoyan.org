@@ -100,8 +100,8 @@ a.title {
     text-decoration: none;
     margin         : 0 5px 0 5px;
     transition     : color 0.3s cubic-bezier(0, 0, 0, 1.1) 0.1s;
-    opacity        : 0;
-    transition     : opacity 0.2s ease-in-out;
+    /* opacity        : 0; */
+    /* transition     : opacity 0.2s ease-in-out; */
 }
 
 a.title:link {
@@ -116,7 +116,7 @@ a.title.on {
     color: #c04851;
 }
 
-a.title.loaded::before {
+a.title::before {
     content         : "";
     width           : 1px;
     height          : 100%;
@@ -131,7 +131,7 @@ a.title.loaded::before {
         height 0.3s ease-in-out;
 }
 
-a.title.loaded::after {
+a.title::after {
     content         : "";
     position        : absolute;
     background-color: #606060;
@@ -155,18 +155,18 @@ a.title.loaded:hover {
     color: white;
 }
 
-a.title.loaded:hover::before {
+a.title:hover::before {
     height   : 0;
     transform: translateY(1em);
 }
 
-a.title.loaded:hover::after {
+a.title:hover::after {
     transform: translateY(-1.07em) scale(1, 3);
 }
 
-a.title.loaded {
+/* a.title.loaded {
     opacity: 1;
-}
+} */
 
 
 /* the guitar figure */
@@ -222,6 +222,8 @@ div.guitar::after {
     border-bottom-right-radius: calc(1px + 7.2vw);
     border                    : 1px solid #656565;
     border-top                : 0;
+    opacity                   : 0;
+    transition                : opacity 0.9s ease-in-out;
 }
 
 div.guitar::before {
@@ -229,13 +231,19 @@ div.guitar::before {
     border-bottom-right-radius: calc(16px + 7.2vw);
     border                    : 16px solid #bbb;
     border-top                : 0;
+    opacity                   : 0;
+    transition                : opacity 0.9s ease-in-out;
 }
 
 div.guitar.loaded::after {
+    /* TODO: add enter effect */
+    opacity  : 1;
     transform: rotate(180deg);
 }
 
 div.guitar.loaded::before {
+    /* TODO: add enter effect */
+    opacity  : 1;
     transform: translateY(10%) scale(0.8, 0.8) rotate(180deg);
 }
 
