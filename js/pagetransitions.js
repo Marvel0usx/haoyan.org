@@ -1,7 +1,9 @@
 var currPage, nextPage;
 var currPageAnimEnd, nextPageAnimEnd;
 var isAnimating;
-const TIMEOUT = 200;
+const WRITE_TIMEOUT = 100;
+const WAIT_TIMEOUT = 1500;
+const ERASE_TIMEOUT = 30;
 const HOME_ROUTE = "/home.html";
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -67,13 +69,13 @@ function showGreetingAndLoadHome() {
     let typewriterH2 = document.querySelector("section.greetings h2.typewriter");
     let typewriterH3 = document.querySelector("section.greetings h3.typewriter");
     typewriterH3.style.display = "none";
-    let eraseTimeout, writeTimeout;
-    writeTimeout = write(typewriterH2, h2Str) * TIMEOUT;
+    let writeTimeout;
+    writeTimeout = write(typewriterH2, h2Str) * WRITE_TIMEOUT;
     setTimeout(() => {
         typewriterH2.classList.add("done");
         typewriterH3.style.display = "block";
         loopWrite(typewriterH3, h3Arr, 0);
-    }, writeTimeout);
+    }, writeTimeout + WAIT_TIMEOUT);
 
     btn.addEventListener("click", () => {
         haltWriting = true;
@@ -85,10 +87,12 @@ function showGreetingAndLoadHome() {
 
 function erase(tw) {
     let eraseLen = tw.textContent.length;
+    let eraseTxt = tw.textContent;
     for (let i = 0; i < eraseLen; i++) {
         setTimeout(() => {
-            tw.textContent.length--;
-        }, i * TIMEOUT);
+            if (haltWriting) return 0;
+            tw.textContent = eraseTxt.slice(0, eraseLen - i - 1);
+        }, i * ERASE_TIMEOUT);
     }
     return eraseLen;
 }
@@ -97,18 +101,20 @@ function write(tw, txt) {
     let writeLen = txt.length;
     for (let i = 0; i < writeLen; i++) {
         setTimeout(() => {
+            if (haltWriting) return 0;
             tw.textContent += txt[i];
-        }, i * TIMEOUT);
+        }, i * WRITE_TIMEOUT);
     }
     return writeLen;
 }
 
 function loopWrite(tw, txtArr, idx) {
-    let eraseTimeout = erase(tw) * TIMEOUT;
+    let eraseTimeout = erase(tw) * ERASE_TIMEOUT;
     setTimeout(() => {
-        let writeTimeout = write(tw, txtArr[idx]) * TIMEOUT;
+        let writeTimeout = write(tw, txtArr[idx]) * WRITE_TIMEOUT;
         setTimeout(() => {
-            loopWrite(tw, txtArr, (idx + 1 >= txtArr.length) ? 0 : idx++);
-        }, writeTimeout);
+            let newIdx = (idx + 1 >= txtArr.length) ? 0 : idx + 1;
+            loopWrite(tw, txtArr, newIdx);
+        }, writeTimeout + WAIT_TIMEOUT);
     }, eraseTimeout);
 }
