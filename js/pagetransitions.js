@@ -1,6 +1,7 @@
 var currPage, nextPage;
 var currPageAnimEnd, nextPageAnimEnd;
 var isAnimating;
+const TIMEOUT = 200;
 const HOME_ROUTE = "/home.html";
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -56,12 +57,58 @@ function resetPages() {
     isAnimating = false;
 }
 
+var haltWriting = false;
+
 function showGreetingAndLoadHome() {
+    const h2Str = "Ahoy! Stranger";
+    const h3Arr = ["Welcome to this cyberland", "It's a pleasure to meet you 😄"];
     let body = document.querySelector("body");
     let btn = document.querySelector("#go");
+    let typewriterH2 = document.querySelector("section.greetings h2.typewriter");
+    let typewriterH3 = document.querySelector("section.greetings h3.typewriter");
+    typewriterH3.style.display = "none";
+    let eraseTimeout, writeTimeout;
+    writeTimeout = write(typewriterH2, h2Str) * TIMEOUT;
+    setTimeout(() => {
+        typewriterH2.classList.add("done");
+        typewriterH3.style.display = "block";
+        loopWrite(typewriterH3, h3Arr, 0);
+    }, writeTimeout);
+
     btn.addEventListener("click", () => {
+        haltWriting = true;
         body.removeChild(document.querySelector("section.greetings"));
         document.querySelectorAll("iframe.pt-page").forEach((p) => p.style.display = "block");
         document.querySelector("iframe.pt-current-page").src = HOME_ROUTE;
     });
+}
+
+function erase(tw) {
+    let eraseLen = tw.textContent.length;
+    for (let i = 0; i < eraseLen; i++) {
+        setTimeout(() => {
+            tw.textContent.length--;
+        }, i * TIMEOUT);
+    }
+    return eraseLen;
+}
+
+function write(tw, txt) {
+    let writeLen = txt.length;
+    for (let i = 0; i < writeLen; i++) {
+        setTimeout(() => {
+            tw.textContent += txt[i];
+        }, i * TIMEOUT);
+    }
+    return writeLen;
+}
+
+function loopWrite(tw, txtArr, idx) {
+    let eraseTimeout = erase(tw) * TIMEOUT;
+    setTimeout(() => {
+        let writeTimeout = write(tw, txtArr[idx]) * TIMEOUT;
+        setTimeout(() => {
+            loopWrite(tw, txtArr, (idx + 1 >= txtArr.length) ? 0 : idx++);
+        }, writeTimeout);
+    }, eraseTimeout);
 }

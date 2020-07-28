@@ -1,3 +1,8 @@
+:root {
+    --data-base-color: #707070;
+    --data-strong-color: #505050;
+}
+
 html,
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -6,7 +11,7 @@ body {
     margin     : 0;
     padding    : 0;
     overflow   : hidden;
-    color      : #505050;
+    color      : var(--data-strong-color);
 }
 
 .pt-page {
@@ -93,14 +98,14 @@ h3 {
     flex-basis: 6%;
     margin-top: 0.2em;
     height: 1px;
-    border-top: 1px solid #707070;
+    border-top: 1px solid var(--data-base-color);
 }
 
 #go > .circle {
     margin-top: 0.15em;
     width: 0.33em;
     height: 0.33em;
-    border: 1px solid #707070;
+    border: 1px solid var(--data-base-color);
     border-radius: 50%;
 }
 
@@ -128,7 +133,7 @@ h3 {
     width: 5em;
     height: 5em;
     margin-top: 1em;
-    border: 1px solid #707070;
+    border: 1px solid var(--data-base-color);
     border-radius: 50%;
     background-repeat: no-repeat;
     background-position: center;
@@ -162,6 +167,7 @@ h3 {
     outline: none !important;
 }
 
+/* background effect */
 .bg {
     height: 30%;
     position: absolute;
@@ -201,6 +207,23 @@ h3 {
     background-repeat: repeat-x;
 }
 
+/* typewriter effect */
+@keyframes blink { 0% { opacity: 0; } 50% {opacity: 1;} 100% { opacity: 0;} }
+.typewriter {
+
+}
+
+.typewriter::after {
+    content: "";
+    border-right: 3px solid var(--data-base-color);
+    animation: blink 0.8s infinite;
+}
+
+.typewriter.done::after {
+    display: none;
+}
+
+/* responsiveness */
 @media all and (max-width: 950px) {
     h2 {
         font-size: calc(1.04em * 3);
