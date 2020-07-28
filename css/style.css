@@ -341,7 +341,7 @@ button.scroll-top.round:active {
 /* play and pause */
 a.music {
     background-image   : url("/assets/icons/unmute.png");
-    background-color   : white;
+    background-color   : transparent;
     background-size    : 1em 1em;
     background-repeat  : no-repeat;
     background-position: center;

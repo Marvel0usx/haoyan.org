@@ -48,29 +48,20 @@ function slideDirection(direction) {
 }
 
 function resetPages() {
+    currPage.innerHTML = "";
     currPageAnimEnd = false;
     nextPageAnimEnd = false;
     currPage.className = "pt-page pt-next-page";
     nextPage.className = "pt-page pt-current-page";
-    currPage.innerHTML = "";
     isAnimating = false;
 }
 
 function showGreetingAndLoadHome() {
     let body = document.querySelector("body");
-    const greeting = `<div class="greetings">
-                        <h2>Ahoy! Stranger.</h2>
-                        <h2>Welcome to this cyberIsland of Haoyan</h2>
-                        <h2>It's a pleasure to meet you.</h2>
-                        <button id="go">Let's Explore</button>
-                      </div>`;
-    body.innerHTML = greeting + body.innerHTML;
-    let btn;
-    do {
-        btn = document.querySelector("#go");
-    } while (!btn);
+    let btn = document.querySelector("#go");
     btn.addEventListener("click", () => {
-        body.removeChild(document.querySelector("div.greetings"));
+        body.removeChild(document.querySelector("section.greetings"));
+        document.querySelectorAll("iframe.pt-page").forEach((p) => p.style.display = "block");
         document.querySelector("iframe.pt-current-page").src = HOME_ROUTE;
     });
 }
