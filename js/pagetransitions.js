@@ -1,7 +1,7 @@
 var currPage, nextPage;
 var currPageAnimEnd, nextPageAnimEnd;
 var isAnimating;
-const WRITE_TIMEOUT = 100;
+const WRITE_TIMEOUT = 60;
 const WAIT_TIMEOUT = 1500;
 const ERASE_TIMEOUT = 30;
 const HOME_ROUTE = "/home.html";
