@@ -4,11 +4,10 @@ var isAnimating;
 const WRITE_TIMEOUT = 60;
 const WAIT_TIMEOUT = 1500;
 const ERASE_TIMEOUT = 30;
-const HOME_ROUTE = "/home.html";
+const HOME_ROUTE = "./home.html";
 
 window.addEventListener("DOMContentLoaded", () => {
     showGreetingAndLoadHome();
-    window.addEventListener("message", receiveMsg);
 });
 
 function receiveMsg(evt) {
@@ -80,6 +79,7 @@ function showGreetingAndLoadHome() {
     btn.addEventListener("click", () => {
         haltWriting = true;
         body.removeChild(document.querySelector("section.greetings"));
+        window.addEventListener("message", receiveMsg);
         document.querySelectorAll("iframe.pt-page").forEach((p) => p.style.display = "block");
         document.querySelector("iframe.pt-current-page").src = HOME_ROUTE;
     });
