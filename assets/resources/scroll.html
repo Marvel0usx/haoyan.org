@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            html, body {
+                font-size: 16px;
+                height: 100%;
+                width: 100%;
+            }
+
+            .container {
+                position: absolute;
+                width: 10ch;
+                white-space: nowrap;
+                overflow: hidden;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .scroll:hover {
+                width: fit-content;
+                animation: scroll 5s 2 linear;
+            }
+
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+
+                50% {
+                    transform: translateX(calc(-100% + 10ch));
+                }
+
+                100% {
+                    transform: translateX(0);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="scroll">This is a long paragraph that I want to display in a row.</div>
+        </div>
+    </body>
+
+</html>

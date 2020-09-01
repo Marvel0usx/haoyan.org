@@ -1,7 +1,7 @@
 var navTextEles, navDots, navLnks, audioCtrl, sectionNavs;
 var shuffledCount, shuffleTextIdx, shuffleChIdx;
 const shuffleTimes = 2;
-const navTextCnts = ["Home", "Projects", "Gallery", "Calendar", "About", "Misc"];
+const navTextCnts = ["Home", "Projects", "Gallery", "Friends", "About", "Misc"];
 var onhover = [false, false, false, false, false, false];
 
 window.addEventListener("DOMContentLoaded", initNavbar);

@@ -1,4 +1,4 @@
-var pageNames = ["/home.html", "/projects.html", "/gallery.html", "/calendar.html", "/about.html", "/misc.html"];
+var pageNames = ["/home.html", "/projects.html", "/gallery.html", "/friends.html", "/about.html", "/misc.html"];
 var mobileQuery = window.matchMedia("(max-width: 620px)");
 var touchStartPtX, touchEndPtX;
 var pageIdx;
