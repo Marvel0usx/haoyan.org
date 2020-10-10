@@ -19,6 +19,18 @@ main.loaded {
   z-index: 9;
 }
 
+a.flink::before {
+    content          : "";
+    background-image : url("../assets/icons/link.png");
+    background-size  : contain;
+    background-repeat: no-repeat;
+    height           : 1em;
+    width            : 1em;
+    position         : absolute;
+    left             : -1.5em;
+    top              : 0.5em;
+}
+
 .friend-card {
   display: block;
   height: fit-content;
