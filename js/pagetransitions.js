@@ -11,11 +11,15 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function receiveMsg(evt) {
+    // Very Important (10.10.2020). If not checked, it allows any message to change page. Caused problem in Chrome.
+    if (!evt.data.direction) return;
     if (evt.origin !== window.origin) return;
     currPage = document.querySelector("iframe.pt-current-page");
     nextPage = document.querySelector("iframe.pt-next-page");
     /* load next page */
     nextPage.src = evt.data.target;
+    // Very important (10.10.2020). If let it propagate, it causes error in Chrome. 
+    evt.stopPropagation();
     slideDirection(evt.data.direction);
 }
 
