@@ -23,7 +23,8 @@ Being the first website that I developed, this site is majorly implemented using
 
 To further the initiative of this website, I will work on several new aspects of the current implementation has to be improved, and these including:
 
-- improve the frame rate when rendering the animations;
-- use postMessage for media control;
-- change to a SPA if possible;
-- turn the home page to a long-scrolling page;
+- [x] improve the frame rate when rendering the animations;
+- [x] use postMessage for media control;
+- [x] change to a SPA if possible;
+- [] turn the home page to a long-scrolling page;
+- [] add blog page.
