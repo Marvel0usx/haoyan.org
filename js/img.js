@@ -55,6 +55,15 @@ const IMG_SRC = {
             "height": 4000
         },
         {
+            "src": "/assets/images/img (101).jpg",
+            "year": 2020,
+            "title": "north summer sky saskatoon",
+            "description": "",
+            "gps": [],
+            "width": 5171,
+            "height": 7060
+        },
+        {
             "src": "/assets/images/img (14).jpg",
             "year": 2016,
             "title": "",
@@ -390,6 +399,15 @@ const IMG_SRC = {
             "height": 3376
         },
         {
+            "src": "/assets/images/img (102).jpg",
+            "year": 2018,
+            "title": "Toronto christmas market",
+            "description": "",
+            "gps": [],
+            "width": 2006,
+            "height": 3037
+        },
+        {
             "src": "/assets/images/img (36).jpg",
             "year": 2019,
             "title": "",
@@ -568,6 +586,24 @@ const IMG_SRC = {
             "gps": [],
             "width": 1458,
             "height": 1411
+        },
+        {
+            "src": "/assets/images/img (104).jpg",
+            "year": 2020,
+            "title": "National Library",
+            "description": "",
+            "gps": [],
+            "width": 3337,
+            "height": 2016
+        },
+        {
+            "src": "/assets/images/img (103).jpg",
+            "year": 2020,
+            "title": "National Opera House",
+            "description": "",
+            "gps": [],
+            "width": 3600,
+            "height": 2026
         },
         {
             "src": "/assets/images/img (92).jpg",
