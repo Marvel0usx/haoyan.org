@@ -26,5 +26,5 @@ To further the initiative of this website, I will work on several new aspects of
 - [x] improve the frame rate when rendering the animations;
 - [x] use postMessage for media control;
 - [x] change to a SPA if possible;
-- [] turn the home page to a long-scrolling page;
-- [] add blog page.
+- [ ] turn the home page to a long-scrolling page;
+- [ ] add blog page.
