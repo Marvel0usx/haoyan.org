@@ -1,6 +1,33 @@
 const IMG_SRC = {
     "nature": [
         {
+            "src": "/assets/images/img (110).jpg",
+            "year": 2022,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 6000,
+            "height": 3376
+        },
+        {
+            "src": "/assets/images/img (111).jpg",
+            "year": 2022,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 6000,
+            "height": 3376
+        },
+        {
+            "src": "/assets/images/img (112).jpg",
+            "year": 2022,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 6000,
+            "height": 3376
+        },
+        {
             "src": "/assets/images/img (2).jpg",
             "year": 2018,
             "title": "",
@@ -299,6 +326,87 @@ const IMG_SRC = {
         }
     ],
     "city": [
+        {
+            "src": "/assets/images/img (105).jpg",
+            "year": 2022,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 6000,
+            "height": 3376
+        },
+        {
+            "src": "/assets/images/img (114).jpg",
+            "year": 2023,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 5106,
+            "height": 2657
+        },
+        {
+            "src": "/assets/images/img (115).jpg",
+            "year": 2023,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 6000,
+            "height": 3779
+        },
+        {
+            "src": "/assets/images/img (119).jpg",
+            "year": 2023,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 3475,
+            "height": 3000
+        },
+        {
+            "src": "/assets/images/img (124).jpg",
+            "year": 2023,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 3932,
+            "height": 2160
+        },
+        {
+            "src": "/assets/images/img (125).jpg",
+            "year": 2022,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 2543,
+            "height": 1708
+        },
+        {
+            "src": "/assets/images/img (108).jpg",
+            "year": 2022,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 3376,
+            "height": 6000
+        },
+        {
+            "src": "/assets/images/img (130).jpg",
+            "year": 2022,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 5336,
+            "height": 2824
+        },
+        {
+            "src": "/assets/images/img (126).jpg",
+            "year": 2022,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 5514,
+            "height": 3312
+        },
         {
             "src": "/assets/images/img (1).jpg",
             "year": 2019,
@@ -768,7 +876,61 @@ const IMG_SRC = {
             "gps": [],
             "width": 1000,
             "height": 1500
-        }
+        },
+        {
+            "src": "/assets/images/img (116).jpg",
+            "year": 2022,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 4000,
+            "height": 3000
+        },
+        {
+            "src": "/assets/images/img (120).jpg",
+            "year": 2023,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 3817,
+            "height": 2147
+        },
+        {
+            "src": "/assets/images/img (121).jpg",
+            "year": 2023,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 4330,
+            "height": 5773
+        },
+        {
+            "src": "/assets/images/img (122).jpg",
+            "year": 2023,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 5773,
+            "height": 4330
+        },
+        {
+            "src": "/assets/images/img (123).jpg",
+            "year": 2023,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 4000,
+            "height": 3000
+        },
+        {
+            "src": "/assets/images/img (127).jpg",
+            "year": 2022,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 6000,
+            "height": 4000
+        },
     ],
     "still": [
         {
@@ -779,6 +941,24 @@ const IMG_SRC = {
             "gps": [],
             "width": 3376,
             "height": 6000
+        },
+        {
+            "src": "/assets/images/img (131).jpg",
+            "year": 2022,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 3376,
+            "height": 5604
+        },
+        {
+            "src": "/assets/images/img (132).jpg",
+            "year": 2022,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 6000,
+            "height": 3376
         },
         {
             "src": "/assets/images/img (35).jpg",
@@ -806,6 +986,15 @@ const IMG_SRC = {
             "gps": [],
             "width": 6000,
             "height": 3376
+        },
+        {
+            "src": "/assets/images/img (118).jpg",
+            "year": 2023,
+            "title": "",
+            "description": "",
+            "gps": [],
+            "width": 4000,
+            "height": 3000
         },
         {
             "src": "/assets/images/img (40).jpg",
