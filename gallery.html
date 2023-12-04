@@ -110,6 +110,10 @@
             <div class="col-3 gallery-col lazy-col">
             </div>
         </div>
+        <!-- object for displaying an image full-screen. 
+             When clicked, we set class to 'shown', this div is full-screened, and image displayed.
+             Then, on the next click, this shown class is removed, and this div is not displayed. -->
+        <div id="fullpage" onclick="this.classList.toggle('shown');"></div>
     </main>
 
     <aside>

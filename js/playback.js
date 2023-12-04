@@ -11,7 +11,7 @@ window.onload = function () {
 function observeAudioCtrl(audio, currState) {
     if (ctrlChkCntDown <= 0) {
         ctrlChkCntDown = CTRL_CHECK_TIMEOUT;
-        console.log("checking ctrl status: " + sessionStorage.getItem("audioCtrl"));
+        // console.log("checking ctrl status: " + sessionStorage.getItem("audioCtrl"));
         let ctrl = sessionStorage.getItem("audioCtrl");
         if (currState !== ctrl && ctrl === "play") {
             fadeIn(audio);

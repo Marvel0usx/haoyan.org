@@ -1,6 +1,9 @@
 var nextImgIdx = 0;
 var lazyLoadObserver, category;
 var cols, sentinels = [];
+/* div for displaying an image fullpage */
+var fullPage;
+
 
 const obsOptions = {
     root: document.querySelector("main"),
@@ -11,7 +14,8 @@ const obsOptions = {
 class Sentinel {
     constructor(colIdx) {
         this.colIdx = colIdx;
-        this.colWidth = parseFloat(cols[colIdx].clientWidth);
+        // Chrome does not support clientWidth
+        this.colWidth = parseFloat(cols[colIdx].innerWidth);
         this.imgIdx = nextImgIdx++;
         this.bindImg();
     }
@@ -66,6 +70,11 @@ function onIntersection(entries, observer) {
         entry.target.src = imgData.src;
         entry.target.classList.remove("lazy-load");
         entry.target.classList.add("loaded");
+        // Add callback to initiate full-screen display by setting class to 'shown'.
+        entry.target.addEventListener('click', function(event) {
+            fullPage.style.backgroundImage = 'url("' + String(event.currentTarget.src) + '")';
+            fullPage.classList.toggle("shown");
+        });
         setSentinel(thisSentinel.colIdx);
         removeSentinel(thisSentinel);
         entry.target.sentinel = undefined;
@@ -103,6 +112,8 @@ window.addEventListener("DOMContentLoaded", () => {
         cs[2].parentNode.removeChild(cs[2]);
         cs[1].parentNode.removeChild(cs[1]);
     }
+    // find the fullpage display object.
+    fullPage = document.querySelector('#fullpage');
     lazyLoad();
 });
 
